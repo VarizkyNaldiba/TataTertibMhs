@@ -2,19 +2,32 @@
 require_once 'config/database.php';
 require_once 'controllers/TatibController.php';
 
-// Menangani URL, pastikan tidak ada awalan atau akhiran garis miring '/' pada URL
-$url = isset($_GET['url']) ? rtrim($_GET['url'], '/') : 'home';
+// Function to handle routing
+function route($request)
+{
+    // Strip query parameters for routing
+    $route = strtok($request, '?');
 
-// Routing URL berdasarkan nilai yang didapatkan
-switch ($url) {
-    case 'home':
-        include 'views/Home.php'; // Pastikan file ini sesuai dengan penulisan
-        break;
-    case 'tatatertib':
-        $controller = new TatibController();
-        $controller->index(); // Memanggil metode index dari controller Tatib
-        break;
-    default:
-        echo "404 Not Found"; // Tampilkan pesan kesalahan jika URL tidak ditemukan
-        break;
+    switch ($route) {
+        case '':
+        case 'home':
+            include 'views/Home.php';
+            break;
+        case 'tataTertib':
+            // Call the controller for tataTertib route
+            $controller = new TatibController();
+            $controller->index();
+            break;
+        default:
+            header("HTTP/1.0 404 Not Found");
+            echo "404 Not Found";
+            break;
+    }
 }
+
+// Get the request path and sanitize
+$request = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+$request = htmlspecialchars($request, ENT_QUOTES, 'UTF-8');
+
+// Route the request
+route($request);

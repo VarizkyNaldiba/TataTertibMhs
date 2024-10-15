@@ -7,7 +7,6 @@
     <title>SI Tata Tertib JTI Polinema - Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="views/styleHome.css">
-
 </head>
 
 <body>
@@ -15,8 +14,8 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <img src="views/img/LogoJTI.png" alt="Logo">
-        <a href="index.php">Home</a>
-        <a href="index.php?url=tatatertib">Tata Tertib</a>
+        <a href="/views/Home.php">Home</a>
+        <a href="/views/tataTertib.php">Tata Tertib</a>
         <a href="#">Lainnya</a>
     </div>
 

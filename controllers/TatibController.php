@@ -6,11 +6,18 @@ class TatibController
     public function index()
     {
         $model = new Tatib();
-        // Dapatkan data tata tertib dari model
-        $tingkat = isset($_GET['tingkat']) ? $_GET['tingkat'] : null;
+
+        // Fetch data using the model, sanitizing the input
+        $tingkat = isset($_GET['tingkat']) ? htmlspecialchars($_GET['tingkat'], ENT_QUOTES, 'UTF-8') : null;
         $dataTatib = $model->getTatibByTingkat($tingkat);
 
-        // Kirim data ke view
-        require 'views/peraturan/AturanTatib.php';
+        // Check if the view file exists and include it
+        $viewFile = 'views/tataTertib.php';
+        if (file_exists($viewFile)) {
+            // Pass data to the view
+            include $viewFile; // The variable $tingkat will now be accessible in the view
+        } else {
+            echo "View file not found!";
+        }
     }
 }
