@@ -25,9 +25,8 @@ function route($request)
     }
 }
 
-// Get the request path and sanitize
+// Get the request path without sanitization
 $request = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-$request = htmlspecialchars($request, ENT_QUOTES, 'UTF-8');
 
 // Route the request
 route($request);

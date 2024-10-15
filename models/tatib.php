@@ -16,7 +16,7 @@ class Tatib
         }
     }
 
-    public function getTatibByTingkat($tingkat)
+    public function getTatibByTingkat($tingkat = null)
     {
         $query = "SELECT * FROM tatatertib";
 
