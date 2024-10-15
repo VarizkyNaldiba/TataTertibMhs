@@ -34,4 +34,4 @@ Untuk memulai dengan proyek ini, silakan ikuti langkah-langkah berikut:
 
 1. Clone repositori ini:
    ```bash
-   git clone https://github.com/username/repo.git
+   git clone https://github.com/VarizkyNaldiba/TataTertibMhs.git
