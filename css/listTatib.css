@@ -1,0 +1,71 @@
+/* List Tatib Page Specific Styles */
+.form-container {
+    background-color: #F2F7FC;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .form-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .form-input input {
+    width: calc(100% - 16px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .form-button button {
+    background-color: #001f3f;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .form-button button:hover {
+    transform: translateY(2px);
+    background-color: #2d3e50;
+  }
+  
+
+  /* Styling umum untuk tabel */
+table {
+    width: 100%;
+    border-collapse: separate; /* Ganti menjadi 'separate' agar border pada setiap sel terlihat */
+    margin-top: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Membulatkan sudut tabel */
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #000000;
+    border-radius: 5px; /* Membulatkan sudut pada setiap sel */
+}
+td{
+    background-color: #BDC9DF;
+}
+
+th {
+    color: #fff;
+    background-color: #052157;
+    font-weight: bold;
+}
+
+/* Mengatur lebar kolom kiri lebih besar */
+table th:first-child, table td:first-child {
+    width: 80%;  /* Kolom Nama lebih besar */
+}
+
+
