@@ -7,7 +7,6 @@
     <title>List Tatib</title>
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/listTatib.css">
-
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
 
@@ -23,43 +22,63 @@
         </ul>
     </div>
 
+    <!-- Konten Utama -->
     <div class="content">
-        <div id="list-tatib" class="page">
-            <div class="header">
-                <h1>List Tatib</h1>
-            </div>
-            <div class="form-container">
-                <div class="form-title">Pelanggaran</div>
-                <form>
-                    <div class="form-input">
-                        <input type="text" placeholder="Enter Pelanggaran">
-                    </div>
-                    <div class="form-button">
-                        <button type="button">Cari</button>
-                    </div>
-                </form>
-            </div>
+        <div class="header">
+            <h1>List Tata Tertib</h1>
+        </div>
 
-            <table class="tatib-table">
-                <thead>
-                    <tr>
-                        <th>Pelanggaran</th>
-                        <th>Tingkat</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Berkomunikasi dengan tidak sopan, baik tertulis atau tidak tertulis kepada mahasiswa, dosen, karyawan, atau orang lain</td>
-                        <td>V</td>
-                        
-                    </tr>
-                    <tr>
-                        <td>Mahasiswa Iaki-laki berambut tidak rapi, gondrong yaitu panjang rarnbutnya melewati batas alis mata di bagian depan, telinga di bagian sarnping atau menyentuh kerah baju di bagian leher</td>
-                        <td>IV</td>
-                    </tr>
-                </tbody>
-            </table>
+        <!-- Filter Section -->
+        <div class="filter-container">
+            <div>
+                <label for="filter-tingkat">Filter Tingkat:</label>
+                <select id="filter-tingkat">
+                    <option value="">Semua Tingkat</option>
+                    <option value="I">I</option>
+                    <option value="II">II</option>
+                    <option value="III">III</option>
+                    <option value="IV">IV</option>
+                    <option value="V">V</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Tabel Pelanggaran -->
+        <table id="tatib-table">
+            <thead>
+                <tr>
+                    <th>Pelanggaran</th>
+                    <th>Tingkat</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-tingkat="V">
+                    <td>Berkomunikasi dengan tidak sopan kepada mahasiswa, dosen, karyawan, atau orang lain</td>
+                    <td>V</td>
+                </tr>
+                <tr data-tingkat="IV">
+                    <td>Mahasiswa laki-laki berambut tidak rapi</td>
+                    <td>IV</td>
+                </tr>
+                <tr data-tingkat="III">
+                    <td>Membuat kegaduhan yang mengganggu perkuliahan</td>
+                    <td>III</td>
+                </tr>
+                <tr data-tingkat="II">
+                    <td>Merusak sarana dan prasarana Polinema</td>
+                    <td>II</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Sanksi Section -->
+        <div class="sanksi-section">
+            <h3>Sanksi Berdasarkan Tingkat</h3>
+            <div><b>Tingkat I:</b> Teguran lisan atau tertulis.</div>
+            <div><b>Tingkat II:</b> Skorsing maksimal 1 minggu.</div>
+            <div><b>Tingkat III:</b> Skorsing maksimal 1 bulan.</div>
+            <div><b>Tingkat IV:</b> Dilarang mengikuti kegiatan akademik selama 1 semester.</div>
+            <div><b>Tingkat V:</b> Dikeluarkan dari institusi (Drop Out).</div>
         </div>
     </div>
 
@@ -67,6 +86,7 @@
     <script>
         feather.replace();
     </script>
+    <script src="../BackEnd/script.js"></script>
 </body>
 
 </html>

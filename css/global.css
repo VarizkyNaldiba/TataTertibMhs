@@ -67,7 +67,7 @@ body {
 .header {
   width: 100%; /* Membuat header full-width */
   background-color: #e8f1f5;
-  height: 50px;
+  height: 40px;
   padding: 10px;
   display: flex;
   font-size: 10px;
