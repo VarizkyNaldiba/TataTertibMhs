@@ -1,3 +1,4 @@
+
 /* Reset dasar */
 body {
   margin: 0;
@@ -50,7 +51,7 @@ body {
 }
 
 .sidebar .logo {
-  width: 40px;
+  width: 33px;
   height: auto;
   display: block;
   margin: 10px auto;
