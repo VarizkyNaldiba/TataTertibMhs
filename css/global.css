@@ -66,6 +66,7 @@ body {
 
 /* Header styling */
 .header {
+  position: fixed;
   width: 100%; /* Membuat header full-width */
   background-color: #e8f1f5;
   height: 40px;
