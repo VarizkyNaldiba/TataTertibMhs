@@ -1,15 +1,3 @@
-/* Home Page Specific Styles */
-
-body {
-    margin: 0;
-    font-family: sans-serif;
-    position: relative;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  
-  
-
 
 /* Kontainer Utama */
 .dashboard-container {

@@ -1,9 +1,10 @@
 
-/* Reset dasar */
-body {
+html, body {
   margin: 0;
-  font-family: sans-serif;
+  padding: 0;
+  box-sizing: border-box;
 }
+
 
 /* Sidebar styling */
 .sidebar {
@@ -68,6 +69,7 @@ body {
 .header {
   position: fixed;
   width: 100%; /* Membuat header full-width */
+  top: 0;
   background-color: #e8f1f5;
   height: 40px;
   padding: 10px;
@@ -82,6 +84,8 @@ body {
 
 /* Content area */
 .content {
+  height: 100%;
+  padding-top: 50px; /* Sesuaikan dengan tinggi header */
   padding-left: 70px;
 }
 
