@@ -84,3 +84,28 @@ body {
 .content {
   padding-left: 70px;
 }
+
+.footer {
+  background-color: #1C204A;  /* Warna latar belakang */
+  color: white;               /* Warna teks */
+  display: flex;              /* Menggunakan Flexbox untuk penyusunan */
+  align-items: center;        /* Menyelaraskan konten secara vertikal */
+  justify-content: space-between; /* Menyelaraskan konten di kedua sisi */
+  padding: 20px 40px;         /* Jarak di dalam footer */
+  font-size: 0.9rem;          /* Ukuran teks */
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan halus di atas */
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;     /* Memastikan padding tidak mempengaruhi lebar */
+}
+
+.footer p {
+  margin: 0;                 /* Menghilangkan margin default pada paragraf */
+}
+
+.footer-logo {
+  height: 40px;              /* Sesuaikan tinggi logo */
+  object-fit: contain;       /* Menjaga aspek rasio logo */
+  margin-left: 15px;         /* Jarak antara teks dan logo */
+}
