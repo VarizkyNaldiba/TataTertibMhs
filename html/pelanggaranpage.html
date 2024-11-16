@@ -14,7 +14,6 @@
 </head>
 
 <body>
-
     <div class="sidebar">
         <img class="logo" src="../img/logo copy.png" alt="logo">
         <div class="logo-separator"></div>
@@ -22,6 +21,7 @@
             <li><a href="homepage.html"><i data-feather="home"></i></a></li>
             <li><a href="listTatib.html"><i data-feather="book"></i></a></li>
             <li class="active"><a href="pelanggaranpage.html"><i data-feather="x-square"></i></a></li>
+            <li><a href=""><i data-feather="bell"></i></a></li>
         </ul>
     </div>
 
@@ -29,39 +29,55 @@
             <div class="header">
                 <h1>Pelanggaran</h1>
             </div>
-            <div class="detail-container">
-                <div class="detail-title">Detail Pelanggaran</div>
+            <div class="profile">
+                <p><strong>Nama :Ahmad Rusdi Ambarawa</strong></p>
+                <p><strong>NIM : 2341010203</strong></p>
+                <p><strong>Semester : 2</strong></p>
+            </div>
+
+            <h3>Tabel Pelanggaran</h3>
+            <div class="table-container">
                 <table>
-                    <tr>
-                        <th>Nama</th>
-                        <td>John Doe</td>
-                    </tr>
-                    <tr>
-                        <th>NIM</th>
-                        <td>2343332323</td>
-                    </tr>
-                    <tr>
-                        <th>Tanggal</th>
-                        <td>2022-01-01</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Pelanggaran</th>
+                            <th>Tingkat Pelanggaran</th>
+                            <th>Dosen Pengampu</th>
+                            <th>Tugas Khusus</th>
+                            <th>Surat</th>
+                            <th>Poin</th>
+                            <th>Status</th>
+                            <th>Pengumpulan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Berkomunikasi dengan tidak sopan, baik tertulis atau tidak tertulis kepada mahasiswa, dosen, karyawan, atau orang lain</td>
+                            <td>V</td>
+                            <td>Dr. Wawan Agung S.pd</td>
+                            <td>-</td>
+                            <td><a href="#">Unduh File</a></td>
+                            <td>2 Poin</td>
+                            <td>On Progress</td>
+                            <td><button class="submit-btn">Kumpulkan</button></td>
+                        </tr>
+                    </tbody>
                 </table>
-                <div class="button-container">
-                    <button class="button-edit">Cari</button>
-                    <button class="button-delete">Delete</button>
+                <div class="statement-button">
+                    <button>Surat Pernyataan</button>
                 </div>
             </div>
+    
+            
             <div class="footer">
                 <p>© Copyright 2024 web Tatib. All Rights Reserved.</p>
                 <img class="footer-logo" src="../img/Logo name.png" alt="">
             </div>
         </div>
 
-        
-
     <!-- feather icons -->
     <script>
         feather.replace();
     </script>
 </body>
-
 </html>
