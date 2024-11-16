@@ -3,6 +3,7 @@ html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 
 
@@ -67,6 +68,7 @@ html, body {
 
 /* Header styling */
 .header {
+  font-family: 'Inter';
   position: fixed;
   width: 100%; /* Membuat header full-width */
   top: 0;
@@ -113,3 +115,4 @@ html, body {
   object-fit: contain;       /* Menjaga aspek rasio logo */
   margin-left: 15px;         /* Jarak antara teks dan logo */
 }
+

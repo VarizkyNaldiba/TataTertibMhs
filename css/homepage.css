@@ -1,6 +1,7 @@
 
 /* Kontainer Utama */
 .dashboard-container {
+  font-family: "Inter", sans-serif;
   font-size: larger;
   display: flex;
   padding-top: 65px;
@@ -58,7 +59,7 @@
   }
   
   .judul p {
-    font-family:serif;
+    font-family: "Inter", sans-serif;
     font-size: 18px;
     margin-top: 20px;                   /* Memberikan jarak antara h2 dan p */
   }
@@ -100,6 +101,7 @@
 }
 
 .news-content p {
+  font-family: "Inter", sans-serif;
   font-size: 0.9rem;
   color: #555;
   line-height: 1.5;
