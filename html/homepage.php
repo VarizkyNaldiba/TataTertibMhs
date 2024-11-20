@@ -21,9 +21,9 @@
         <img class="logo" src="../img/logo copy.png" alt="logo">
         <div class="logo-separator"></div>
         <ul>
-            <li class="active"><a href="homepage.html"><i data-feather="home"></i></a></li>
-            <li><a href="listTatib.html"><i data-feather="book"></i></a></li>
-            <li><a href="pelanggaranpage.html"><i data-feather="x-square"></i></a></li>
+            <li class="active"><a href="homepage.php"><i data-feather="home"></i></a></li>
+            <li><a href="listTatib.php"><i data-feather="book"></i></a></li>
+            <li><a href="pelanggaranpage.php"><i data-feather="x-square"></i></a></li>
             <li><a href=""><i data-feather="bell"></i></a></li>
         </ul>
     </div>

@@ -1,7 +1,7 @@
 .profile {
   font-family: 'Inter';
   margin: 38px;
-  background-color: #CED0D2;
+  background-color: #F2F7FC;
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -14,7 +14,7 @@
 .table-container {
   margin:38px;
   margin-top: 0;
-  background-color: #CED0D2;
+  background-color: #F2F7FC;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -35,7 +35,7 @@ table th, table td {
 }
 
 table th {
-  background-color: #f5f5f5;
+  background-color: #052157;
 }
 
 table a {

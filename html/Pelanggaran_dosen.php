@@ -18,9 +18,9 @@
         <img class="logo" src="../img/logo copy.png" alt="logo">
         <div class="logo-separator"></div>
         <ul>
-            <li><a href="homepage.html"><i data-feather="home"></i></a></li>
-            <li><a href="listTatib.html"><i data-feather="book"></i></a></li>
-            <li class="active"><a href="pelanggaranpage.html"><i data-feather="x-square"></i></a></li>
+            <li><a href="homepage.php"><i data-feather="home"></i></a></li>
+            <li><a href="listTatib.php"><i data-feather="book"></i></a></li>
+            <li class="active"><a href="pelanggaranpage.php"><i data-feather="x-square"></i></a></li>
             <li><a href=""><i data-feather="bell"></i></a></li>
         </ul>
     </div>
@@ -40,6 +40,7 @@
                 <table>
                     <thead>
                         <tr>
+                            <th>Pelanggar</th>
                             <th>Pelanggaran</th>
                             <th>Tingkat Pelanggaran</th>
                             <th>Dosen Pengampu</th>
@@ -47,24 +48,23 @@
                             <th>Surat</th>
                             <th>Poin</th>
                             <th>Status</th>
-                            <th>Pengumpulan</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                            <td>Ahmad Rusdi Ambarawa</td>
                             <td>Berkomunikasi dengan tidak sopan, baik tertulis atau tidak tertulis kepada mahasiswa, dosen, karyawan, atau orang lain</td>
                             <td>V</td>
                             <td>Dr. Wawan Agung S.pd</td>
                             <td>-</td>
-                            <td><a href="#">Unduh File</a></td>
+                            <td>Surat Pernyataan tidak mengulangi lagi</td>
                             <td>2 Poin</td>
                             <td>On Progress</td>
-                            <td><button class="submit-btn">Kumpulkan</button></td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="statement-button">
-                    <button>Surat Pernyataan</button>
+                    <button>Tambah</button>
                 </div>
             </div>
     
