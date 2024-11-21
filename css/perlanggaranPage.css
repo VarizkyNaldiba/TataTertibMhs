@@ -26,6 +26,7 @@ table {
   border-collapse: collapse;
   margin-top: 20px;
   padding: 20px;
+  font-family: 'Inter';
 }
 
 table th, table td {
@@ -36,6 +37,7 @@ table th, table td {
 
 table th {
   background-color: #052157;
+  color: #CED0D2;
 }
 
 table a {

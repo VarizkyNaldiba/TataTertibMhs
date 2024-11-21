@@ -25,3 +25,9 @@
             }
         });
     }
+
+    // Update file name on upload
+  function updateFileName(input, labelId) {
+    const fileName = input.files[0]?.name || "Upload File";
+    document.getElementById(labelId).innerText = fileName;
+  }
