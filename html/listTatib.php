@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/listTatib.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
@@ -21,10 +22,10 @@
         <img class="logo" src="../img/logo copy.png" alt="logo">
         <div class="logo-separator"></div>
         <ul>
-            <li><a href="homepage.php"><i data-feather="home"></i></a></li>
-            <li class="active"><a href="listTatib.php"><i data-feather="book"></i></a></li>
-            <li><a href="pelanggaranpage.php"><i data-feather="x-square"></i></a></li>
-            <li><a href=""><i data-feather="bell"></i></a></li>
+        <li><a href="homepage.php"><i class="fa-solid fa-house"></i></a></li>
+            <li class="active"><a href="listTatib.php"><i class="fa-solid fa-book"></i></a></li>
+            <li><a href="pelanggaranpage.php"><i class="fa-solid fa-hand"></i></i></a></li>
+            <li><a href=""><i class="fa-solid fa-bell"></i></a></li>
         </ul>
     </div>
 
@@ -107,9 +108,6 @@
     </div>
 
     <!-- feather icons -->
-    <script>
-        feather.replace();
-    </script>
     <script src="../BackEnd/script.js"></script>
 </body>
 
