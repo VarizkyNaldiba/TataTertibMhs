@@ -46,7 +46,7 @@
         <div class="notifications">
             <div class="notification-item">
                 <div class="icon">
-                    <img src="icon-placeholder.png" alt="Icon">
+                <i class="fa-solid fa-user"></i>
                 </div>
                 <div class="notification-content">
                     <p><strong>Dosen A</strong> telah melaporkan <strong>Tri Sukma Sarah</strong>, Mahasiswa telah Melanggar Tata Tertib Mahasiswa <strong>Tingkat III</strong></p>
@@ -56,7 +56,7 @@
 
             <div class="notification-item">
                 <div class="icon">
-                    <img src="icon-placeholder.png" alt="Icon">
+                <i class="fa-solid fa-user"></i>
                 </div>
                 <div class="notification-content">
                     <p><strong>Dosen Pembimbing Akademik</strong> telah memberikan tugas khusus kepada <strong>Ghoffar Abdullah</strong></p>
@@ -67,7 +67,7 @@
             <!-- Duplicate items for demonstration -->
             <div class="notification-item">
                 <div class="icon">
-                    <img src="icon-placeholder.png" alt="Icon">
+                <i class="fa-solid fa-user"></i>
                 </div>
                 <div class="notification-content">
                     <p><strong>Dosen Pembimbing Akademik</strong> telah memberikan tugas khusus kepada <strong>Ghoffar Abdullah</strong></p>
@@ -82,7 +82,7 @@
         <img class ="footer-logo" src="../img/logo.png" alt="logo polinema">
     </div>
     <div class="footer-center">
-        <p>Jl. Soekarno Hatta No.9, Jatimulyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 65141</p>
+        <p>Jl. Soekarno Hatta No.9, Jatimulyo, Kec. Lowokwaru, <br>Kota Malang, Jawa Timur 65141</p>
         <p><a href="tel:(0341)404424" class="footer-link">(0341) 404424</a></p>
     </div>
     <div class="footer-right">

@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="../BackEnd/script.js"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
@@ -106,7 +107,7 @@
         <img class ="footer-logo" src="../img/logo.png" alt="logo polinema">
     </div>
     <div class="footer-center">
-        <p>Jl. Soekarno Hatta No.9, Jatimulyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 65141</p>
+        <p>Jl. Soekarno Hatta No.9, Jatimulyo, Kec. Lowokwaru, <br>Kota Malang, Jawa Timur 65141</p>
         <p><a href="tel:(0341)404424" class="footer-link">(0341) 404424</a></p>
     </div>
     <div class="footer-right">
@@ -119,7 +120,7 @@
     </div>
 </div>
     </div>
-    <script src="../BackEnd/script.js"></script>
+    
 </body>
 
 </html>

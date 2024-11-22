@@ -65,7 +65,7 @@
         <img class ="footer-logo" src="../img/logo.png" alt="logo polinema">
     </div>
     <div class="footer-center">
-        <p>Jl. Soekarno Hatta No.9, Jatimulyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 65141</p>
+        <p>Jl. Soekarno Hatta No.9, Jatimulyo, Kec. Lowokwaru, <br>Kota Malang, Jawa Timur 65141</p>
         <p><a href="tel:(0341)404424" class="footer-link">(0341) 404424</a></p>
     </div>
     <div class="footer-right">

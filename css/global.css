@@ -111,7 +111,7 @@ html, body {
 .footer-left {
   display: flex;             
   align-items: center;       
-  gap: 15px;             
+  gap: 30px;             
 }
 .footer-logo {
   height: 70px;             
@@ -121,7 +121,7 @@ html, body {
 /* Footer Center Section */
 .footer-center {
   text-align: center;      
-  font-size: 0.8rem;       
+  font-size: 1rem;       
 }
 .footer-center p {
   margin: 5px 0;           
@@ -135,12 +135,13 @@ html, body {
 /* Footer Right Section (Social Media) */
 .footer-right {
   display: flex;           
-  gap: 15px;               
+  gap: 20px;               
 }
 .social-link {
   font-size: 20px;
   text-decoration: none;
   color: #e8f1f5;   
+  
 }
 .social-icon {
   height: 100px;            

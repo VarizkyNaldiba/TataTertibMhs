@@ -1,5 +1,4 @@
-
-    function filterTingkat() {
+   function filterTingkat() {
         // Ambil nilai filter yang dipilih
         const filterValue = document.getElementById("filter-tingkat").value;
 
@@ -26,8 +25,5 @@
         });
     }
 
-    // Update file name on upload
-  function updateFileName(input, labelId) {
-    const fileName = input.files[0]?.name || "Upload File";
-    document.getElementById(labelId).innerText = fileName;
-  }
+ 
+
