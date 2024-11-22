@@ -58,6 +58,7 @@
 /* Notifications Section */
 .notifications {
     width: 75%;
+    height: 50%;
     padding: 20px;
     background-color: white;
     overflow-y: auto;

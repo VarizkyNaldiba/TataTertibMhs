@@ -92,28 +92,67 @@ html, body {
   padding-left: 70px;
 }
 
+/* Footer Container */
 .footer {
   background-color: #1C204A;  
   color: white;              
   display: flex;              
-  align-items: center;       
-  justify-content: space-between; 
-  padding: 20px 40px;       
-  font-size: 0.9rem;         
+  flex-direction: column;     
+  padding: 20px 40px;         
+  font-size: 0.9rem;          
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); 
-  position: relative;
-  bottom: 0;
-  width: 100%;
   box-sizing: border-box;    
+  width: 100%;               
+  align-items: center;
+  gap: 20px;                 
 }
 
-.footer p {
-  margin: 0;               
+/* Footer Left Section */
+.footer-left {
+  display: flex;             
+  align-items: center;       
+  gap: 15px;             
 }
-
 .footer-logo {
-  height: 40px;             
+  height: 70px;             
   object-fit: contain;      
-  margin-left: 15px;        
 }
+
+/* Footer Center Section */
+.footer-center {
+  text-align: center;      
+  font-size: 0.8rem;       
+}
+.footer-center p {
+  margin: 5px 0;           
+}
+.footer-link {
+  color: #ffffff;          
+  text-decoration: none;   
+  font-weight: bold;       
+}
+
+/* Footer Right Section (Social Media) */
+.footer-right {
+  display: flex;           
+  gap: 15px;               
+}
+.social-link {
+  font-size: 20px;
+  text-decoration: none;
+  color: #e8f1f5;   
+}
+.social-icon {
+  height: 100px;            
+  object-fit: contain;     
+}
+
+/* Footer Bottom Section */
+.footer-bottom {
+  text-align: center;      
+  font-size: 0.7rem;       
+  margin-top: 5px;        
+  color: #ccc;             
+}
+ 
 

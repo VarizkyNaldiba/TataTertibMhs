@@ -60,9 +60,24 @@
                 </div>
             </div>
             <div class="footer">
-                <p>© Copyright 2024 web Tatib. All Rights Reserved.</p>
-                <img class="footer-logo" src="../img/Logo name.png" alt="">
-            </div>
+    <div class="footer-left">
+        <img class="footer-logo" src="../img/full.png" alt="Logo">
+        <img class ="footer-logo" src="../img/logo.png" alt="logo polinema">
+    </div>
+    <div class="footer-center">
+        <p>Jl. Soekarno Hatta No.9, Jatimulyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 65141</p>
+        <p><a href="tel:(0341)404424" class="footer-link">(0341) 404424</a></p>
+    </div>
+    <div class="footer-right">
+        <a href="https://instagram.com" class="social-link"><i class="fa-brands fa-instagram" alt="Instagram" class="social-icon"></i></a>
+        <a href="https://youtube.com" class="social-link"><i class="fa-brands fa-youtube" alt="YouTube" class="social-icon"></i></a>
+        <a href="https://wa.me/1234567890" class="social-link"><i class="fa-solid fa-envelope" alt="Email" class="social-icon"></i></a>
+    </div>
+    <div class="footer-bottom">
+        <p>© Copyright 2024 web Tatib. All Rights Reserved.</p>
+    </div>
+</div>
+
     </div>
 </body>
 
