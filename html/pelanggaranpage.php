@@ -68,7 +68,7 @@
             </table>
         </div>
 
-
+<!-- untuk modal ini ada 2 pengumpulan tugas khusus dan akhir gimana caranya biar kalo tugas akhir nya ga ada, form untuk input tugas akhir nya ga ada juga?? -->
        <!-- Modal -->
 <div id="uploadModal" class="modal">
     <div class="modal-dialog">

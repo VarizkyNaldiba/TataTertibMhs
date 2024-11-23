@@ -19,7 +19,6 @@
     <li><a href="homepage.php"><i class="fa-solid fa-house"></i></a></li>
             <li><a href="listTatib.php"><i class="fa-solid fa-book"></i></a></li>
             <li class="active"><a href="pelanggaranpage.php"><i class="fa-solid fa-hand"></i></i></a></li>
-            <li><a href=""><i class="fa-solid fa-bell"></i></a></li>
             <li><a href="notifikasi_dosen.php"><i class="fa-solid fa-bell"></i></a></li>
     </ul>
 </div>
@@ -30,8 +29,8 @@
     <form action="">
         <h3>Masuk</h3>
         <div class="user">
-            <div class="NIM-button-active" onclick="redirectToPage('login_mahasiswa.html')">NIM</div>
-            <div class="NIP-button" onclick="redirectToPage('login_dosen.html')">NIP</div>
+            <div class="NIM-button-active" onclick="redirectToPage('login_mahasiswa.php')">NIM</div>
+            <div class="NIP-button" onclick="redirectToPage('login_dosen.php')">NIP</div>
           </div>
         <label for="username">NIM</label>
         <input type="text" placeholder="NIM" id="username">

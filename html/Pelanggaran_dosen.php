@@ -30,9 +30,8 @@
                 <h1>Pelanggaran</h1>
             </div>
             <div class="profile">
-                <p><strong>Nama :Ahmad Rusdi Ambarawa</strong></p>
-                <p><strong>NIM : 2341010203</strong></p>
-                <p><strong>Semester : 2</strong></p>
+                <p><strong>Nama :Wawan Agung</strong></p>
+                <p><strong>NIP  :12345678</strong></p>
             </div>
 
             <h3>Tabel Pelanggaran</h3>
@@ -64,7 +63,7 @@
                     </tbody>
                 </table>
                 <div class="statement-button">
-                <button>Kumpulkan</button>
+                <button onclick="window.location.href='pelaporan.php'">Laporkan</button>
                 </div>
                 
             </div>

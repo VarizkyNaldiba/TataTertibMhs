@@ -31,11 +31,11 @@
     <form action="" method="POST">
         <h3>Masuk</h3>
         <div class="user">
-            <div class="NIM-button" onclick="redirectToPage('login_mahasiswa.html')">NIM</div>
-            <div class="NIP-button-active" onclick="redirectToPage('login_dosen.html')">NIP</div>
+            <div class="NIM-button" onclick="redirectToPage('login_mahasiswa.php')">NIM</div>
+            <div class="NIP-button-active" onclick="redirectToPage('login_dosen.php')">NIP</div>
           </div>
         <label for="username">NIP</label>
-        <input type="text" placeholder="NIM" id="username">
+        <input type="text" placeholder="NIP" id="username">
 
         <label for="password">Kata Sandi</label>
         <input type="password" placeholder="Password" id="password">
