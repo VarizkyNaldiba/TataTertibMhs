@@ -114,10 +114,10 @@
                 <p><a href="tel:(0341)404424" class="footer-link">(0341) 404424</a></p>
             </div>
             <div class="footer-right">
-                <a href="https://instagram.com" class="social-link"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://youtube.com" class="social-link"><i class="fa-brands fa-youtube"></i></a>
-                <a href="https://wa.me/1234567890" class="social-link"><i class="fa-solid fa-envelope"></i></a>
-            </div>
+        <a href="https://instagram.com" class="social-link"><i class="fa-brands fa-instagram" alt="Instagram" class="social-icon"></i></a>
+        <a href="https://wa.me/1234567890" class="social-link"><i class="fa-brands fa-whatsapp" alt="WhatsApp" class="social-icon"></i></a>
+        <a href="https://wa.me/1234567890" class="social-link"><i class="fa-solid fa-envelope" alt="Email" class="social-icon"></i></a>
+    </div>
             <div class="footer-bottom">
                 <p>© Copyright 2024 web Tatib. All Rights Reserved.</p>
             </div>
