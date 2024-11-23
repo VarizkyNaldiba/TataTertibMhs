@@ -25,9 +25,8 @@
         });
     }
 
-    function redirectToLogin() {
-        // Redirect to login page
-        window.location.href = 'login_mahasiswa.php'; // Ganti 'login.html' dengan URL halaman login Anda
+    function redirectToPage(page) {
+        window.location.href = page; // Navigasi ke halaman target
     }
     
  

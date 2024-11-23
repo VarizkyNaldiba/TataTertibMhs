@@ -30,7 +30,7 @@
     <div class="content">
     <div class="header">
     <h1>Home</h1>
-    <button class="login-btn" onclick="redirectToLogin()">Login</button>
+    <button class="login-btn" onclick="redirectToPage('login.php')">Login</button>
 </div>
 
             <div class="judul">
@@ -81,6 +81,8 @@
 </div>
 
     </div>
+    <script src="../BackEnd/script.js">
+    </script>
 </body>
 
 </html>
