@@ -71,7 +71,7 @@ html, body {
 .header {
   font-family: 'Inter';
   position: fixed;
-  width: 100%; 
+  width: calc(100% - 90px); 
   top: 0;
   background-color: #e8f1f5;
   height: 40px;
@@ -84,6 +84,22 @@ html, body {
   z-index: 1000; 
 }
 
+/* Login button styling */
+.login-btn {
+  font-family: 'Inter';
+  background-color: #007bff; /* Button background color */
+  color: white; /* Button text color */
+  border: none;
+  padding: 10px 20px; /* Ukuran tombol */
+  font-size: 14px; /* Ukuran teks */
+  border-radius: 5px; /* Rounded edges */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
 
 /* Content area */
 .content {

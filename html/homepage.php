@@ -28,9 +28,11 @@
     </div>
 
     <div class="content">
-        <div class="header">
-            <h1>Home</h1>
-        </div>
+    <div class="header">
+    <h1>Home</h1>
+    <button class="login-btn" onclick="redirectToLogin()">Login</button>
+</div>
+
             <div class="judul">
                 <h2>TATA TERTIB <br>MAHASISWA </h2>
                 <p>Sebuah sistem yang dirancang untuk mengelola aturan, <br>pelanggaran, dan sanksi di Universitas</p>
