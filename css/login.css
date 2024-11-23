@@ -79,6 +79,23 @@ button:hover{
 background-color: #324A86;
 }
 
+.admin-button {
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;          
+  right: 0;        
+  z-index: 1000;   
+  margin: 20px;      
+  padding: 5px;
+  border: solid 1px #000000;
+  border-radius: 8px;
+}
+.admin-button:hover{
+  color: #ffffff;
+background-color: #052157;
+}
+
+
 .user {
     margin: 30px 25%;
     width: 50%;

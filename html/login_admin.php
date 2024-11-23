@@ -24,29 +24,20 @@
 </div>
 <div class="content">
   <div class="header">
-    <h1>login Mahasiswa</h1>
+    <h1>login</h1>
   </div>
-    <form action="">
-        <h3>Masuk</h3>
-        <div class="user">
-            <div class="NIM-button-active" onclick="redirectToPage('login_mahasiswa.php')">NIM</div>
-            <div class="NIP-button" onclick="redirectToPage('login_dosen.php')">NIP</div>
-          </div>
-        <label for="username">NIM</label>
-        <input type="text" placeholder="NIM" id="username">
-
-        <label for="password">Kata Sandi</label>
-        <input type="password" placeholder="Password" id="password">
-
-        <button>Masuk</button>
-        
-    </form>
+  <form method="POST" action="">
+    <div class="admin-button" onclick="redirectToPage('login.php')">Mahasiswa/Dosen</div>
+    <h3>Masuk</h3>
+    <input type="hidden" id="user-type" name="user_type" value="nim">
+    <label for="username">NIP</label>
+    <input type="text" placeholder="Masukkan NIP" id="username" name="username" required>
+    <label for="password">Kata Sandi</label>
+    <input type="password" placeholder="Masukkan Kata Sandi" id="password" name="password" required>
+    <button type="submit">Masuk</button>
+</form>
   </div>
-    <script>
-
-      function redirectToPage(page) {
-          window.location.href = page;
-      }
+    <script src="../BackEnd/login.js">
   </script>
 
 </body>
