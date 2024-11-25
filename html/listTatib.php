@@ -33,6 +33,7 @@
     <div class="content">
         <div class="header">
             <h1>List Tata Tertib</h1>
+            <button class="login-btn" onclick="redirectToPage('login.php')">Login</button>
         </div>
 
         <!-- Filter Section -->
