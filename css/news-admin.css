@@ -1,0 +1,36 @@
+body{
+    font-family: 'Inter';
+background-color: #9EC6EC;
+}
+.header{
+    background-color: blue;
+}
+.judul {
+    position: relative; /* Menjaga elemen gambar tetap di tempat */
+    font-size: 30px;
+    display: flex;
+    align-items: center; /* Menyelaraskan elemen secara vertikal */
+    justify-content: flex-start; /* Tetap berada di sebelah kiri */
+}
+
+.judul img {
+    position: absolute;
+    right: 10px; /* Jarak dari tepi kanan */
+    top: 30px; /* Jarak dari tepi atas */
+    height: 90px; /* Ukuran default gambar */
+}
+
+/* Media Query untuk layar kecil (HP) */
+@media (max-width: 768px) {
+    .judul {
+        font-size: 20px; /* Mengecilkan ukuran teks untuk layar kecil */
+    }
+
+    .judul img {
+        height: 60px; /* Mengecilkan ukuran gambar */
+        right: 5px; /* Mengurangi jarak untuk layar kecil */
+        top: 20px;
+    }
+   
+}
+
