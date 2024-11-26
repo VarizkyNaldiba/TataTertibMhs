@@ -1,9 +1,5 @@
 <?php
 function connectToDatabase($servername, $dbname) {
-    $connectionOptions = array(
-        "Database" => $dbname,
-    );
-
     try {
         $conn = new PDO("sqlsrv:Server=$servername;Database=$dbname");
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -14,5 +10,5 @@ function connectToDatabase($servername, $dbname) {
     }
 }
 
-connectToDatabase("LAPTOP-CEEMFUHE", "Disciplink");
+$connect = connectToDatabase("LAPTOP-CEEMFUHE", "Disciplink");
 ?>
