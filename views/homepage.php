@@ -6,6 +6,7 @@
             <li><a href="views/listTatib.php"><i class="fa-solid fa-book"></i></a></li>
             <li><a href="views/pelanggaranpage.php"><i class="fa-solid fa-hand"></i></i></a></li>
             <li><a href="views/notifikasi_dosen.php"><i class="fa-solid fa-bell"></i></a></li>
+            <li><a href=""><i class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>
     </div>
 
