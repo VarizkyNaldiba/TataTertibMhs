@@ -1,3 +1,18 @@
+<?php
+session_start();
+// session_destroy();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,10 +35,11 @@
         <img class="logo" src="../img/logo copy.png" alt="logo">
         <div class="logo-separator"></div>
         <ul>
-            <li><a href="homepage.php"><i class="fa-solid fa-house"></i></a></li>
+            <li><a href="../index.php"><i class="fa-solid fa-house"></i></a></li>
             <li><a href="listTatib.php"><i class="fa-solid fa-book"></i></a></li>
             <li class="active"><a href="pelanggaranpage.php"><i class="fa-solid fa-hand"></i></a></li>
             <li><a href="notifikasi_dosen.php"><i class="fa-solid fa-bell"></i></a></li>
+            <li><a href="?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>
     </div>
 
