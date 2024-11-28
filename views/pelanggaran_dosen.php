@@ -18,7 +18,7 @@
         <img class="logo" src="../img/logo copy.png" alt="logo">
         <div class="logo-separator"></div>
         <ul>
-            <li><a href="homepage.php"><i class="fa-solid fa-house"></i></a></li>
+            <li><a href="../index.php"><i class="fa-solid fa-house"></i></a></li>
             <li><a href="listTatib.php"><i class="fa-solid fa-book"></i></a></li>
             <li class="active"><a href="pelanggaranpage.php"><i class="fa-solid fa-hand"></i></i></a></li>
             <li><a href="notifikasi_dosen.php"><i class="fa-solid fa-bell"></i></a></li>
