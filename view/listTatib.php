@@ -1,3 +1,12 @@
+<?php
+require_once '../config.php';
+
+require_once "../Controllers/TatibController.php";
+
+$tatibData = ReadTatib();
+$sanksiData = ReadSanksi();
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -61,30 +70,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-tingkat="V">
-                        <td>Berkomunikasi dengan tidak sopan kepada mahasiswa, dosen, karyawan, atau orang lain</td>
-                        <td>V</td>
+                    <?php
+                        if ($tatibData) {
+                            foreach ($tatibData as $tatib) {;?>
+                    <tr data-tingkat="<?= $tatib['tingkat']?>">
+                        <td><?= $tatib['deskripsi']?></td>
+                        <td><?= $tatib['tingkat']?></td>
                     </tr>
-                    <tr data-tingkat="IV">
-                        <td>Mahasiswa laki-laki berambut tidak rapi</td>
-                        <td>IV</td>
-                    </tr>
-                    <tr data-tingkat="III">
-                        <td>Membuat kegaduhan yang mengganggu perkuliahan</td>
-                        <td>III</td>
-                    </tr>
-                    <tr data-tingkat="II">
-                        <td>Merusak sarana dan prasarana Polinema</td>
-                        <td>II</td>
-                    </tr>
-                    <tr data-tingkat="I">
-                        <td>Terlambat datang ke kelas lebih dari 15 menit</td>
-                        <td>I</td>
-                    </tr>
-                    <tr data-tingkat="II">
-                        <td>Tidak mengenakan pakaian sesuai aturan kampus</td>
-                        <td>II</td>
-                    </tr>
+                    <?php
+                    }
+                }
+                ?>
                 </tbody>
             </table>
         </div>
@@ -93,12 +89,23 @@
         <!-- Sanksi Section -->
         <div class="sanksi-section">
             <h3>Sanksi Berdasarkan Tingkat</h3>
-            <div class="sanksi-tingkat" data-tingkat="I"><b>Tingkat I:</b> Teguran lisan atau tertulis.</div>
-            <div class="sanksi-tingkat" data-tingkat="II"><b>Tingkat II:</b> Skorsing maksimal 1 minggu.</div>
+            <?php
+                        if ($sanksiData) {
+                            foreach ($sanksiData as $sanksi) {;?>
+                    
+                    <div class="sanksi-tingkat" data-tingkat="<?= $sanksi['tingkat']?>">
+                        <b>Tingkat <?= $sanksi['tingkat']?>:</b> 
+                        <?= $sanksi['deskripsi']?>.
+                    </div>
+                    <?php
+                    }
+                }
+                ?>
+            <!-- <div class="sanksi-tingkat" data-tingkat="II"><b>Tingkat II:</b> Skorsing maksimal 1 minggu.</div>
             <div class="sanksi-tingkat" data-tingkat="III"><b>Tingkat III:</b> Skorsing maksimal 1 bulan.</div>
             <div class="sanksi-tingkat" data-tingkat="IV"><b>Tingkat IV:</b> Dilarang mengikuti kegiatan akademik selama
                 1 semester.</div>
-            <div class="sanksi-tingkat" data-tingkat="V"><b>Tingkat V:</b> Dikeluarkan dari institusi (Drop Out).</div>
+            <div class="sanksi-tingkat" data-tingkat="V"><b>Tingkat V:</b> Dikeluarkan dari institusi (Drop Out).</div> -->
         </div>
 
 
