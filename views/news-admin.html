@@ -31,8 +31,73 @@
         <h1>DISCIPLINK NEWS</h1>
         <img src="../img/logo copy.png" alt="logo">
     </div>
-    
 
+    <button class="add-button">Tambah</button>
+  <table class="news-table">
+    <thead>
+      <tr>
+        <th>Judul</th>
+        <th>Konten</th>
+        <th>Penulis</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Pelanggaran tata tertib tingkat II</td>
+        <td>Mahasiswa dengan NIM 2341024909 telah melakukan perusakan Fasilitas Jurusan Teknologi Informasi</td>
+        <td>1</td>
+        <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
+      </tr>
+      <tr>
+        <td>Pelanggaran tata tertib tingkat III</td>
+        <td>Mahasiswa dengan NIM 2341024909 telah Merokok di luar area kawasan merokok</td>
+        <td>2</td>
+        <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
+      </tr>
+      <tr>
+        <td>Memperbarui Tata Tertib</td>
+        <td>Memperbarui tingkat pelanggaran ganti rugi</td>
+        <td>3</td>
+        <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
+      </tr>
+      <tr>
+        <td>Pelanggaran tata tertib tingkat IV</td>
+        <td>Mahasiswa dengan NIM 2341024909 telah Makan di Laboratorium</td>
+        <td>4</td>
+        <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
+      </tr>
+      <tr>
+        <td>Pelanggaran tata tertib tingkat V</td>
+        <td>Mahasiswa dengan NIM 2341024909 telah Berkata kasar kepada teman</td>
+        <td>5</td>
+        <td><button class="edit-button" onclick="openModal()"><i class="fa-solid fa-pen-to-square"></i></button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Edit Berita</h2>
+        <form id="editForm">
+            <label for="editJudul">Judul:</label>
+            <input type="text" id="editJudul" name="judul" required>
+
+            <label for="editKonten">Konten:</label>
+            <textarea id="editKonten" name="konten" rows="4" required></textarea>
+
+            <label for="editPenulis">Penulis:</label>
+            <input type="text" id="editPenulis" name="penulis" required>
+
+            <button type="submit" class="save-button">Simpan</button>
+        </form>
+    </div>
+</div>
+
+<!-- javascript -->
+<script src="../BackEnd/script-news.js"></script>
 
     <!-- footer -->
     <div class="footer">
