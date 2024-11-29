@@ -18,16 +18,16 @@ html, body {
   left: 0;
   z-index: 100000;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Stack items vertically */
 }
 
 .sidebar ul {
   list-style-type: none;
   padding: 0;
-  margin-top: 10px;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Ensures the ul takes up the remaining space */
+  flex-grow: 1; /* Allow the list to grow and push items around */
 }
 
 .sidebar li {
@@ -72,21 +72,17 @@ html, body {
   margin: 10px auto;
 }
 
-/* Push the last item with logout icon to the bottom */
-.sidebar ul li a {
-  display: block;
+/* Push the logout item to the bottom */
+.sidebar li.logout {
+  margin-bottom: 10px;
+  margin-top: auto; /* Pushes this specific item to the bottom */
+  border: none /* Optional: to visually separate logout */
 }
 
-.sidebar ul li a .fa-right-from-bracket {
-  /* Apply this rule only for the logout icon */
-  position: relative;
-  bottom: 0;
+.sidebar li.logout a:hover {
+  transform: translateY(-2px);
 }
 
-/* Move the logout item to the bottom */
-.sidebar ul li:last-child a .fa-right-from-bracket {
-  margin-top: auto;  /* Pushes the logout icon down */
-}
 
 /* Header styling */
 .header {
