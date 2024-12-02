@@ -1,11 +1,22 @@
 <?php
+session_start();
 require_once '../Controllers/UserController.php';
-
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
 if (isset($_GET['logout'])) {
     $userController = new UserController();
     $userController->logout();
     exit();
 }
+if ($_SESSION['user_type'] === 'mahasiswa') {
+    header("Location: pelanggaranpage.php");
+    exit();
+}
+
+// Ambil data user dari session
+$userData = $_SESSION['user_data'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,8 +51,8 @@ if (isset($_GET['logout'])) {
                 <h1>Pelanggaran</h1>
             </div>
             <div class="profile">
-                <p><strong>Nama :Wawan Agung</strong></p>
-                <p><strong>NIP  :12345678</strong></p>
+                <p><strong>Nama : <?= $userData['nama_lengkap']?></strong></p>
+                <p><strong>NIP  : <?= $userData['nidn']?></strong></p>
             </div>
 
 
@@ -52,19 +63,19 @@ if (isset($_GET['logout'])) {
             <!-- NIM -->
             <div class="form-group">
                 <label for="nim">NIM</label>
-                <input type="text" id="nim" name="nim" value="2341010203" required>
+                <input type="text" id="nim" name="nim" placeholder="Ketikkan NIM" required>
             </div>
 
             <!-- Nama -->
             <div class="form-group">
                 <label for="nama">Nama</label>
-                <input type="text" id="nama" name="nama" value="Ahmad Rusdi Ambarawa" readonly>
+                <input type="text" id="nama" name="nama" placeholder="Ketikkan Nama" readonly>
             </div>
 
             <!-- Semester -->
             <div class="form-group">
-                <label for="semester">Semester</label>
-                <input type="text" id="semester" name="semester" value="2" readonly>
+                <label for="angkatan">Angkatan</label>
+                <input type="text" id="angkatan" name="angkatan" placeholder="Ketikkan Angkatan" readonly>
             </div>
 
             <!-- Jenis Pelanggaran -->
@@ -79,7 +90,7 @@ if (isset($_GET['logout'])) {
             <!-- Deskripsi Pelanggaran -->
             <div class="form-group">
                 <label for="deskripsiPelanggaran">Deskripsi Pelanggaran</label>
-                <textarea id="deskripsiPelanggaran" name="deskripsiPelanggaran" required>Berkata kasar kepada teman sekelas</textarea>
+                <textarea id="deskripsiPelanggaran" name="deskripsiPelanggaran" placeholder="Berkata kasar kepada teman sekelas" required></textarea>
             </div>
 
             <!-- Tugas Khusus -->

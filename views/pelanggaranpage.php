@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../Controllers/UserController.php';
+require_once '../Controllers/PelanggaranController.php';
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
@@ -12,7 +13,6 @@ if (isset($_GET['logout'])) {
     exit();
 }
 
-// Check user type and redirect if needed
 if ($_SESSION['user_type'] === 'dosen') {
     header("Location: pelanggaran_dosen.php");
     exit();
@@ -28,6 +28,11 @@ $semester = ($yearDiff * 2);
 if($currentMonth >= 8) { // Semester ganjil dimulai sekitar Agustus
     $semester += 1;
 }
+
+// tabel
+$pelanggaranController = new PelanggaranController();
+$nim = $userData['nim'];
+$pelanggaranDetail = $pelanggaranController->getDetailPelanggaranMahasiswa($nim);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,6 +82,7 @@ if($currentMonth >= 8) { // Semester ganjil dimulai sekitar Agustus
                     <tr>
                         <th>Pelanggaran</th>
                         <th>Tingkat Pelanggaran</th>
+                        <th>Sanksi</th>
                         <th>Dosen Pengampu</th>
                         <th>Tugas Khusus</th>
                         <th>Surat</th>
@@ -86,16 +92,23 @@ if($currentMonth >= 8) { // Semester ganjil dimulai sekitar Agustus
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Berkomunikasi dengan tidak sopan, baik tertulis atau tidak tertulis kepada mahasiswa, dosen, karyawan, atau orang lain</td>
-                        <td>V</td>
-                        <td>Dr. Wawan Agung S.pd</td>
-                        <td>-</td>
-                        <td><a href="#">Unduh File</a></td>
-                        <td>2 Poin</td>
-                        <td>On Progress</td>
-                        <td><button class="submit-btn" id="openModalButton">Kumpulkan</button></td>
-                    </tr>
+                        <?php if (!empty($pelanggaranDetail)) { 
+                            foreach ($pelanggaranDetail as $detail) { ?>
+                            <tr>
+                                <td><?= htmlspecialchars($detail['pelanggaran']) ?></td>
+                                <td><?= htmlspecialchars($detail['tingkat']) ?></td>
+                                <td><?= htmlspecialchars($detail['sanksi']) ?></td>
+                                <td><?= htmlspecialchars($detail['nama_lengkap']) ?></td>
+                                <td><?= htmlspecialchars($detail['tugas_khusus']) ?></td>
+                                <td><a href="<?= htmlspecialchars($detail['surat']) ?>">Unduh File</a></td>
+                                <td><?= htmlspecialchars($detail['poin']) ?></td>
+                                <td><?= htmlspecialchars($detail['status']) ?></td>
+                                <td><button class="submit-btn" id="openModalButton">Kumpulkan</button></td>
+                            </tr>
+                            <?php } 
+                        } else {
+                            echo "<td colspan='8'>Data pelanggaran tidak ditemukan.</td>";
+                        } ?>
                 </tbody>
             </table>
         </div>

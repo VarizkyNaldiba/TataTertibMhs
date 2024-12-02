@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../Controllers/UserController.php';
+require_once '../Controllers/PelanggaranController.php';
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
@@ -12,11 +13,18 @@ if (isset($_GET['logout'])) {
     exit();
 }
 
-// Check user type and redirect if needed
 if ($_SESSION['user_type'] === 'mahasiswa') {
     header("Location: pelanggaranpage.php");
     exit();
 }
+
+// Ambil data user dari session
+$userData = $_SESSION['user_data'];
+
+// tabel
+$pelanggaranController = new PelanggaranController();
+$nidn = $userData['nidn'];
+$pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,8 +59,8 @@ if ($_SESSION['user_type'] === 'mahasiswa') {
                 <h1>Pelanggaran</h1>
             </div>
             <div class="profile">
-                <p><strong>Nama :Wawan Agung</strong></p>
-                <p><strong>NIP  :12345678</strong></p>
+                <p><strong>Nama : <?= $userData['nama_lengkap']?></strong></p>
+                <p><strong>NIP  : <?= $userData['nidn']?></strong></p>
             </div>
 
             <h3>Tabel Pelanggaran</h3>
@@ -71,16 +79,22 @@ if ($_SESSION['user_type'] === 'mahasiswa') {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Ahmad Rusdi Ambarawa</td>
-                            <td>Berkomunikasi dengan tidak sopan, baik tertulis atau tidak tertulis kepada mahasiswa, dosen, karyawan, atau orang lain</td>
-                            <td>V</td>
-                            <td>Dr. Wawan Agung S.pd</td>
-                            <td>-</td>
-                            <td>Surat Pernyataan tidak mengulangi lagi</td>
-                            <td>2 Poin</td>
-                            <td>On Progress</td>
-                        </tr>
+                    <?php if (!empty($pelanggaranDetail)) { 
+                            foreach ($pelanggaranDetail as $detail) { ?>
+                            <tr>
+                                <td><?= htmlspecialchars($detail['nama_mahasiswa']) ?></td>
+                                <td><?= htmlspecialchars($detail['pelanggaran']) ?></td>
+                                <td><?= htmlspecialchars($detail['tingkat']) ?></td>
+                                <td><?= htmlspecialchars($detail['dosen_pengampu']) ?></td>
+                                <td><?= htmlspecialchars($detail['tugas_khusus']) ?></td>
+                                <td><a href="<?= htmlspecialchars($detail['surat']) ?>">Unduh File</a></td>
+                                <td><?= htmlspecialchars($detail['poin']) ?></td>
+                                <td><?= htmlspecialchars($detail['status_pelanggaran']) ?></td>
+                            </tr>
+                            <?php } 
+                        } else {
+                            echo "<td colspan='8'>Data pelanggaran tidak ditemukan.</td>";
+                        } ?>
                     </tbody>
                 </table>
                 <div class="statement-button">
