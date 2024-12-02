@@ -57,5 +57,15 @@ class Pelanggaran {
         
         return $stmt->execute(); // Return true on success, false on failure
     }
+
+    public function getNotifikasiDosen($id) {
+        $query = "SELECT * FROM NOTIFIKASI WHERE id_dosen = ?";
+        $stmt = $this->connect->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR); 
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $result;
+    }
 }
 ?>
