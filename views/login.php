@@ -1,18 +1,30 @@
 <?php
-  require_once '../Controllers/UserController.php';
-  
-  $user = new UserController();
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      $username = $_POST['username'];
-      $password = $_POST['password'];
-      $userType = $_POST['user_type'];
-      
-      if (!$user -> login($username, $password)) {
-          echo "<div class='alert alert-danger' style='color: red; text-align: center; margin-bottom: 15px;'>
-                    Login gagal! Username atau password salah.
-                </div>";
-      }
-  }
+require_once '../Controllers/UserController.php';
+
+session_start();
+if (isset($_SESSION['username'])) {
+    // Redirect based on role
+    if ($_SESSION['user_type'] === 'mahasiswa') {
+        header("Location: pelanggaranpage.php");
+        exit();
+    } else if ($_SESSION['user_type'] === 'dosen') {
+        header("Location: pelanggaran_dosen.php");
+        exit();
+    }
+}
+
+$user = new UserController();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $userType = $_POST['user_type'];
+    
+    if (!$user->login($username, $password)) {
+        echo "<div class='alert alert-danger' style='color: red; text-align: center; margin-bottom: 15px;'>
+                Login gagal! Username atau password salah.
+              </div>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

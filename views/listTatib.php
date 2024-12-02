@@ -1,7 +1,15 @@
 <?php
+session_start();
 require_once '../config.php';
 
 require_once "../Controllers/TatibController.php";
+require_once '../Controllers/UserController.php';
+
+if (isset($_GET['logout'])) {
+    $userController = new UserController();
+    $userController->logout();
+    exit();
+}
 
 $tatibData = ReadTatib();
 $sanksiData = ReadSanksi();
@@ -43,7 +51,9 @@ $sanksiData = ReadSanksi();
     <div class="content">
         <div class="header">
             <h1>List Tata Tertib</h1>
-            <button class="login-btn" onclick="redirectToPage('login.php')">Login</button>
+            <?php if (!isset($_SESSION['username'])) : ?>
+                <button class="login-btn" onclick="redirectToPage('login.php')">Login</button>
+            <?php endif; ?>
         </div>
 
         <!-- Filter Section -->

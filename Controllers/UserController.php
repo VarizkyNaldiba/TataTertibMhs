@@ -3,52 +3,39 @@ require_once '../config.php';
 require_once '../Models/Users.php';
 
 class UserController {
-    private $connect;
+    private $userModel;
 
     public function __construct() {
-        global $connect;
-        $this->connect = $connect;
+        $this->userModel = new Users();
     }
 
     public function login($username, $password) {
-        if (!$this->connect) {
-            throw new Exception("Database connection failed");
-        }
-        
         try {
-            // Check if login is using NIM (mahasiswa)
-            $stmt = $this->connect->prepare("SELECT * FROM mahasiswa WHERE nim = ? AND password = ?");
-            $stmt->execute([$username, $password]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
+            // Check mahasiswa login
+            $user = $this->userModel->getMahasiswaLogin($username, $password);
             if ($user) {
-                // Mahasiswa login successful
                 session_start();
                 $_SESSION['username'] = $username;
                 $_SESSION['user_type'] = 'mahasiswa';
-                $_SESSION['user_data'] = $user; // Store user data in session
+                $_SESSION['user_data'] = $user;
                 header("Location: pelanggaranpage.php");
                 exit();
             }
 
-            // If not found in mahasiswa, check dosen table
-            $stmt = $this->connect->prepare("SELECT * FROM dosen WHERE nip = ? AND password = ?");
-            $stmt->execute([$username, $password]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
+            // Check dosen login
+            $user = $this->userModel->getDosenLogin($username, $password);
             if ($user) {
-                // Dosen login successful
-                session_start(); 
-                $_SESSION['username'] = $username;
+                session_start();
+                $_SESSION['username'] = $username; 
                 $_SESSION['user_type'] = 'dosen';
-                $_SESSION['user_data'] = $user; // Store user data in session
+                $_SESSION['user_data'] = $user;
                 header("Location: pelanggaran_dosen.php");
                 exit();
             }
 
             return false;
 
-        } catch(PDOException $e) {
+        } catch(Exception $e) {
             echo "Error: " . $e->getMessage();
             return false;
         }

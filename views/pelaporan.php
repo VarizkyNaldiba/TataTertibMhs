@@ -1,3 +1,12 @@
+<?php
+require_once '../Controllers/UserController.php';
+
+if (isset($_GET['logout'])) {
+    $userController = new UserController();
+    $userController->logout();
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
