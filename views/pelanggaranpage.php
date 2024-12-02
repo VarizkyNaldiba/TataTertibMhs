@@ -12,9 +12,22 @@ if (isset($_GET['logout'])) {
     exit();
 }
 
+// Check user type and redirect if needed
+if ($_SESSION['user_type'] === 'dosen') {
+    header("Location: pelanggaran_dosen.php");
+    exit();
+}
+
 // Ambil data user dari session
 $userData = $_SESSION['user_data'];
 
+$currentYear = date('Y');
+$currentMonth = date('n');
+$yearDiff = $currentYear - $userData['angkatan'];
+$semester = ($yearDiff * 2);
+if($currentMonth >= 8) { // Semester ganjil dimulai sekitar Agustus
+    $semester += 1;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +67,7 @@ $userData = $_SESSION['user_data'];
         <div class="profile">
             <p><strong>Nama: <?= $userData['nama_lengkap'] ?></strong></p>
             <p><strong>NIM: <?= $userData['nim'] ?></strong></p>
-            <p><strong>Semester: <?= $userData['angkatan'] ?></strong></p>
+            <p><strong>Semester: <?= $semester?></strong></p>
         </div>
 
         <h3>Tabel Pelanggaran</h3>
