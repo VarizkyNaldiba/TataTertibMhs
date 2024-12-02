@@ -11,8 +11,9 @@ if (isset($_GET['logout'])) {
     exit();
 }
 
-$tatibData = ReadTatib();
-$sanksiData = ReadSanksi();
+$tatibController = new TatibController();
+$tatibData = $tatibController->ReadTatib();
+$sanksiData = $tatibController->ReadSanksi();
 ?>
 
 <!DOCTYPE html>
