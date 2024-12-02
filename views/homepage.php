@@ -5,15 +5,19 @@
         <li class="active"><a href="homepage.php"><i class="fa-solid fa-house"></i></a></li>
             <li><a href="views/listTatib.php"><i class="fa-solid fa-book"></i></a></li>
             <li><a href="views/pelanggaranpage.php"><i class="fa-solid fa-hand"></i></i></a></li>
-            <li><a href="views/notifikasi_dosen.php"><i class="fa-solid fa-bell"></i></a></li>
-            <li class="logout"><a href="?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+            <?php if (isset($_SESSION['user_type']) === 'dosen'): ?>
+                <li><a href="notifikasi_dosen.php"><i class="fa-solid fa-bell"></i></a></li>
+                <li class="logout"><a href="?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+            <?php endif; ?>
         </ul>
     </div>
 
     <div class="content">
     <div class="header">
     <h1>Home</h1>
-    <button class="login-btn" onclick="window.location.href='views/login.php'">Login</button>
+    <?php if (!isset($_SESSION['username'])) : ?>
+        <button class="login-btn" onclick="window.location.href='views/login.php'">Login</button>
+    <?php endif; ?>
 </div>
 
             <div class="judul">
