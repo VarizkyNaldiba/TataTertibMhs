@@ -1,16 +1,19 @@
 <?php
 session_start();
-// session_destroy();
+require_once '../Controllers/UserController.php';
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
 
 if (isset($_GET['logout'])) {
-    session_destroy();
-    header("Location: login.php");
+    $userController = new UserController();
+    $userController->logout();
     exit();
 }
+
+// Ambil data user dari session
+$userData = $_SESSION['user_data'];
 
 ?>
 <!DOCTYPE html>
@@ -49,9 +52,9 @@ if (isset($_GET['logout'])) {
             <h1>Pelanggaran</h1>
         </div>
         <div class="profile">
-            <p><strong>Nama: Ahmad Rusdi Ambarawa</strong></p>
-            <p><strong>NIM: 2341010203</strong></p>
-            <p><strong>Semester: 2</strong></p>
+            <p><strong>Nama: <?= $userData['nama_lengkap'] ?></strong></p>
+            <p><strong>NIM: <?= $userData['nim'] ?></strong></p>
+            <p><strong>Semester: <?= $userData['angkatan'] ?></strong></p>
         </div>
 
         <h3>Tabel Pelanggaran</h3>
