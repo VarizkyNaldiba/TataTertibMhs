@@ -1,10 +1,20 @@
 <?php
+session_start();
 require_once '../config.php';
 
 require_once "../Controllers/TatibController.php";
+require_once '../Controllers/UserController.php';
 
-$tatibData = ReadTatib();
-$sanksiData = ReadSanksi();
+if (isset($_GET['logout'])) {
+    $userController = new UserController();
+    $userController->logout();
+    exit();
+}
+
+$tatibController = new TatibController();
+$tatibData = $tatibController->ReadTatib();
+$sanksiData = $tatibController->ReadSanksi();
+
 ?>
 
 <!DOCTYPE html>
@@ -33,9 +43,11 @@ $sanksiData = ReadSanksi();
         <ul>
         <li><a href="../index.php"><i class="fa-solid fa-house"></i></a></li>
             <li class="active"><a href="listTatib.php"><i class="fa-solid fa-book"></i></a></li>
-            <li><a href="pelanggaranpage.php"><i class="fa-solid fa-hand"></i></i></a></li>
-            <li><a href="notifikasi_dosen.php"><i class="fa-solid fa-bell"></i></a></li>
-            <li class="logout"><a href="?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+            <li><a href="pelanggaranpage.php"><i class="fa-solid fa-hand"></i></a></li>
+            <?php if (isset($_SESSION['user_type']) === 'dosen'): ?>
+                <li><a href="notifikasi_dosen.php"><i class="fa-solid fa-bell"></i></a></li>
+                <li class="logout"><a href="?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+            <?php endif; ?>
         </ul>
     </div>
 
@@ -43,7 +55,9 @@ $sanksiData = ReadSanksi();
     <div class="content">
         <div class="header">
             <h1>List Tata Tertib</h1>
-            <button class="login-btn" onclick="redirectToPage('login.php')">Login</button>
+            <?php if (!isset($_SESSION['username'])) : ?>
+                <button class="login-btn" onclick="redirectToPage('login.php')">Login</button>
+            <?php endif; ?>
         </div>
 
         <!-- Filter Section -->

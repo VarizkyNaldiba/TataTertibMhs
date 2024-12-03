@@ -1,3 +1,25 @@
+<?php
+session_start();
+require_once '../Controllers/UserController.php';
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+if (isset($_GET['logout'])) {
+    $userController = new UserController();
+    $userController->logout();
+    exit();
+}
+if ($_SESSION['user_type'] === 'mahasiswa') {
+    header("Location: pelanggaranpage.php");
+    exit();
+}
+
+// Ambil data user dari session
+$userData = $_SESSION['user_data'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,9 +60,9 @@
             <h1>Pelanggaran</h1>
         </div>
         <div class="profile">
-            <p><strong>Nama :Wawan Agung</strong></p>
-            <p><strong>NIP :12345678</strong></p>
-        </div>
+                <p><strong>Nama : <?= $userData['nama_lengkap']?></strong></p>
+                <p><strong>NIP  : <?= $userData['nidn']?></strong></p>
+            </div>
 
         <div class="form-container">
             <form id="pelanggaranForm">

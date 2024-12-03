@@ -28,7 +28,9 @@
     <div class="content">
     <div class="header">
     <h1>Home</h1>
-    <button class="login-btn" onclick="window.location.href='views/login.php'">Login</button>
+    <?php if (!isset($_SESSION['username'])) : ?>
+        <button class="login-btn" onclick="window.location.href='views/login.php'">Login</button>
+    <?php endif; ?>
 </div>
 
             <div class="judul">

@@ -1,3 +1,22 @@
+<?php
+session_start();
+require_once '../Controllers/UserController.php';
+require_once '../Controllers/PelanggaranController.php'; // Include PelanggaranController
+
+if (isset($_GET['logout'])) {
+    $userController = new UserController();
+    $userController->logout();
+    exit();
+}
+
+// Ambil data user dari session
+$userData = $_SESSION['user_data'];
+
+// Get notifications for the logged-in dosen
+$id_dosen = $userData['id_dosen']; // Assuming user_id is stored in session
+$pelanggaranController = new PelanggaranController();
+$notifications = $pelanggaranController->getNotifikasiDosen($id_dosen); // Fetch notifications
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,36 +64,17 @@
 
         <!-- Notifications Section -->
         <div class="notifications">
+            <?php foreach ($notifications as $notification): ?>
             <div class="notification-item">
                 <div class="icon">
                 <i class="fa-solid fa-user"></i>
                 </div>
                 <div class="notification-content">
-                    <p><strong>Dosen A</strong> telah melaporkan <strong>Tri Sukma Sarah</strong>, Mahasiswa telah Melanggar Tata Tertib Mahasiswa <strong>Tingkat III</strong></p>
-                    <small>5m ago</small>
+                    <p><strong><?= htmlspecialchars($notification['pesan']); ?></strong></p>
+                    <!-- <small><?= htmlspecialchars($notification['tanggal']); ?></small> -->
                 </div>
             </div>
-
-            <div class="notification-item">
-                <div class="icon">
-                <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="notification-content">
-                    <p><strong>Dosen Pembimbing Akademik</strong> telah memberikan tugas khusus kepada <strong>Ghoffar Abdullah</strong></p>
-                    <small>5m ago</small>
-                </div>
-            </div>
-
-            <!-- Duplicate items for demonstration -->
-            <div class="notification-item">
-                <div class="icon">
-                <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="notification-content">
-                    <p><strong>Dosen Pembimbing Akademik</strong> telah memberikan tugas khusus kepada <strong>Ghoffar Abdullah</strong></p>
-                    <small>5m ago</small>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
         </div>
         <div class="footer">

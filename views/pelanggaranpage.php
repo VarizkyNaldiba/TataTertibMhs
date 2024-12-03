@@ -1,17 +1,38 @@
 <?php
 session_start();
-// session_destroy();
+require_once '../Controllers/UserController.php';
+require_once '../Controllers/PelanggaranController.php';
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
 
 if (isset($_GET['logout'])) {
-    session_destroy();
-    header("Location: login.php");
+    $userController = new UserController();
+    $userController->logout();
     exit();
 }
 
+if ($_SESSION['user_type'] === 'dosen') {
+    header("Location: pelanggaran_dosen.php");
+    exit();
+}
+
+// Ambil data user dari session
+$userData = $_SESSION['user_data'];
+
+$currentYear = date('Y');
+$currentMonth = date('n');
+$yearDiff = $currentYear - $userData['angkatan'];
+$semester = ($yearDiff * 2);
+if($currentMonth >= 8) { // Semester ganjil dimulai sekitar Agustus
+    $semester += 1;
+}
+
+// tabel
+$pelanggaranController = new PelanggaranController();
+$nim = $userData['nim'];
+$pelanggaranDetail = $pelanggaranController->getDetailPelanggaranMahasiswa($nim);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +59,6 @@ if (isset($_GET['logout'])) {
             <li><a href="../index.php"><i class="fa-solid fa-house"></i></a></li>
             <li><a href="listTatib.php"><i class="fa-solid fa-book"></i></a></li>
             <li class="active"><a href="pelanggaranpage.php"><i class="fa-solid fa-hand"></i></a></li>
-            <li><a href="notifikasi_dosen.php"><i class="fa-solid fa-bell"></i></a></li>
             <li class="logout"><a href="?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>
     </div>
@@ -49,9 +69,9 @@ if (isset($_GET['logout'])) {
             <h1>Pelanggaran</h1>
         </div>
         <div class="profile">
-            <p><strong>Nama: Ahmad Rusdi Ambarawa</strong></p>
-            <p><strong>NIM: 2341010203</strong></p>
-            <p><strong>Semester: 2</strong></p>
+            <p><strong>Nama: <?= $userData['nama_lengkap'] ?></strong></p>
+            <p><strong>NIM: <?= $userData['nim'] ?></strong></p>
+            <p><strong>Semester: <?= $semester?></strong></p>
         </div>
 
         <h3>Tabel Pelanggaran</h3>
@@ -61,6 +81,7 @@ if (isset($_GET['logout'])) {
                     <tr>
                         <th>Pelanggaran</th>
                         <th>Tingkat Pelanggaran</th>
+                        <th>Sanksi</th>
                         <th>Dosen Pengampu</th>
                         <th>Tugas Khusus</th>
                         <th>Surat</th>
@@ -70,16 +91,23 @@ if (isset($_GET['logout'])) {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Berkomunikasi dengan tidak sopan, baik tertulis atau tidak tertulis kepada mahasiswa, dosen, karyawan, atau orang lain</td>
-                        <td>V</td>
-                        <td>Dr. Wawan Agung S.pd</td>
-                        <td>-</td>
-                        <td><a href="#">Unduh File</a></td>
-                        <td>2 Poin</td>
-                        <td>On Progress</td>
-                        <td><button class="submit-btn" id="openModalButton">Kumpulkan</button></td>
-                    </tr>
+                        <?php if (!empty($pelanggaranDetail)) { 
+                            foreach ($pelanggaranDetail as $detail) { ?>
+                            <tr>
+                                <td><?= htmlspecialchars($detail['pelanggaran']) ?></td>
+                                <td><?= htmlspecialchars($detail['tingkat']) ?></td>
+                                <td><?= htmlspecialchars($detail['sanksi']) ?></td>
+                                <td><?= htmlspecialchars($detail['nama_lengkap']) ?></td>
+                                <td><?= htmlspecialchars($detail['tugas_khusus']) ?></td>
+                                <td><a href="<?= htmlspecialchars($detail['surat']) ?>">Unduh File</a></td>
+                                <td><?= htmlspecialchars($detail['poin']) ?></td>
+                                <td><?= htmlspecialchars($detail['status']) ?></td>
+                                <td><button class="submit-btn" id="openModalButton">Kumpulkan</button></td>
+                            </tr>
+                            <?php } 
+                        } else {
+                            echo "<td colspan='8'>Data pelanggaran tidak ditemukan.</td>";
+                        } ?>
                 </tbody>
             </table>
         </div>

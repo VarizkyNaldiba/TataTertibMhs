@@ -2,28 +2,21 @@
 require_once '../Models/Tatib.php';
 require_once '../Models/Sanksi.php';
 
-function ReadTatib() {
-    global $connect, $sqlt;
-    try {
-        $stmt = $connect->prepare($sqlt);
-        $stmt->execute();
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
-    } catch(PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return false;
+class TatibController {
+    private $tatibModel;
+    private $sanksiModel;
+
+    public function __construct() {
+        $this->tatibModel = new Tatib();
+        $this->sanksiModel = new Sanksi();
     }
-}
-function ReadSanksi() {
-    global $connect, $sqls;
-    try {
-        $stmt = $connect->prepare($sqls);
-        $stmt->execute();
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
-    } catch(PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return false;
+
+    public function ReadTatib() {
+        return $this->tatibModel->getAllTatib();
+    }
+
+    public function ReadSanksi() {
+        return $this->sanksiModel->getAllSanksi();
     }
 }
 ?>

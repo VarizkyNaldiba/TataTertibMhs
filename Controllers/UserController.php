@@ -2,55 +2,50 @@
 require_once '../config.php';
 require_once '../Models/Users.php';
 
-function login($username, $password) {
-    global $connect;
-    
-    if (!$connect) {
-        throw new Exception("Database connection failed");
+class UserController {
+    private $userModel;
+
+    public function __construct() {
+        $this->userModel = new Users();
     }
-    
-    try {
-        // Check if login is using NIM (mahasiswa)
-        $stmt = $connect->prepare("SELECT * FROM mahasiswa WHERE nim = ? AND password = ?");
-        $stmt->execute([$username, $password]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user) {
-            // Mahasiswa login successful
-            session_start();
-            $_SESSION['username'] = $username;
-            $_SESSION['user_type'] = 'mahasiswa';
-            header("Location: pelanggaranpage.php");
-            exit();
+    public function login($username, $password) {
+        try {
+            // Check mahasiswa login
+            $user = $this->userModel->getMahasiswaLogin($username, $password);
+            if ($user) {
+                session_start();
+                $_SESSION['username'] = $username;
+                $_SESSION['user_type'] = 'mahasiswa';
+                $_SESSION['user_data'] = $user;
+                header("Location: pelanggaranpage.php");
+                exit();
+            }
+
+            // Check dosen login
+            $user = $this->userModel->getDosenLogin($username, $password);
+            if ($user) {
+                session_start();
+                $_SESSION['username'] = $username; 
+                $_SESSION['user_type'] = 'dosen';
+                $_SESSION['user_data'] = $user;
+                header("Location: pelanggaran_dosen.php");
+                exit();
+            }
+
+            return false;
+
+        } catch(Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         }
+    }
 
-        // If not found in mahasiswa, check dosen table
-        $stmt = $connect->prepare("SELECT * FROM dosen WHERE nip = ? AND password = ?");
-        $stmt->execute([$username, $password]);
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($user) {
-            // Dosen login successful
-            session_start(); 
-            $_SESSION['username'] = $username;
-            $_SESSION['user_type'] = 'dosen';
-            header("Location: pelanggaranpage.php");
-            exit();
-        }
-
-        return false;
-
-    } catch(PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return false;
+    public function logout() {
+        session_start();
+        session_destroy();
+        header("Location: login.php");
+        exit();
     }
 }
-
-function logout() {
-    session_start();
-    session_destroy();
-    header("Location: login.php");
-    exit();
-}
-
 ?>
