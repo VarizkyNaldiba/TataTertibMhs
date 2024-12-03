@@ -1,81 +1,48 @@
-//data dump untuk nyoba pelacakan untuk cari pelnggaran dari database
-const pelanggaranDatabase = [
-    "Berkomunikasi dengan tidak sopan",
-    "Berbicara kasar kepada teman",
-    "Melanggar aturan berpakaian",
-    "Mengganggu ketertiban kelas",
-    "Tidak membawa perlengkapan",
-    "Berbuat plagiarisme",
-    "Terlambat masuk kelas",
-    "Tidak sopan kepada dosen",
-    "Meninggalkan kelas tanpa izin",
-    "Melanggar aturan ujian"
-];
+document.getElementById('jenisPelanggaran').addEventListener('change', function () {
+    var jenisPelanggaran = this.value;
+    var tingkatInput = document.getElementById('tingkat');
+    var sanksiSelect = document.getElementById('sanksi');  // Menambahkan deklarasi untuk sanksiSelect
 
+    // Mendapatkan tingkat yang sesuai dari data-tingkat atribut
+    var selectedOption = this.options[this.selectedIndex];
+    var tingkat = selectedOption.getAttribute('data-tingkat');
 
-const jenisPelanggaranInput = document.getElementById('jenisPelanggaran');
-const suggestionsList = document.getElementById('suggestionsList');
+    // Mengatur nilai tingkat berdasarkan jenis pelanggaran yang dipilih
+    tingkatInput.value = tingkat;
 
-
-jenisPelanggaranInput.addEventListener('input', function () {
-    const query = this.value.toLowerCase();
-    suggestionsList.innerHTML = ''; // Clear previous suggestions
-
-    if (query) {
-        const filteredSuggestions = pelanggaranDatabase.filter(item =>
-            item.toLowerCase().includes(query)
-        );
-
-        if (filteredSuggestions.length > 0) {
-            suggestionsList.style.display = 'block';
-            filteredSuggestions.forEach(item => {
-                const div = document.createElement('div');
-                div.textContent = item;
-                div.classList.add('suggestion-item');
-                div.addEventListener('click', function () {
-                    jenisPelanggaranInput.value = item; // Set input value
-                    suggestionsList.style.display = 'none'; // Hide suggestions
-                });
-                suggestionsList.appendChild(div);
-            });
-        } else {
-            suggestionsList.style.display = 'none';
-        }
+    // Menampilkan opsi sanksi dan deskripsi tugas sesuai tingkat
+    if (tingkat === '1') {
+        sanksiSelect.innerHTML = `
+            <option value="Sanksi Tingkat 1A">Sanksi Tingkat 1A</option>
+            <option value="Sanksi Tingkat 1B">Sanksi Tingkat 1B</option>
+        `;
+        document.getElementById('deskripsiTugas-container').style.display = 'block'; // Menampilkan deskripsi tugas
+    } else if (tingkat === '2') {
+        sanksiSelect.innerHTML = `
+            <option value="Sanksi Tingkat 2A">Sanksi Tingkat 2A</option>
+            <option value="Sanksi Tingkat 2B">Sanksi Tingkat 2B</option>
+        `;
+        document.getElementById('deskripsiTugas-container').style.display = 'block'; // Menampilkan deskripsi tugas
+    } else if (tingkat === '3') {
+        sanksiSelect.innerHTML = `
+            <option value="Sanksi Tingkat 3A">Sanksi Tingkat 3A</option>
+            <option value="Sanksi Tingkat 3B">Sanksi Tingkat 3B</option>
+        `;
+        document.getElementById('deskripsiTugas-container').style.display = 'block'; // Menampilkan deskripsi tugas
+    } else if (tingkat === '4') {
+        sanksiSelect.innerHTML = `
+            <option value="Sanksi Tingkat 4A">Sanksi Tingkat 4A</option>
+            <option value="Sanksi Tingkat 4B">Sanksi Tingkat 4B</option>
+        `;
+        document.getElementById('deskripsiTugas-container').style.display = 'none'; // Menyembunyikan deskripsi tugas
+    } else if (tingkat === '5') {
+        sanksiSelect.innerHTML = `
+            <option value="Sanksi Tingkat 5A">Sanksi Tingkat 5A</option>
+            <option value="Sanksi Tingkat 5B">Sanksi Tingkat 5B</option>
+        `;
+        document.getElementById('deskripsiTugas-container').style.display = 'none'; // Menyembunyikan deskripsi tugas
     } else {
-        suggestionsList.style.display = 'none';
+        sanksiSelect.innerHTML = ''; // Tidak ada sanksi
+        document.getElementById('deskripsiTugas-container').style.display = 'none'; // Menyembunyikan deskripsi tugas
     }
 });
-
-
-document.addEventListener('click', function (e) {
-    if (!suggestionsList.contains(e.target) && e.target !== jenisPelanggaranInput) {
-        suggestionsList.style.display = 'none';
-    }
-});
-
-
-const tugasKhususCheckbox = document.getElementById('tugasKhusus');
-const deskripsiTugasTextarea = document.getElementById('deskripsiTugas');
-
-
-tugasKhususCheckbox.addEventListener('change', function () {
-    if (this.checked) {
-        deskripsiTugasTextarea.disabled = false; // Enable textarea
-        deskripsiTugasTextarea.focus(); // Focus on textarea
-    } else {
-        deskripsiTugasTextarea.disabled = true; // Disable textarea
-        deskripsiTugasTextarea.value = ''; // Clear the value
-    }
-});
-
-function resetForm() {
-    document.getElementById('pelanggaranForm').reset();
-
-//disable tugas akhir
-    const deskripsiTugasTextarea = document.getElementById('deskripsiTugasKhusus');
-    if (deskripsiTugasTextarea) {
-        deskripsiTugasTextarea.disabled = true;
-    }
-
-    window.location.href = 'pelanggaran_dosen.php'; // Ganti 'nama_halaman.html' dengan URL halaman tujuan
-}
