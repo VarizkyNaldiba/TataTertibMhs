@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/news-admin.css">
+    <link rel="stylesheet" href="../css/tatib-admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
 </head>
 
@@ -20,57 +20,57 @@
         <div class="logo-separator"></div>
         <ul>
         <li><a href="home-admin.html"><i class="fa-solid fa-house"></i></a></li>
-            <li><a href="listTatib.php"><i class="fa-solid fa-book"></i></a></li>
-            <li class="active"><a href="news-admin.html"><i class="fa-solid fa-newspaper"></i></a></li>
+            <li class="active"><a href="listTatib-admin.php"><i class="fa-solid fa-book"></i></a></li>
+            <li><a href="news-admin.html"><i class="fa-solid fa-newspaper"></i></a></li>
             <li class="logout"><a href="?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>
     </div>
 <div class="content">
     <div class="header"></div>
     <div class="judul">
-        <h1>DISCIPLINK NEWS</h1>
+        <h1>DISCIPLINE</h1>
         <img src="../img/logo copy.png" alt="logo">
     </div>
 
-    <button class="add-button">Tambah</button>
+    <button class="add-button" id="addButton">Tambah</button>
   <table class="news-table">
     <thead>
       <tr>
-        <th>Judul</th>
-        <th>Konten</th>
-        <th>Penulis</th>
+        <th>No</th>
+        <th>Pelanggaran</th>
+        <th>Tingkat</th>
         <th>Aksi</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>Pelanggaran tata tertib tingkat II</td>
-        <td>Mahasiswa dengan NIM 2341024909 telah melakukan perusakan Fasilitas Jurusan Teknologi Informasi</td>
         <td>1</td>
+        <td>Mahasiswa dengan NIM 2341024909 telah melakukan perusakan Fasilitas Jurusan Teknologi Informasi</td>
+        <td>II</td>
         <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
       </tr>
       <tr>
-        <td>Pelanggaran tata tertib tingkat III</td>
-        <td>Mahasiswa dengan NIM 2341024909 telah Merokok di luar area kawasan merokok</td>
         <td>2</td>
+        <td>Mahasiswa dengan NIM 2341024909 telah melakukan perusakan Fasilitas Jurusan Teknologi Informasi</td>
+        <td>II</td>
         <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
       </tr>
       <tr>
-        <td>Memperbarui Tata Tertib</td>
-        <td>Memperbarui tingkat pelanggaran ganti rugi</td>
         <td>3</td>
+        <td>Mahasiswa dengan NIM 2341024909 telah melakukan perusakan Fasilitas Jurusan Teknologi Informasi</td>
+        <td>II</td>
         <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
       </tr>
       <tr>
-        <td>Pelanggaran tata tertib tingkat IV</td>
-        <td>Mahasiswa dengan NIM 2341024909 telah Makan di Laboratorium</td>
         <td>4</td>
+        <td>Mahasiswa dengan NIM 2341024909 telah melakukan perusakan Fasilitas Jurusan Teknologi Informasi</td>
+        <td>II</td>
         <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
       </tr>
       <tr>
-        <td>Pelanggaran tata tertib tingkat V</td>
-        <td>Mahasiswa dengan NIM 2341024909 telah Berkata kasar kepada teman</td>
         <td>5</td>
+        <td>Mahasiswa dengan NIM 2341024909 telah melakukan perusakan Fasilitas Jurusan Teknologi Informasi</td>
+        <td>II</td>
         <td><button class="edit-button" onclick="openModal()"><i class="fa-solid fa-pen-to-square"></i></button></td>
       </tr>
     </tbody>
@@ -80,16 +80,16 @@
 <div id="editModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Edit Berita</h2>
+        <h2>Edit Pelanggaran</h2>
         <form id="editForm">
-            <label for="editJudul">Judul:</label>
-            <input type="text" id="editJudul" name="judul" required>
+            <label for="nomor">no.</label>
+            <input type="text" id="nomor" name="nomor" readonly>
 
-            <label for="editKonten">Konten:</label>
+            <label for="editKonten">Pelanggaran:</label>
             <textarea id="editKonten" name="konten" rows="4" required></textarea>
 
-            <label for="editPenulis">Penulis:</label>
-            <input type="text" id="editPenulis" name="penulis" required>
+            <label for="editTingkat">Tingkat:</label>
+            <input type="text" id="editTingkat" name="tingkat" required>
 
             <button type="submit" class="save-button">Simpan</button>
         </form>
@@ -97,7 +97,7 @@
 </div>
 
 <!-- javascript -->
-<script src="../BackEnd/script-news.js"></script>
+<script src="../BackEnd/admin-tatib.js"></script>
 
     <!-- footer -->
     <div class="footer">
