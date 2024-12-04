@@ -171,7 +171,7 @@ $sanksiData = $tatibController->ReadSanksi();
         </div>
     </div>
 
-    <script src="../BackEnd/script_pelaporan.js"></script>
+    <script src="../js/script_pelaporan.js"></script>
 </body>
 
 </html>

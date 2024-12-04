@@ -97,7 +97,7 @@
 </div>
 
 <!-- javascript -->
-<script src="../BackEnd/script-news.js"></script>
+<script src="../js/script-news.js"></script>
 
     <!-- footer -->
     <div class="footer">
