@@ -25,6 +25,7 @@ class PelanggaranController {
                 'message' => 'ID Tata Tertib, ID Sanksi, dan NIM harus diisi'
             ];
         }
+        // var_dump($nidn);
 
         // Simpan detail pelanggaran menggunakan model
         $result = $this->pelanggaranModel->simpanDetailPelanggaran(
@@ -37,7 +38,6 @@ class PelanggaranController {
             $surat, 
             $status
         );
-        
         // Cek hasil penyimpanan
         if ($result) {
             return [
