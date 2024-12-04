@@ -30,7 +30,7 @@ session_start();
     include 'views/homepage.php';
     ?>
 
-    <script src="../BackEnd/script.js">
+    <script src="../js/script.js">
     </script>
 </body>
 

@@ -72,7 +72,7 @@ $sanksiData = $tatibController->ReadSanksi();
             </div>
 
         <div class="form-container">
-            <form id="pelanggaranForm" method="POST" action="../BackEnd/PelaporanRequestHandler.php"> <!-- Added method POST -->
+            <form id="pelanggaranForm" method="POST" action="../Request/Handler_Pelaporan.php"> <!-- Added method POST -->
                 <!-- NIM -->
                 <div class="form-group">
                     <label for="nim">NIM</label>
@@ -171,7 +171,7 @@ $sanksiData = $tatibController->ReadSanksi();
         </div>
     </div>
 
-    <script src="../BackEnd/script_pelaporan.js"></script>
+    <script src="../js/script_pelaporan.js"></script>
 </body>
 
 </html>

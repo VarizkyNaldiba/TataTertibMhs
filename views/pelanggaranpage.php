@@ -170,7 +170,7 @@ $pelanggaranDetail = $pelanggaranController->getDetailPelanggaranMahasiswa($nim)
     </div>
 
     <!-- JavaScript -->
-    <script src="../BackEnd/scriptmodal.js" >
+    <script src="../js/scriptmodal.js" >
     </script>
 </body>
 
