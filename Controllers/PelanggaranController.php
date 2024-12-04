@@ -53,6 +53,10 @@ class PelanggaranController {
         return $result; // Return the result of the update operation
     }
 
+    public function getNotifikasiMahasiswa($idMahasiswa) {
+        return $this->pelanggaranModel->getNotifikasiMahasiswa($idMahasiswa);
+    }
+
     public function getNotifikasiDosen($idDosen) {
         return $this->pelanggaranModel->getNotifikasiDosen($idDosen);
     }

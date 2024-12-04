@@ -10,7 +10,7 @@ class Pelanggaran {
     }
 
     public function getDetailPelanggaranMahasiswa($nim) {
-        $query = "SELECT * FROM PelanggaranMahasiswa WHERE nim = ?";
+        $query = "SELECT * FROM v_PelanggaranMahasiswa WHERE nim = ?";
         $stmt = $this->connect->prepare($query);
         $stmt->bindParam(1, $nim, PDO::PARAM_STR); 
         $stmt->execute();
@@ -20,7 +20,7 @@ class Pelanggaran {
     }
 
     public function getDetailLaporanDosen($nidn) {
-        $query = "SELECT * FROM DosenMelaporkan WHERE nidn = ?";
+        $query = "SELECT * FROM v_DosenMelaporkan WHERE nidn = ?";
         $stmt = $this->connect->prepare($query);
         $stmt->bindParam(1, $nidn, PDO::PARAM_STR); 
         $stmt->execute();
@@ -58,8 +58,17 @@ class Pelanggaran {
         return $stmt->execute(); // Return true on success, false on failure
     }
 
+    public function getNotifikasiMahasiswa($id) {
+        $query = "SELECT * FROM v_NotifikasiMahasiswa WHERE nim = ?";
+        $stmt = $this->connect->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR); 
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $result;
+    }
     public function getNotifikasiDosen($id) {
-        $query = "SELECT * FROM NOTIFIKASI WHERE id_dosen = ?";
+        $query = "SELECT * FROM v_NotifikasiDosen WHERE nidn = ?";
         $stmt = $this->connect->prepare($query);
         $stmt->bindParam(1, $id, PDO::PARAM_STR); 
         $stmt->execute();
