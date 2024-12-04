@@ -1,48 +1,43 @@
-document.getElementById('jenisPelanggaran').addEventListener('change', function () {
-    var jenisPelanggaran = this.value;
-    var tingkatInput = document.getElementById('tingkat');
-    var sanksiSelect = document.getElementById('sanksi');  // Menambahkan deklarasi untuk sanksiSelect
+document.getElementById('tingkat').addEventListener('change', function () {
+    var tingkat = this.value;
 
-    // Mendapatkan tingkat yang sesuai dari data-tingkat atribut
-    var selectedOption = this.options[this.selectedIndex];
-    var tingkat = selectedOption.getAttribute('data-tingkat');
+    // Filter jenis pelanggaran berdasarkan tingkat
+    var jenisPelanggaranSelect = document.getElementById('jenisPelanggaran');
+    var jenisOptions = jenisPelanggaranSelect.options;
 
-    // Mengatur nilai tingkat berdasarkan jenis pelanggaran yang dipilih
-    tingkatInput.value = tingkat;
+    for (var i = 0; i < jenisOptions.length; i++) {
+        var option = jenisOptions[i];
+        if (option.getAttribute('data-tingkat') === tingkat || option.value === "") {
+            option.style.display = 'block';
+        } else {
+            option.style.display = 'none';
+        }
+    }
 
-    // Menampilkan opsi sanksi dan deskripsi tugas sesuai tingkat
-    if (tingkat === '1') {
-        sanksiSelect.innerHTML = `
-            <option value="Sanksi Tingkat 1A">Sanksi Tingkat 1A</option>
-            <option value="Sanksi Tingkat 1B">Sanksi Tingkat 1B</option>
-        `;
-        document.getElementById('deskripsiTugas-container').style.display = 'block'; // Menampilkan deskripsi tugas
-    } else if (tingkat === '2') {
-        sanksiSelect.innerHTML = `
-            <option value="Sanksi Tingkat 2A">Sanksi Tingkat 2A</option>
-            <option value="Sanksi Tingkat 2B">Sanksi Tingkat 2B</option>
-        `;
-        document.getElementById('deskripsiTugas-container').style.display = 'block'; // Menampilkan deskripsi tugas
-    } else if (tingkat === '3') {
-        sanksiSelect.innerHTML = `
-            <option value="Sanksi Tingkat 3A">Sanksi Tingkat 3A</option>
-            <option value="Sanksi Tingkat 3B">Sanksi Tingkat 3B</option>
-        `;
-        document.getElementById('deskripsiTugas-container').style.display = 'block'; // Menampilkan deskripsi tugas
-    } else if (tingkat === '4') {
-        sanksiSelect.innerHTML = `
-            <option value="Sanksi Tingkat 4A">Sanksi Tingkat 4A</option>
-            <option value="Sanksi Tingkat 4B">Sanksi Tingkat 4B</option>
-        `;
-        document.getElementById('deskripsiTugas-container').style.display = 'none'; // Menyembunyikan deskripsi tugas
-    } else if (tingkat === '5') {
-        sanksiSelect.innerHTML = `
-            <option value="Sanksi Tingkat 5A">Sanksi Tingkat 5A</option>
-            <option value="Sanksi Tingkat 5B">Sanksi Tingkat 5B</option>
-        `;
-        document.getElementById('deskripsiTugas-container').style.display = 'none'; // Menyembunyikan deskripsi tugas
+    // Reset pilihan jenis pelanggaran
+    jenisPelanggaranSelect.value = "";
+
+    // Filter sanksi berdasarkan tingkat
+    var sanksiSelect = document.getElementById('sanksi');
+    var sanksiOptions = sanksiSelect.options;
+
+    for (var j = 0; j < sanksiOptions.length; j++) {
+        var sanksiOption = sanksiOptions[j];
+        if (sanksiOption.getAttribute('data-tingkat') === tingkat || sanksiOption.value === "") {
+            sanksiOption.style.display = 'block';
+        } else {
+            sanksiOption.style.display = 'none';
+        }
+    }
+
+    // Reset pilihan sanksi
+    sanksiSelect.value = "";
+
+    // Tampilkan atau sembunyikan form "Deskripsi Tugas Khusus"
+    var deskripsiTugasContainer = document.getElementById('deskripsiTugas-container');
+    if (tingkat === '1' || tingkat === '2' || tingkat === '3') {
+        deskripsiTugasContainer.style.display = 'block'; // Tampilkan deskripsi tugas
     } else {
-        sanksiSelect.innerHTML = ''; // Tidak ada sanksi
-        document.getElementById('deskripsiTugas-container').style.display = 'none'; // Menyembunyikan deskripsi tugas
+        deskripsiTugasContainer.style.display = 'none'; // Sembunyikan deskripsi tugas
     }
 });
