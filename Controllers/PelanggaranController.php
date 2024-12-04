@@ -17,18 +17,75 @@ class PelanggaranController {
         return $this->pelanggaranModel->getDetailLaporanDosen($idDosen);
     }
 
-    public function simpanDetailPelanggaran($id_tata_tertib, $id_sanksi, $tugas_khusus, $surat, $status) {
-        // Ambil ID Dosen dari session atau data user yang login
-        session_start();
-        $id_dosen = $_SESSION['user_id']; // Asumsi user_id disimpan di session saat login
+    public function simpanDetailPelanggaran($id_tata_tertib, $id_sanksi, $tugas_khusus = null, $surat = null, $status = 'pending') {
+        // Validate input
+        if (!$id_tata_tertib || !$id_sanksi) {
+            return [
+                'success' => false, 
+                'message' => 'ID Tata Tertib dan ID Sanksi harus diisi'
+            ];
+        }
 
-        // Ambil ID Mahasiswa dari session atau data user yang login
-        $id_mahasiswa = $_SESSION['mahasiswa_id']; // Asumsi mahasiswa_id disimpan di session saat login
+        // Mulai session untuk mendapatkan ID dosen dan mahasiswa
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+
+        // Pastikan user sudah login
+        if (!isset($_SESSION['user_id']) || !isset($_SESSION['mahasiswa_id'])) {
+            return [
+                'success' => false, 
+                'message' => 'Anda harus login terlebih dahulu'
+            ];
+        }
+
+        // Ambil ID Dosen dari session atau data user yang login
+        $id_dosen = $_SESSION['user_id'];
+        $id_mahasiswa = $_SESSION['mahasiswa_id'];
+
+        // Proses upload surat jika ada
+        if (isset($_FILES['surat']) && $_FILES['surat']['error'] === UPLOAD_ERR_OK) {
+            $targetDir = "../document/"; // Direktori untuk menyimpan file
+            
+            // Buat nama file unik
+            $fileName = uniqid() . '_' . basename($_FILES['surat']['name']);
+            $targetFilePath = $targetDir . $fileName;
+
+            // Pindahkan file yang diupload
+            if (move_uploaded_file($_FILES['surat']['tmp_name'], $targetFilePath)) {
+                $surat = $targetFilePath;
+            } else {
+                return [
+                    'success' => false, 
+                    'message' => 'Gagal mengunggah surat'
+                ];
+            }
+        }
 
         // Simpan detail pelanggaran menggunakan model
-        $result = $this->pelanggaranModel->simpanDetailPelanggaran($id_dosen, $id_tata_tertib, $id_mahasiswa, $id_sanksi, $tugas_khusus, $surat, $status);
+        $result = $this->pelanggaranModel->simpanDetailPelanggaran(
+            $id_dosen, 
+            $id_tata_tertib, 
+            $id_mahasiswa, 
+            $id_sanksi, 
+            $tugas_khusus, 
+            $surat, 
+            $status
+        );
         
-        return $result; // Kembalikan hasil penyimpanan
+        // Cek hasil penyimpanan
+        if ($result) {
+            return [
+                'success' => true, 
+                'message' => 'Berhasil menyimpan detail pelanggaran',
+                'id_detail' => $result
+            ];
+        } else {
+            return [
+                'success' => false, 
+                'message' => 'Gagal menyimpan detail pelanggaran'
+            ];
+        }
     }
     
     public function updateDetailPelanggaran($id_detail, $status, $tugas_khusus, $surat) {
@@ -52,6 +109,8 @@ class PelanggaranController {
 
         return $result; // Return the result of the update operation
     }
+
+    
 
     public function getNotifikasiMahasiswa($idMahasiswa) {
         return $this->pelanggaranModel->getNotifikasiMahasiswa($idMahasiswa);

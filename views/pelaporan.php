@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "../Controllers/TatibController.php";
 require_once '../Controllers/UserController.php';
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
@@ -17,6 +18,9 @@ if ($_SESSION['user_type'] === 'mahasiswa') {
 
 // Ambil data user dari session
 $userData = $_SESSION['user_data'];
+
+$tatibController = new TatibController();
+$tatibData = $tatibController->ReadTatib();
 ?>
 
 
@@ -69,7 +73,7 @@ $userData = $_SESSION['user_data'];
                 <!-- NIM -->
                 <div class="form-group">
                     <label for="nim">NIM</label>
-                    <input type="text" id="nim" name="nim" value="2341010203" required>
+                    <input type="text" id="nim" name="nim" placeholder="2341010203" required>
                 </div>
 
                 <!-- Nama -->
@@ -88,22 +92,10 @@ $userData = $_SESSION['user_data'];
                 <div class="form-group">
                     <label for="jenisPelanggaran">Jenis Pelanggaran</label>
                     <select id="jenisPelanggaran" name="jenisPelanggaran" style="width: 100%;" required>
-                        <option></option>
-                        <option value="Berkomunikasi dengan tidak sopan" data-tingkat="1">Berkomunikasi dengan tidak
-                            sopan</option>
-                        <option value="Berbicara kasar kepada teman" data-tingkat="2">Berbicara kasar kepada teman
-                        </option>
-                        <option value="Melanggar aturan berpakaian" data-tingkat="3">Melanggar aturan berpakaian
-                        </option>
-                        <option value="Mengganggu ketertiban kelas" data-tingkat="1">Mengganggu ketertiban kelas
-                        </option>
-                        <option value="Tidak membawa perlengkapan" data-tingkat="2">Tidak membawa perlengkapan</option>
-                        <option value="Berbuat plagiarisme" data-tingkat="5">Berbuat plagiarisme</option>
-                        <option value="Terlambat masuk kelas" data-tingkat="2">Terlambat masuk kelas</option>
-                        <option value="Tidak sopan kepada dosen" data-tingkat="3">Tidak sopan kepada dosen</option>
-                        <option value="Meninggalkan kelas tanpa izin" data-tingkat="1">Meninggalkan kelas tanpa izin
-                        </option>
-                        <option value="Melanggar aturan ujian" data-tingkat="2">Melanggar aturan ujian</option>
+                        <option readonly>Pilih Jenis Pelanggaran</option>
+                        <?php foreach($tatibData as $data) :?>
+                        <option value="<?= $data['id_tata_tertib']?>" data-tingkat="<?= $data['tingkat']?>"><?= $data['deskripsi']?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
 
@@ -126,7 +118,7 @@ $userData = $_SESSION['user_data'];
                 <div class="form-group">
                     <label for="deskripsiPelanggaran">Deskripsi Pelanggaran</label>
                     <textarea id="deskripsiPelanggaran" name="deskripsiPelanggaran"
-                        required>Berkata kasar kepada teman sekelas</textarea>
+                        required></textarea>
                 </div>
 
                 <!-- Deskripsi Tugas Khusus -->
