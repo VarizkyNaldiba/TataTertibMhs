@@ -28,12 +28,12 @@ class Pelanggaran {
         
         return $result;
     }
-    public function simpanDetailPelanggaran($id_dosen, $id_tata_tertib, $id_mahasiswa, $id_sanksi, $tugas_khusus = null, $surat = null, $status = 'pending') {
+    public function simpanDetailPelanggaran($nidn_dosen, $id_tata_tertib, $nim_mahasiswa, $id_sanksi, $tugas_khusus = null, $detail_tugas_khusus = null, $surat = null, $status = 'pending') {
         try {
             $query = "EXEC sp_InsertDetailPelanggaran 
-                @id_dosen = :id_dosen, 
+                @nidn_dosen = :nidn_dosen, 
                 @id_tata_tertib = :id_tata_tertib, 
-                @id_mahasiswa = :id_mahasiswa, 
+                @nim_mahasiswa = :nim_mahasiswa, 
                 @id_sanksi = :id_sanksi, 
                 @tugas_khusus = :tugas_khusus, 
                 @detail_tugas_khusus = :detail_tugas_khusus,
@@ -43,34 +43,23 @@ class Pelanggaran {
             $stmt = $this->connect->prepare($query);
     
             $params = [
-                ':id_dosen' => $id_dosen,
+                ':nidn_dosen' => $nidn_dosen,
                 ':id_tata_tertib' => $id_tata_tertib,
-                ':id_mahasiswa' => $id_mahasiswa,
+                ':nim_mahasiswa' => $nim_mahasiswa,
                 ':id_sanksi' => $id_sanksi,
                 ':tugas_khusus' => $tugas_khusus,
-                ':detail_tugas_khusus' => $tugas_khusus,
+                ':detail_tugas_khusus' => $detail_tugas_khusus,
                 ':surat' => $surat,
                 ':status' => $status,
             ];
     
             $stmt->execute($params);
     
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $result['id_detail'] ?? false;
+            return $stmt->rowCount() > 0; // Return true if a row was affected
         } catch (PDOException $e) {
             error_log('Error in simpanDetailPelanggaran: ' . $e->getMessage());
             return false;
         }
-    }
-    
-        public function updateDetailPelanggaran($id_detail, $status, $tugas_khusus) {
-        $query = "UPDATE DETAIL_PELANGGARAN SET status = ?, tugas_khusus = ? WHERE id_detail = ?";
-        $stmt = $this->connect->prepare($query);
-        $stmt->bindParam(1, $status, PDO::PARAM_STR);
-        $stmt->bindParam(2, $tugas_khusus, PDO::PARAM_STR);
-        $stmt->bindParam(3, $id_detail, PDO::PARAM_INT);
-        
-        return $stmt->execute(); // Return true on success, false on failure
     }
 
     public function getNotifikasiMahasiswa($id) {

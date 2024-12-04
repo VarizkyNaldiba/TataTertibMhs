@@ -47,5 +47,14 @@ class UserController {
         header("Location: login.php");
         exit();
     }
+
+public function getAllMahasiswa() {
+    try {
+        return $this->userModel->getAllUsers(); // Assuming getAllUsers() returns both mahasiswa and dosen
+    } catch(Exception $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
 }
 ?>
