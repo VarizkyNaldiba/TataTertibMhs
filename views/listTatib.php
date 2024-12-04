@@ -44,7 +44,7 @@ $sanksiData = $tatibController->ReadSanksi();
         <li><a href="../index.php"><i class="fa-solid fa-house"></i></a></li>
             <li class="active"><a href="listTatib.php"><i class="fa-solid fa-book"></i></a></li>
             <li><a href="pelanggaranpage.php"><i class="fa-solid fa-hand"></i></a></li>
-            <?php if (isset($_SESSION['user_type']) === 'dosen'): ?>
+            <?php if (isset($_SESSION['username'])): ?>
                 <li><a href="notifikasi_dosen.php"><i class="fa-solid fa-bell"></i></a></li>
                 <li class="logout"><a href="?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
             <?php endif; ?>
