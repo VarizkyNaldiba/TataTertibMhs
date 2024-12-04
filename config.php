@@ -10,5 +10,5 @@ function connectToDatabase($servername, $dbname) {
     }
 }
 
-$connect = connectToDatabase("LAPTOP-CEEMFUHE", "Disciplink");
+$connect = connectToDatabase("LAPTOP-CEEMFUHE", "DiscipLink");
 ?>
