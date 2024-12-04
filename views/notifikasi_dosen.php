@@ -2,6 +2,10 @@
 session_start();
 require_once '../Controllers/UserController.php';
 require_once '../Controllers/PelanggaranController.php'; // Include PelanggaranController
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
 
 if (isset($_GET['logout'])) {
     $userController = new UserController();
@@ -12,10 +16,17 @@ if (isset($_GET['logout'])) {
 // Ambil data user dari session
 $userData = $_SESSION['user_data'];
 
-// Get notifications for the logged-in dosen
-$id_dosen = $userData['id_dosen']; // Assuming user_id is stored in session
+// Initialize PelanggaranController
 $pelanggaranController = new PelanggaranController();
-$notifications = $pelanggaranController->getNotifikasiDosen($id_dosen); // Fetch notifications
+
+// Get notifications based on user type
+if ($_SESSION['user_type'] === 'mahasiswa') {
+    $notifications = $pelanggaranController->getNotifikasiMahasiswa($userData['nim']);
+} elseif ($_SESSION['user_type'] === 'dosen') {
+    $notifications = $pelanggaranController->getNotifikasiDosen($userData['nidn']);
+} else {
+    $notifications = []; // Default to empty if user type is unknown
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,13 +63,15 @@ $notifications = $pelanggaranController->getNotifikasiDosen($id_dosen); // Fetch
     <div class="side">
             <div class="profile">
                 <img src="profile-placeholder.png" alt="Profile" class="profile-image">
-                <h2>Wawan Agung</h2>
-                <p>Dosen</p>
+                <h2><?= htmlspecialchars($userData['nama_lengkap']); ?></h2>
+                <p><?= $_SESSION['user_type'] === 'dosen' ? 'Dosen' : 'Mahasiswa'; ?></p>
             </div>
             <div class="menu">
                 <button class="menu-btn active">Semua</button>
-                <button class="menu-btn">Pelapor</button>
-                <button class="menu-btn">DPA</button>
+                <?php if ($_SESSION['user_type'] === 'dosen'): ?>
+                    <button class="menu-btn">Pelapor</button>
+                    <button class="menu-btn">DPA</button>
+                <?php endif; ?>
             </div>
         </div>
 
