@@ -105,17 +105,20 @@ $sanksiData = $tatibController->ReadSanksi();
         <div class="sanksi-section">
             <h3>Sanksi Berdasarkan Tingkat</h3>
             <?php
-                        if ($sanksiData) {
-                            foreach ($sanksiData as $sanksi) {;?>
-                    
-                    <div class="sanksi-tingkat" data-tingkat="<?= $sanksi['tingkat']?>">
-                        <b>Tingkat <?= $sanksi['tingkat']?>:</b> 
-                        <?= $sanksi['deskripsi']?>.
-                    </div>
-                    <?php
+                if ($sanksiData) {
+                    foreach ($sanksiData as $sanksi) {
+                        $formattedDeskripsi = str_replace(';', '<br>', $sanksi['deskripsi']);
+                        ?>
+                        <div class="sanksi-tingkat" data-tingkat="<?= $sanksi['tingkat']?>">
+                            <b>Tingkat <?= $sanksi['tingkat']?>:</b> 
+                            <div style="margin-left: 10px;">
+                                <?= $formattedDeskripsi ?>.
+                            </div>
+                        </div>
+                        <?php
                     }
                 }
-                ?>
+            ?>
             <!-- <div class="sanksi-tingkat" data-tingkat="II"><b>Tingkat II:</b> Skorsing maksimal 1 minggu.</div>
             <div class="sanksi-tingkat" data-tingkat="III"><b>Tingkat III:</b> Skorsing maksimal 1 bulan.</div>
             <div class="sanksi-tingkat" data-tingkat="IV"><b>Tingkat IV:</b> Dilarang mengikuti kegiatan akademik selama
