@@ -19,4 +19,5 @@ class TatibController {
         return $this->sanksiModel->getAllSanksi();
     }
 }
+
 ?>
