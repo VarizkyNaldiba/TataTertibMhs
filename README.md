@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-// Tutorial kalau ingin test webnya.
-
-1. buat DB dengan nama tatatertib
-2. import file sql
-3. run localhost
-=======
 # Sistem Informasi Tata Tertib
 
 ## Deskripsi Proyek
@@ -42,4 +35,3 @@ Untuk memulai dengan proyek ini, silakan ikuti langkah-langkah berikut:
 1. Clone repositori ini:
    ```bash
    git clone https://github.com/VarizkyNaldiba/TataTertibMhs.git
->>>>>>> 71f1ac10d88a0516784951ed11ad45df402e0dca
