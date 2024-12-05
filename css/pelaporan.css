@@ -124,6 +124,12 @@ textarea[readonly] {
 .btn-secondary:hover {
     background-color: #c9302c;
 }
+.btn-third{
+    background-color: orange;
+}
+.btn-third:hover{
+    background-color: rgb(249, 174, 36);
+}
 
  /* Suggestions Container */
  .suggestions {

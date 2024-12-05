@@ -33,11 +33,22 @@ document.getElementById('tingkat').addEventListener('change', function () {
     // Reset pilihan sanksi
     sanksiSelect.value = "";
 
-    // Tampilkan atau sembunyikan form "Deskripsi Tugas Khusus"
-    var deskripsiTugasContainer = document.getElementById('deskripsiTugas-container');
-    if (tingkat === '1' || tingkat === '2' || tingkat === '3') {
-        deskripsiTugasContainer.style.display = 'block'; // Tampilkan deskripsi tugas
-    } else {
-        deskripsiTugasContainer.style.display = 'none'; // Sembunyikan deskripsi tugas
-    }
+     // Tampilkan atau sembunyikan form "Deskripsi Tugas Khusus"
+     var deskripsiTugasContainer = document.getElementById('deskripsiTugas-container');
+     var skipTugasContainer = document.getElementById('skipTugasKhusus-container');
+ 
+     if (tingkat === '1' || tingkat === '2' || tingkat === '3') {
+         deskripsiTugasContainer.style.display = 'block'; // Tampilkan deskripsi tugas
+         skipTugasContainer.style.display = 'block'; // Tampilkan tombol lapor DPA
+     } else {
+         deskripsiTugasContainer.style.display = 'none'; // Sembunyikan deskripsi tugas
+         skipTugasContainer.style.display = 'none'; // Sembunyikan tombol lapor DPA
+     }
+ });
+ 
+ // Fungsi tombol Lapor ke DPA
+ document.getElementById('skipTugasKhusus').addEventListener('click', function () {
+     if (confirm('Apakah Anda yakin ingin melaporkan ke DPA dan tidak mengisi tugas khusus?')) {
+         deskripsiTugasContainer.style.display = 'none'; // Sembunyikan deskripsi tugas
+     }
 });

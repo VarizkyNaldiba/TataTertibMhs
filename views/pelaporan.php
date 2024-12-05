@@ -134,6 +134,12 @@ $sanksiData = $tatibController->ReadSanksi();
                         required></textarea>
                 </div>
 
+                <!-- Tombol Melempar ke DPA -->
+                <div id="skipTugasKhusus-container" style="display: none;">
+                    <label for="tugasKhusus">Kirim kan laporan ke DPA</label>
+                    <button id="skipTugasKhusus" type="button" class="btn btn-third">kirim</button>
+                </div>
+
                 <!-- Deskripsi Tugas Khusus -->
                 <div class="form-group" id="deskripsiTugas-container" style="display: none;">
                     <label for="deskripsiTugas">Deskripsi Tugas Khusus</label>
