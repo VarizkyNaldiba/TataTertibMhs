@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const isSuratPernyataanValid = validateFile(suratPernyataanInput);
         const isTugasKhususValid = validateFile(tugasKhususInput);
 
-        if (isSuratPernyataanValid && isTugasKhususValid) {
+        if ((isSuratPernyataanValid || isTugasKhususValid)||(isSuratPernyataanValid && isTugasKhususValid)) {
             alert("File berhasil diunggah!");
             // Reset kedua form setelah berhasil
             suratPernyataanInput.value = "";
