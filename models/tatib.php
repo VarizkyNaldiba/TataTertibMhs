@@ -1,47 +1,23 @@
 <?php
-require_once 'config/database.php';
+require_once '../config.php';
 
-class Tatib
-{
-    private $conn;
+class Tatib {
+    private $connect;
 
-    public function __construct()
-    {
-        $database = new Database();
-        $this->conn = $database->getConnection();
-
-        // Check for successful connection
-        if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
-        }
+    public function __construct() {
+        global $connect;
+        $this->connect = $connect;
     }
 
-    public function getTatibByTingkat($tingkat = null)
-    {
-        $query = "SELECT * FROM tatatertib";
-
-        if ($tingkat) {
-            $query .= " WHERE tingkat = ?";
-            $stmt = $this->conn->prepare($query);
-            if ($stmt === false) {
-                die("Query preparation failed: " . $this->conn->error);
-            }
-
-            $stmt->bind_param("s", $tingkat);
-            if (!$stmt->execute()) {
-                die("Query execution failed: " . $stmt->error);
-            }
-
-            $result = $stmt->get_result();
-            $stmt->close();
-        } else {
-            $result = $this->conn->query($query);
-            if ($result === false) {
-                die("Query execution failed: " . $this->conn->error);
-            }
+    public function getAllTatib() {
+        try {
+            $stmt = $this->connect->prepare("SELECT * FROM TATA_TERTIB");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
         }
-
-        // Fetch all results
-        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }
+?>
