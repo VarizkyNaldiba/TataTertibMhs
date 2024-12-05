@@ -1,4 +1,39 @@
+<?php
+session_start();
+require_once '../Controllers/UserController.php';
+require_once '../Controllers/PelanggaranController.php';
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
 
+if (isset($_GET['logout'])) {
+    $userController = new UserController();
+    $userController->logout();
+    exit();
+}
+
+if ($_SESSION['user_type'] === 'dosen') {
+    header("Location: pelanggaran_dosen.php");
+    exit();
+}
+
+// Ambil data user dari session
+$userData = $_SESSION['user_data'];
+
+$currentYear = date('Y');
+$currentMonth = date('n');
+$yearDiff = $currentYear - $userData['angkatan'];
+$semester = ($yearDiff * 2);
+if($currentMonth >= 8) { // Semester ganjil dimulai sekitar Agustus
+    $semester += 1;
+}
+
+// tabel
+$pelanggaranController = new PelanggaranController();
+$nim = $userData['nim'];
+$pelanggaranDetail = $pelanggaranController->getDetailPelanggaranMahasiswa($nim);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
