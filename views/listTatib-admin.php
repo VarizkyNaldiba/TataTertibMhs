@@ -97,7 +97,7 @@
 </div>
 
 <!-- javascript -->
-<script src="../BackEnd/admin-tatib.js"></script>
+<script src="../js/admin-tatib.js"></script>
 
     <!-- footer -->
     <div class="footer">

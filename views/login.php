@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <button type="submit">Masuk</button>
 </form>
   </div>
-    <script src="../BackEnd/login.js">
+    <script src="../js/login.js">
   </script>
 
 </body>

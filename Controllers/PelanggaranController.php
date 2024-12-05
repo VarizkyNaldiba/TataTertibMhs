@@ -17,62 +17,27 @@ class PelanggaranController {
         return $this->pelanggaranModel->getDetailLaporanDosen($idDosen);
     }
 
-    public function simpanDetailPelanggaran($id_tata_tertib, $id_sanksi, $tugas_khusus = null, $surat = null, $status = 'pending') {
+    public function simpanDetailPelanggaran($nidn, $id_tata_tertib, $nim, $id_sanksi, $tugas_khusus = null, $detail_tugas = null, $surat = null, $status = 'pending') {
         // Validate input
-        if (!$id_tata_tertib || !$id_sanksi) {
+        if (!$id_tata_tertib || !$id_sanksi || !$nim) {
             return [
                 'success' => false, 
-                'message' => 'ID Tata Tertib dan ID Sanksi harus diisi'
+                'message' => 'ID Tata Tertib, ID Sanksi, dan NIM harus diisi'
             ];
         }
-
-        // Mulai session untuk mendapatkan ID dosen dan mahasiswa
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-
-        // Pastikan user sudah login
-        if (!isset($_SESSION['user_id']) || !isset($_SESSION['mahasiswa_id'])) {
-            return [
-                'success' => false, 
-                'message' => 'Anda harus login terlebih dahulu'
-            ];
-        }
-
-        // Ambil ID Dosen dari session atau data user yang login
-        $id_dosen = $_SESSION['user_id'];
-        $id_mahasiswa = $_SESSION['mahasiswa_id'];
-
-        // Proses upload surat jika ada
-        if (isset($_FILES['surat']) && $_FILES['surat']['error'] === UPLOAD_ERR_OK) {
-            $targetDir = "../document/"; // Direktori untuk menyimpan file
-            
-            // Buat nama file unik
-            $fileName = uniqid() . '_' . basename($_FILES['surat']['name']);
-            $targetFilePath = $targetDir . $fileName;
-
-            // Pindahkan file yang diupload
-            if (move_uploaded_file($_FILES['surat']['tmp_name'], $targetFilePath)) {
-                $surat = $targetFilePath;
-            } else {
-                return [
-                    'success' => false, 
-                    'message' => 'Gagal mengunggah surat'
-                ];
-            }
-        }
+        // var_dump($nidn);
 
         // Simpan detail pelanggaran menggunakan model
         $result = $this->pelanggaranModel->simpanDetailPelanggaran(
-            $id_dosen, 
+            $nidn, 
             $id_tata_tertib, 
-            $id_mahasiswa, 
+            $nim, 
             $id_sanksi, 
             $tugas_khusus, 
+            $detail_tugas, 
             $surat, 
             $status
         );
-        
         // Cek hasil penyimpanan
         if ($result) {
             return [
@@ -88,27 +53,27 @@ class PelanggaranController {
         }
     }
     
-    public function updateDetailPelanggaran($id_detail, $status, $tugas_khusus, $surat) {
-        // Update detail pelanggaran menggunakan model
-        $result = $this->pelanggaranModel->updateDetailPelanggaran($id_detail, $status, $tugas_khusus);
+    // public function updateDetailPelanggaran($id_detail, $status, $tugas_khusus, $surat) {
+    //     // Update detail pelanggaran menggunakan model
+    //     $result = $this->pelanggaranModel->updateDetailPelanggaran($id_detail, $status, $tugas_khusus);
         
-        // Logic to handle file upload for surat
-        if (isset($_FILES['suratPernyataan']) && $_FILES['suratPernyataan']['error'] === UPLOAD_ERR_OK) {
-            $targetDir = "../document/"; // Directory to save uploaded files
-            $fileName = basename($_FILES['suratPernyataan']['name']);
-            $targetFilePath = $targetDir . $fileName;
+    //     // Logic to handle file upload for surat
+    //     if (isset($_FILES['suratPernyataan']) && $_FILES['suratPernyataan']['error'] === UPLOAD_ERR_OK) {
+    //         $targetDir = "../document/"; // Directory to save uploaded files
+    //         $fileName = basename($_FILES['suratPernyataan']['name']);
+    //         $targetFilePath = $targetDir . $fileName;
 
-            // Move the uploaded file to the target directory
-            if (move_uploaded_file($_FILES['suratPernyataan']['tmp_name'], $targetFilePath)) {
-                // Update the surat path in the database
-                $this->pelanggaranModel->updateSuratPath($id_detail, $targetFilePath);
-            } else {
-                return false; // Return false if file upload failed
-            }
-        }
+    //         // Move the uploaded file to the target directory
+    //         if (move_uploaded_file($_FILES['suratPernyataan']['tmp_name'], $targetFilePath)) {
+    //             // Update the surat path in the database
+    //             $this->pelanggaranModel->updateSuratPath($id_detail, $targetFilePath);
+    //         } else {
+    //             return false; // Return false if file upload failed
+    //         }
+    //     }
 
-        return $result; // Return the result of the update operation
-    }
+    //     return $result; // Return the result of the update operation
+    // }
 
     
 

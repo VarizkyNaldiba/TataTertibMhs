@@ -1,6 +1,10 @@
 <?php
 session_start();
+
+require_once "../Controllers/TatibController.php";
 require_once '../Controllers/UserController.php';
+require_once '../Controllers/PelanggaranController.php'; // Include PelanggaranController
+
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
@@ -17,9 +21,11 @@ if ($_SESSION['user_type'] === 'mahasiswa') {
 
 // Ambil data user dari session
 $userData = $_SESSION['user_data'];
+
+$tatibController = new TatibController();
+$tatibData = $tatibController->ReadTatib();
+$sanksiData = $tatibController->ReadSanksi();
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,95 +72,66 @@ $userData = $_SESSION['user_data'];
             </div>
 
         <div class="form-container">
-            <form id="pelanggaranForm">
+            <form id="pelanggaranForm" method="POST" action="../Request/Handler_Pelaporan.php"> <!-- Added method POST -->
                 <!-- NIM -->
                 <div class="form-group">
                     <label for="nim">NIM</label>
-                    <input type="text" id="nim" name="nim" value="2341010203" required>
+                    <input type="text" id="nim" name="nim" placeholder="NIM" required>
                 </div>
 
                 <!-- Nama -->
                 <div class="form-group">
                     <label for="nama">Nama</label>
-                    <input type="text" id="nama" name="nama" value="Ahmad Rusdi Ambarawa" readonly>
+                    <input type="text" id="nama" name="nama" placeholder="Nama Lengkap">
                 </div>
 
                 <!-- Semester -->
                 <div class="form-group">
                     <label for="semester">Semester</label>
-                    <input type="text" id="semester" name="semester" value="2" readonly>
+                    <input type="text" id="semester" name="semester" placeholder="Semester">
                 </div>
 
                 <!-- Tingkat -->
-<div class="form-group">
-    <label for="tingkat">Tingkat</label>
-    <select id="tingkat" name="tingkat" required>
-        <option value=""></option>
-        <option value="1">Tingkat 1</option>
-        <option value="2">Tingkat 2</option>
-        <option value="3">Tingkat 3</option>
-        <option value="4">Tingkat 4</option>
-        <option value="5">Tingkat 5</option>
-    </select>
-</div>
+                <div class="form-group">
+                    <label for="tingkat">Tingkat</label>
+                    <select id="tingkat" name="tingkat" required>
+                        <option value="">Pilih Tingkat</option>
+                        <option value="I">Tingkat 1</option>
+                        <option value="II">Tingkat 2</option>
+                        <option value="III">Tingkat 3</option>
+                        <option value="IV">Tingkat 4</option>
+                        <option value="V">Tingkat 5</option>
+                    </select>
+                </div>
 
-<!-- Jenis Pelanggaran -->
-<div class="form-group">
-    <label for="jenisPelanggaran">Jenis Pelanggaran</label>
-    <select id="jenisPelanggaran" name="jenisPelanggaran" required>
-        <option value=""></option>
-        <!-- Tingkat 1 -->
-        <option value="Berkomunikasi dengan tidak sopan" data-tingkat="1">Berkomunikasi dengan tidak sopan</option>
-        <option value="Mengganggu ketertiban kelas" data-tingkat="1">Mengganggu ketertiban kelas</option>
-        <option value="Meninggalkan kelas tanpa izin" data-tingkat="1">Meninggalkan kelas tanpa izin</option>
+                <!-- Jenis Pelanggaran -->
+                <div class="form-group">
+                    <label for="jenisPelanggaran">Jenis Pelanggaran</label>
+                    <select id="jenisPelanggaran" name="jenisPelanggaran" required>
+                        <option value="" readonly>Pilih Jenis Pelanggaran</option>
+                        <?php foreach($tatibData as $tatib) :?>
+                            <option value="<?= $tatib['id_tata_tertib']?>" data-tingkat="<?= $tatib['tingkat']?>"><?= $tatib['deskripsi']?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
 
-        <!-- Tingkat 2 -->
-        <option value="Berbicara kasar kepada teman" data-tingkat="2">Berbicara kasar kepada teman</option>
-        <option value="Tidak membawa perlengkapan" data-tingkat="2">Tidak membawa perlengkapan</option>
-        <option value="Terlambat masuk kelas" data-tingkat="2">Terlambat masuk kelas</option>
-
-        <!-- Tingkat 3 -->
-        <option value="Melanggar aturan berpakaian" data-tingkat="3">Melanggar aturan berpakaian</option>
-        <option value="Tidak sopan kepada dosen" data-tingkat="3">Tidak sopan kepada dosen</option>
-
-        <!-- Tingkat 5 -->
-        <option value="Berbuat plagiarisme" data-tingkat="5">Berbuat plagiarisme</option>
-    </select>
-</div>
-
-<!-- Sanksi -->
-<div class="form-group" id="sanksi-container">
-    <label for="sanksi">Sanksi</label>
-    <select id="sanksi" name="sanksi" required>
-        <option value=""></option>
-        <!-- Tingkat 1 -->
-        <option value="Sanksi Tingkat 1A" data-tingkat="1">Sanksi Tingkat 1A</option>
-        <option value="Sanksi Tingkat 1B" data-tingkat="1">Sanksi Tingkat 1B</option>
-
-        <!-- Tingkat 2 -->
-        <option value="Sanksi Tingkat 2A" data-tingkat="2">Sanksi Tingkat 2A</option>
-        <option value="Sanksi Tingkat 2B" data-tingkat="2">Sanksi Tingkat 2B</option>
-
-        <!-- Tingkat 3 -->
-        <option value="Sanksi Tingkat 3A" data-tingkat="3">Sanksi Tingkat 3A</option>
-        <option value="Sanksi Tingkat 3B" data-tingkat="3">Sanksi Tingkat 3B</option>
-
-        <!-- Tingkat 4 -->
-        <option value="Sanksi Tingkat 4A" data-tingkat="4">Sanksi Tingkat 4A</option>
-        <option value="Sanksi Tingkat 4B" data-tingkat="4">Sanksi Tingkat 4B</option>
-
-        <!-- Tingkat 5 -->
-        <option value="Sanksi Tingkat 5A" data-tingkat="5">Sanksi Tingkat 5A</option>
-        <option value="Sanksi Tingkat 5B" data-tingkat="5">Sanksi Tingkat 5B</option>
-    </select>
-</div>
+                <!-- Sanksi -->
+                <div class="form-group" id="sanksi-container">
+                    <label for="sanksi">Sanksi</label>
+                    <select id="sanksi" name="sanksi" required>
+                        <option value="">Pilih Sanksi</option>
+                        <?php foreach($sanksiData as $sanksi) :?>
+                            <option value="<?= $sanksi['id_sanksi']?>" data-tingkat="<?= $sanksi['tingkat']?>"><?= $sanksi['deskripsi']?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
 
 
                 <!-- Deskripsi Pelanggaran -->
                 <div class="form-group">
                     <label for="deskripsiPelanggaran">Deskripsi Pelanggaran</label>
                     <textarea id="deskripsiPelanggaran" name="deskripsiPelanggaran"
-                        required>Berkata kasar kepada teman sekelas</textarea>
+                        required></textarea>
                 </div>
 
                 <!-- Deskripsi Tugas Khusus -->
@@ -194,7 +171,7 @@ $userData = $_SESSION['user_data'];
         </div>
     </div>
 
-    <script src="../BackEnd/script_pelaporan.js"></script>
+    <script src="../js/script_pelaporan.js"></script>
 </body>
 
 </html>
