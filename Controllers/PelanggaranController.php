@@ -85,4 +85,5 @@ class PelanggaranController {
         return $this->pelanggaranModel->getNotifikasiDosen($idDosen);
     }
 }
+
 ?>
