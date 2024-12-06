@@ -21,21 +21,18 @@ editButtons.forEach((button) => {
 
         // Tampilkan modal
         modal.style.display = 'block';
-        console.log('Modal opened with data:', { nomor, konten, tingkat }); // Debugging
     });
 });
 
 // Fungsi untuk menutup modal
 closeModal.addEventListener('click', () => {
     modal.style.display = 'none';
-    console.log('Modal closed'); // Debugging
 });
 
 // Menutup modal ketika klik di luar area modal
 window.addEventListener('click', (event) => {
     if (event.target === modal) {
         modal.style.display = 'none';
-        console.log('Modal closed by clicking outside'); // Debugging
     }
 });
 
@@ -54,5 +51,4 @@ addButton.addEventListener('click', (e) => {
 
     // Tampilkan modal
     modal.style.display = 'block';
-    console.log('Modal opened with empty fields'); // Debugging
 });
