@@ -72,9 +72,9 @@ CREATE TABLE DETAIL_PELANGGARAN (
     id_sanksi INT NOT NULL,  -- ID Sanksi yang diberikan
     tugas_khusus VARCHAR(255),
 	detail_tugas_khusus VARCHAR(MAX), --deskripsi tugas khusus
-	pengumpulan_tgsKhusus TEXT, --tempat mengumpulkan tugas khusus
-    surat TEXT,  -- pemberian surat mahasiswa
-	pengumpulan_surat TEXT, -- pengumpulan surat mahasiswa
+	pengumpulan_tgsKhusus VARCHAR(255), --tempat mengumpulkan tugas khusus
+    surat VARCHAR(255),  -- pemberian surat mahasiswa
+	pengumpulan_surat VARCHAR(255), -- pengumpulan surat mahasiswa
     status VARCHAR(50) NOT NULL DEFAULT 'Pending',  -- Status pelanggaran (misalnya: 'pending', 'terverifikasi', dll.)
 	status_tugas VARCHAR(50) DEFAULT 'Belum Diberikan', -- status tugas khusus apakah sudah diiberikan atau tidak
     CONSTRAINT FK_Dosen FOREIGN KEY (id_dosen) REFERENCES DOSEN(id_dosen),
