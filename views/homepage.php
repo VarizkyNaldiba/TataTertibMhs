@@ -22,7 +22,7 @@
 
             <div class="judul">
                 <h2>TATA TERTIB <br>MAHASISWA </h2>
-                <p>Sebuah sistem yang dirancang untuk mengelola aturan, <br>pelanggaran, dan sanksi di Universitas</p>
+                <p>Sebuah sistem yang dirancang untuk mengelola aturan, <br>pelanggaran, dan sanksi di Politeknik Negeri Malang</p>
             </div>
             <div class="dashboard-container">
                 <img class="logo-disciplink" src="img/full.png">
