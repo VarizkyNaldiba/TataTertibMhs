@@ -34,10 +34,12 @@
             <div class="news">
                 <h2>Lastest News</h2>
                 <div class="row">
+                    <!-- nanti pakai while aja isi nya biar sesuai dengan inputan-->
                     <div class="news-content">
-                        <img src="" alt="gambar">
-                        <p>nsakdlaksjd;laskdjaskdjalksd</p>
+                        <img src="img/news.jpg" alt="gambar">
+                        <p>nsakdlaksjd;laskdjaskdjalksddmsakdmaks</p>
                     </div>
+                    <!-- sampai sini while nya nanti yang bawah di hapus -->
                     <div class="news-content">
                         <img src="" alt="gambar">
                         <p>kfakjdjkashdjkashjkdhasjdhaksjhdkajshdk</p>
@@ -48,6 +50,8 @@
                     </div>
                 </div>
             </div>
+
+            
             <div class="footer">
     <div class="footer-left">
         <img class="footer-logo" src="img/full.png" alt="Logo">
