@@ -24,13 +24,13 @@ VALUES
     ('2347120120', 'Eko Prasetyo', 'eko.prasetyo@student.example.com', 2023, 'TI02', 5, 'password102', 'mahasiswa');
 
 -- Data Dummy untuk Tabel ADMIN
-INSERT INTO ADMIN (NIP, password, role)
+INSERT INTO ADMIN (NIP, password)
 VALUES
-('ADMIN001', 'admin123', 'admin'),
-('ADMIN002', 'admin456', 'admin'),
-('ADMIN003', 'admin789', 'admin'),
-('ADMIN004', 'admin101', 'admin'),
-('ADMIN005', 'admin102', 'admin');
+('ADMIN001', 'admin123'),
+('ADMIN002', 'admin456'),
+('ADMIN003', 'admin789'),
+('ADMIN004', 'admin101'),
+('ADMIN005', 'admin102');
 
 -- Data Dummy untuk Tabel TATA_TERTIB
 INSERT INTO TATA_TERTIB (deskripsi, tingkat, poin)
