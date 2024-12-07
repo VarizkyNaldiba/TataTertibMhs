@@ -1,12 +1,13 @@
 <?php
 session_start();
-// require_once '../Controllers/UserController.php';
+echo realpath(__DIR__ . '/Controllers/UserController.php');
+require_once __DIR__ . '/Controllers/UserController.php';
 
-// if (isset($_GET['logout'])) {
-//     $userController = new UserController();
-//     $userController->logout();
-//     exit();
-// }
+if (isset($_GET['logout'])) {
+    $userController = new UserController();
+    $userController->logout();
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -30,8 +31,7 @@ session_start();
     include 'views/homepage.php';
     ?>
 
-    <script src="../js/script.js">
-    </script>
+    <script src="../js/script.js"></script>
 </body>
 
 </html>
