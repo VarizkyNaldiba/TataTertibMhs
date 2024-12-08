@@ -1,6 +1,6 @@
 <?php
-require_once '../config.php';
-require_once '../Models/Users.php';
+require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../Models/Users.php';
 
 class UserController {
     private $userModel;
@@ -26,7 +26,7 @@ class UserController {
             $user = $this->userModel->getDosenLogin($username, $password);
             if ($user) {
                 session_start();
-                $_SESSION['username'] = $username; 
+                $_SESSION['username'] = $username;
                 $_SESSION['user_type'] = 'dosen';
                 $_SESSION['user_data'] = $user;
                 header("Location: pelanggaran_dosen.php");
@@ -44,18 +44,18 @@ class UserController {
     public function logout() {
         session_start();
         session_destroy();
-        header("Location: login.php");
+        header("Location: index.php");
         exit();
     }
 
-public function getAllMahasiswa() {
-    try {
-        return $this->userModel->getAllUsers(); // Assuming getAllUsers() returns both mahasiswa and dosen
-    } catch(Exception $e) {
-        echo "Error: " . $e->getMessage();
-        return false;
+    public function getAllMahasiswa() {
+        try {
+            return $this->userModel->getAllUsers(); // Assuming getAllUsers() returns both mahasiswa and dosen
+        } catch(Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
-}
 }
 
 ?>
