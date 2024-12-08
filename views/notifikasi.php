@@ -51,7 +51,7 @@ if ($_SESSION['user_type'] === 'mahasiswa') {
         <li><a href="../index.php"><i class="fa-solid fa-house"></i></a></li>
         <li><a href="listTatib.php"><i class="fa-solid fa-book"></i></a></li>
         <li><a href="pelanggaranpage.php"><i class="fa-solid fa-hand"></i></i></a></li>
-        <li class="active"><a href="notifikasi_dosen.php"><i class="fa-solid fa-bell"></i></a></li>
+        <li class="active"><a href=""><i class="fa-solid fa-bell"></i></a></li>
         <li class="logout"><a href="?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
     </ul>
 </div>
@@ -59,15 +59,6 @@ if ($_SESSION['user_type'] === 'mahasiswa') {
         <div class="header">
             <h1>Notifikasi</h1>
         </div>
-        <div class="container">
-            <div class="side">
-                <div class="profile">
-                    <img src="profile-placeholder.png" alt="Profile" class="profile-image">
-                    <h2><?= htmlspecialchars($userData['nama_lengkap']); ?></h2>
-                    <p><?= $_SESSION['user_type'] === 'dosen' ? 'Dosen' : 'Mahasiswa'; ?></p>
-                </div>
-            </div>
-
             <!-- Notifications Section -->
             <div class="notifications">
                 <?php foreach ($notifications as $notification): ?>

@@ -140,3 +140,24 @@ background-color: #052157;
     color: black;
     border-radius: 0 50px 50px 0;
   }
+
+  @media screen and (max-width: 768px) {
+    form {
+      width: 90%; /* Lebar lebih kecil agar sesuai layar ponsel */
+      max-width: 320px; /* Batasi ukuran maksimum agar tidak terlalu besar */
+      padding: 20px 15px; /* Kurangi padding untuk proporsi lebih kecil */
+      border-radius: 8px; /* Sesuaikan radius sudut */
+      
+    }
+  
+    input {
+      height: 40px; /* Kurangi tinggi input agar lebih proporsional */
+      font-size: 12px; /* Ukuran teks input lebih kecil */
+    }
+  
+    button {
+      font-size: 14px; /* Sesuaikan ukuran tombol */
+      padding: 8px 0; /* Kurangi padding pada tombol */
+    }
+  }
+  

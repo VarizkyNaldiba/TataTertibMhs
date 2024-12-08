@@ -37,7 +37,7 @@ document.getElementById('tingkat').addEventListener('change', function () {
      var deskripsiTugasContainer = document.getElementById('deskripsiTugas-container');
      var skipTugasContainer = document.getElementById('skipTugasKhusus-container');
  
-     if (tingkat === '1' || tingkat === '2' || tingkat === '3') {
+     if (tingkat === 'I' || tingkat === 'II' || tingkat === 'III') {
          deskripsiTugasContainer.style.display = 'block'; // Tampilkan deskripsi tugas
          skipTugasContainer.style.display = 'block'; // Tampilkan tombol lapor DPA
      } else {

@@ -1,9 +1,8 @@
-
 html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
+  overflow-x: hidden;
 }
 
 /* Sidebar styling */
@@ -17,7 +16,7 @@ html, body {
   left: 0;
   z-index: 100000;
   display: flex;
-  flex-direction: column; /* Stack items vertically */
+  flex-direction: column;
 }
 
 .sidebar ul {
@@ -26,7 +25,7 @@ html, body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Allow the list to grow and push items around */
+  flex-grow: 1;
 }
 
 .sidebar li {
@@ -74,20 +73,19 @@ html, body {
 /* Push the logout item to the bottom */
 .sidebar li.logout {
   margin-bottom: 10px;
-  margin-top: auto; /* Pushes this specific item to the bottom */
-  border: none /* Optional: to visually separate logout */
+  margin-top: auto;
+  border: none;
 }
 
 .sidebar li.logout a:hover {
   transform: translateY(-2px);
 }
 
-
 /* Header styling */
 .header {
   font-family: 'Inter';
   position: fixed;
-  width: calc(100% - 90px); 
+  width: calc(100% - 70px);
   top: 0;
   background-color: #e8f1f5;
   height: 40px;
@@ -95,97 +93,133 @@ html, body {
   display: flex;
   font-size: 10px;
   align-items: center;
-  justify-content: space-between; 
+  justify-content: space-between;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 1000; 
+  z-index: 1000;
 }
 
 /* Login button styling */
 .login-btn {
   font-family: 'Inter';
-  background-color: #007bff; /* Button background color */
-  color: white; /* Button text color */
+  background-color: #007bff;
+  color: white;
   border: none;
-  padding: 10px 20px; /* Ukuran tombol */
-  font-size: 14px; /* Ukuran teks */
-  border-radius: 5px; /* Rounded edges */
+  padding: 10px 20px;
+  font-size: 14px;
+  margin-right: 20px;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .login-btn:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
 }
 
 /* Content area */
 .content {
   height: 100%;
-  padding-top: 50px; 
+  padding-top: 50px;
   padding-left: 70px;
 }
 
 /* Footer Container */
 .footer {
-  background-color: #1C204A;  
-  color: white;              
-  display: flex;              
-  flex-direction: column;     
-  padding: 20px 40px;         
-  font-size: 0.9rem;          
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); 
-  box-sizing: border-box;    
-  width: 100%;               
+  background-color: #1C204A;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  font-size: 0.9rem;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  width: 100%;
   align-items: center;
-  gap: 20px;                 
+  gap: 20px;
 }
 
 /* Footer Left Section */
 .footer-left {
-  display: flex;             
-  align-items: center;       
-  gap: 30px;             
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }
+
 .footer-logo {
-  height: 70px;             
-  object-fit: contain;      
+  height: 70px;
+  object-fit: contain;
 }
 
 /* Footer Center Section */
 .footer-center {
-  text-align: center;      
-  font-size: 1rem;       
+  text-align: center;
+  font-size: 1rem;
 }
+
 .footer-center p {
-  margin: 5px 0;           
+  margin: 5px 0;
 }
+
 .footer-link {
-  color: #ffffff;          
-  text-decoration: none;   
-  font-weight: bold;       
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 /* Footer Right Section (Social Media) */
 .footer-right {
-  display: flex;           
-  gap: 20px;               
+  display: flex;
+  gap: 20px;
 }
+
 .social-link {
   font-size: 20px;
   text-decoration: none;
-  color: #e8f1f5;   
-  
+  color: #e8f1f5;
 }
+
 .social-icon {
-  height: 100px;            
-  object-fit: contain;     
+  height: 100px;
+  object-fit: contain;
 }
 
 /* Footer Bottom Section */
 .footer-bottom {
-  text-align: center;      
-  font-size: 0.7rem;       
-  margin-top: 5px;        
-  color: #ccc;             
+  text-align: center;
+  font-size: 0.7rem;
+  margin-top: 5px;
+  color: #ccc;
 }
- 
 
+/* Responsive Design for Mobile */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+  }
+
+  .header {
+    width: calc(100% - 60px);
+    font-size: 9px;
+  }
+
+  .content {
+    padding-left: 60px;
+  }
+
+  .footer {
+    padding: 10px 20px;
+    font-size: 0.8rem;
+  }
+
+  .footer-logo {
+    height: 50px;
+  }
+
+  .footer-right {
+    gap: 10px;
+  }
+
+  .footer-center {
+    font-size: 0.9rem;
+  }
+}
