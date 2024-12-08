@@ -2,11 +2,11 @@
         <img class="logo" src="img/logo copy.png" alt="logo">
         <div class="logo-separator"></div>
         <ul>
-        <li class="active"><a href="homepage.php"><i class="fa-solid fa-house"></i></a></li>
+        <li class="active"><a href=""><i class="fa-solid fa-house"></i></a></li>
             <li><a href="views/listTatib.php"><i class="fa-solid fa-book"></i></a></li>
             <li><a href="views/pelanggaranpage.php"><i class="fa-solid fa-hand"></i></i></a></li>
             <?php if (isset($_SESSION['username'])): ?>
-                <li><a href="views/notifikasi_dosen.php"><i class="fa-solid fa-bell"></i></a></li>
+                <li><a href="views/notifikasi.php"><i class="fa-solid fa-bell"></i></a></li>
                 <li class="logout"><a href="?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
             <?php endif; ?>
         </ul>

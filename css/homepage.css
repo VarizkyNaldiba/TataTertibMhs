@@ -1,4 +1,3 @@
-
 /* Kontainer Utama */
 .dashboard-container {
   font-family: "Inter", sans-serif;
@@ -13,7 +12,7 @@
   background-color: #1C204A;    /* Warna latar belakang biru */
   width: 100%;               /* Memastikan lebar elemen 100% dari viewport */
   box-sizing: border-box;    /* Memastikan padding tidak menambah lebar total */
-  color: white;             /* Warna teks putih untuk kontras */     /* Jarak antara gambar dan teks */
+  color: white;             /* Warna teks putih untuk kontras */
 }
 
 /* Styling untuk Logo */
@@ -50,25 +49,25 @@
   z-index: -1;                 /* Menempatkan overlay di belakang konten */
 }
 
-  
-  .judul h2 {
-    font-family: 'Italiana', serif;
-    font-size: 78px;
-    margin: 0;                          /* Menghapus margin default pada h2 */
-  }
-  
-  .judul p {
-    font-family: "Inter", sans-serif;
-    font-size: 18px;
-    margin-top: 20px;                   /* Memberikan jarak antara h2 dan p */
-  }
-  .news h2{
-    font-size: 30px;
-    margin-top: 40px;
-    display: flex;
-    justify-content: center;
-    font-family: 'Italiana';
-  }
+.judul h2 {
+  font-family: 'Italiana', serif;
+  font-size: 78px;
+  margin: 0;                          /* Menghapus margin default pada h2 */
+}
+
+.judul p {
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  margin-top: 20px;                   /* Memberikan jarak antara h2 dan p */
+}
+
+.news h2 {
+  font-size: 30px;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  font-family: 'Italiana';
+}
 
 /* Mengatur layout horizontal untuk card berita */
 .row {
@@ -109,4 +108,36 @@
   word-wrap: break-word; /* Memastikan kata panjang akan dipisah ke baris berikutnya */
   text-overflow: ellipsis; /* Jika overflow, tambahkan ellipsis (...) */
   overflow: visible; /* Biarkan teks melanjutkan ke bawah */
+}
+
+/* Responsif Design */
+@media screen and (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .dashboard-container .logo-disciplink {
+    margin-right: 0;
+    margin-bottom: 20px;
+    width: 200px;
+  }
+
+  .judul h2 {
+    font-size: 48px;
+  }
+
+  .judul p {
+    font-size: 16px;
+  }
+
+  .news-content {
+    width: 90%; /* Mengambil hampir seluruh lebar layar */
+    margin: 0 auto; /* Agar card berada di tengah */
+  }
+
+  .row {
+    gap: 10px;
+  }
 }
