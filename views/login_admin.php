@@ -13,7 +13,7 @@
 </head>
 <body>
   <div class="sidebar">
-    <img class="logo" src="../img/logo copy.png" alt="logo">
+  <img class="logo" src="img/logo aja.png" alt="logo">
     <div class="logo-separator"></div>
     <ul>
     <li><a href="homepage.php"><i class="fa-solid fa-house"></i></a></li>

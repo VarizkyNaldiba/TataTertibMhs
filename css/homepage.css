@@ -9,10 +9,10 @@
   padding-left: 30px;
   align-items: center;       /* Menyelaraskan konten secara vertikal di tengah */
   justify-content: space-between; /* Menyusun konten di kedua sisi (kiri dan kanan) */
-  background-color: #1C204A;    /* Warna latar belakang biru */
+  background-color: #5BA4E5;    /* Warna latar belakang biru */
   width: 100%;               /* Memastikan lebar elemen 100% dari viewport */
   box-sizing: border-box;    /* Memastikan padding tidak menambah lebar total */
-  color: white;             /* Warna teks putih untuk kontras */
+  color: black;             /* Warna teks putih untuk kontras */
 }
 
 /* Styling untuk Logo */
@@ -50,7 +50,7 @@
 }
 
 .judul h2 {
-  font-family: 'Italiana', serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 78px;
   margin: 0;                          /* Menghapus margin default pada h2 */
 }
@@ -66,7 +66,7 @@
   margin-top: 40px;
   display: flex;
   justify-content: center;
-  font-family: 'Italiana';
+  font-family: "Libre Baskerville";
 }
 
 /* Mengatur layout horizontal untuk card berita */
@@ -116,6 +116,7 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 10px;
+    font-size: 16px;
   }
 
   .dashboard-container .logo-disciplink {
@@ -123,9 +124,11 @@
     margin-bottom: 20px;
     width: 200px;
   }
-
+  .judul{
+    margin-top: -40px;
+  }
   .judul h2 {
-    font-size: 48px;
+    font-size: 40px;
   }
 
   .judul p {
