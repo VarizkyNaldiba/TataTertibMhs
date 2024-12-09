@@ -53,7 +53,7 @@ $pelanggaranDetail = $pelanggaranController->getDetailPelanggaranMahasiswa($nim)
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <img class="logo" src="../img/logo copy.png" alt="logo">
+    <img class="logo" src="../img/logo aja.png" alt="logo">
         <div class="logo-separator"></div>
         <ul>
             <li><a href="../index.php"><i class="fa-solid fa-house"></i></a></li>
@@ -151,7 +151,7 @@ $pelanggaranDetail = $pelanggaranController->getDetailPelanggaranMahasiswa($nim)
         <!-- Footer -->
         <div class="footer">
             <div class="footer-left">
-                <img class="footer-logo" src="../img/full.png" alt="Logo">
+            <img class="footer-logo" src="../img/logo aja.png" alt="Logo">
                 <img class="footer-logo" src="../img/logo.png" alt="logo polinema">
             </div>
             <div class="footer-center">

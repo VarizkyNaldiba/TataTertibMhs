@@ -1,5 +1,5 @@
 <div class="sidebar">
-        <img class="logo" src="img/logo copy.png" alt="logo">
+        <img class="logo" src="img/logo aja.png" alt="logo">
         <div class="logo-separator"></div>
         <ul>
         <li class="active"><a href=""><i class="fa-solid fa-house"></i></a></li>
@@ -25,7 +25,7 @@
                 <p>Sebuah sistem yang dirancang untuk mengelola aturan, <br>pelanggaran, dan sanksi di Politeknik Negeri Malang</p>
             </div>
             <div class="dashboard-container">
-                <img class="logo-disciplink" src="img/full.png">
+                <img class="logo-disciplink" src="img/ga logo aja.png">
                 <p>Disciplink adalah platform digital inovatif yang dirancang untuk menghubungkan mahasiswa dengan
                     sistem kedisiplinan kampus. Sebagai gabungan dari kata "Discipline" dan "Link", Disciplink berfokus
                     pada penyederhanaan proses pengelolaan tata tertib di lingkungan akademik, memudahkan mahasiswa dan
@@ -54,7 +54,7 @@
             
             <div class="footer">
     <div class="footer-left">
-        <img class="footer-logo" src="img/full.png" alt="Logo">
+        <img class="footer-logo" src="img/logo aja.png" alt="Logo">
         <img class ="footer-logo" src="img/logo.png" alt="logo polinema">
     </div>
     <div class="footer-center">
