@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
   <div class="sidebar">
-  <img class="logo" src="img/logo aja.png" alt="logo">
+  <img class="logo" src="../img/logo aja.png" alt="logo">
     <div class="logo-separator"></div>
     <ul>
     <li><a href="../index.php"><i class="fa-solid fa-house"></i></a></li>

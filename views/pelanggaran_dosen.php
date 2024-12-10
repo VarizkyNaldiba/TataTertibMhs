@@ -50,7 +50,7 @@ $pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
             <li><a href="listTatib.php"><i class="fa-solid fa-book"></i></a></li>
             <li class="active"><a href="pelanggaranpage.php"><i class="fa-solid fa-hand"></i></i></a></li>
             <li><a href="notifikasi.php"><i class="fa-solid fa-bell"></i></a></li>
-            <li class="logout"><a href="?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+            <li class="logout"><a href="../?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>
     </div>
 
@@ -71,11 +71,12 @@ $pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
                             <th>Pelanggar</th>
                             <th>Pelanggaran</th>
                             <th>Tingkat Pelanggaran</th>
-                            <th>Dosen Pengampu</th>
+                            <th>Dosen Pelapor</th>
                             <th>Tugas Khusus</th>
                             <th>Surat</th>
                             <th>Poin</th>
                             <th>Status</th>
+                            <th>Status Tugas</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,11 +86,12 @@ $pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
                                 <td><?= htmlspecialchars($detail['nama_mahasiswa']) ?></td>
                                 <td><?= htmlspecialchars($detail['pelanggaran']) ?></td>
                                 <td><?= htmlspecialchars($detail['tingkat']) ?></td>
-                                <td><?= htmlspecialchars($detail['dosen_pengampu']) ?></td>
+                                <td><?= htmlspecialchars($detail['dosen_pelapor']) ?></td>
                                 <td><?= htmlspecialchars($detail['tugas_khusus']) ?></td>
-                                <td><a href="<?= htmlspecialchars($detail['surat']) ?>">Unduh File</a></td>
+                                <td><a href="#">Unduh File</a></td>
                                 <td><?= htmlspecialchars($detail['poin']) ?></td>
                                 <td><?= htmlspecialchars($detail['status_pelanggaran']) ?></td>
+                                <td><?= htmlspecialchars($detail['status_tugas']) ?></td>
                             </tr>
                             <?php } 
                         } else {
