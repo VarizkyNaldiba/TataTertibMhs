@@ -16,7 +16,6 @@ $tatibData = $tatibController->ReadTatib();
 $sanksiData = $tatibController->ReadSanksi();
 
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 
