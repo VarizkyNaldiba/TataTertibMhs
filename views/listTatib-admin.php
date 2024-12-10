@@ -1,3 +1,31 @@
+<?php
+session_start();
+require_once '../config.php';
+
+require_once "../Controllers/TatibController.php";
+require_once '../Controllers/UserController.php';
+
+if (isset($_SESSION['username'])) {
+  // Redirect based on role
+  if ($_SESSION['user_type'] === 'mahasiswa') {
+      header("Location: pelanggaranpage.php");
+      exit();
+  } else if ($_SESSION['user_type'] === 'dosen') {
+    header("Location: pelanggaran_dosen.php");
+    exit();
+  }
+}
+
+if (isset($_GET['logout'])) {
+    $userController = new UserController();
+    $userController->logout();
+    exit();
+}
+
+$tatibController = new TatibController();
+$tatibData = $tatibController->ReadTatib();
+
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -22,14 +50,15 @@
         <li><a href="home-admin.php"><i class="fa-solid fa-house"></i></a></li>
             <li class="active"><a href="listTatib-admin.php"><i class="fa-solid fa-book"></i></a></li>
             <li><a href="news-admin.php"><i class="fa-solid fa-newspaper"></i></a></li>
-            <li class="logout"><a href="?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+            <?php if (isset($_SESSION['username'])): ?>
+                <li class="logout"><a href="../?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+            <?php endif; ?>
         </ul>
     </div>
 <div class="content">
     <div class="header"></div>
     <div class="judul">
         <h1>DISCIPLINE</h1>
-        <img src="../img/logo copy.png" alt="logo">
     </div>
 
     <button class="add-button" id="addButton">Tambah</button>
@@ -37,42 +66,29 @@
     <thead>
       <tr>
         <th>No</th>
+        <th>admin</th>
         <th>Pelanggaran</th>
         <th>Tingkat</th>
+        <th>Poin</th>
         <th>Aksi</th>
       </tr>
     </thead>
     <tbody>
+      <?php $i = 1?>
       <tr>
-        <td>1</td>
-        <td>Mahasiswa dengan NIM 2341024909 telah melakukan perusakan Fasilitas Jurusan Teknologi Informasi</td>
-        <td>II</td>
-        <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Mahasiswa dengan NIM 2341024909 telah melakukan perusakan Fasilitas Jurusan Teknologi Informasi</td>
-        <td>II</td>
-        <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Mahasiswa dengan NIM 2341024909 telah melakukan perusakan Fasilitas Jurusan Teknologi Informasi</td>
-        <td>II</td>
-        <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>Mahasiswa dengan NIM 2341024909 telah melakukan perusakan Fasilitas Jurusan Teknologi Informasi</td>
-        <td>II</td>
-        <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td>Mahasiswa dengan NIM 2341024909 telah melakukan perusakan Fasilitas Jurusan Teknologi Informasi</td>
-        <td>II</td>
-        <td><button class="edit-button" onclick="openModal()"><i class="fa-solid fa-pen-to-square"></i></button></td>
-      </tr>
+          <?php if ($tatibData) :?>
+                  <?php foreach ($tatibData as $tatib) :?>
+                  <tr>
+                      <td><?= $i?></td>
+                      <td><?= $tatib['id_adminTatib']?></td>
+                      <td><?= $tatib['deskripsi']?></td>
+                      <td><?= $tatib['tingkat']?></td>
+                      <td><?= $tatib['poin']?></td>
+                      <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
+                  </tr>
+                  <?php $i++?>
+                  <?php endforeach;?>
+          <?php endif;?>
     </tbody>
   </table>
 
