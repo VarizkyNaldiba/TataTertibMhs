@@ -1,3 +1,27 @@
+<?php
+session_start();
+
+require_once '../Controllers/UserController.php';
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
+if (isset($_GET['logout'])) {
+    $userController = new UserController();
+    $userController->logout();
+    exit();
+}
+
+if ($_SESSION['user_type'] === 'mahasiswa') {
+    header("Location: pelanggaranpage.php");
+    exit();
+} else if ($_SESSION['user_type'] === 'dosen') {
+    header("Location: pelanggaran_dosen.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 
