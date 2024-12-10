@@ -52,7 +52,7 @@ if ($_SESSION['user_type'] === 'mahasiswa') {
         <li><a href="listTatib.php"><i class="fa-solid fa-book"></i></a></li>
         <li><a href="pelanggaranpage.php"><i class="fa-solid fa-hand"></i></i></a></li>
         <li class="active"><a href=""><i class="fa-solid fa-bell"></i></a></li>
-        <li class="logout"><a href="?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+        <li class="logout"><a href="../?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
     </ul>
 </div>
     <div class="content">
