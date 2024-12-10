@@ -18,7 +18,7 @@ class UserController {
                 $_SESSION['username'] = $username;
                 $_SESSION['user_type'] = 'mahasiswa';
                 $_SESSION['user_data'] = $user;
-                header("Location: views/pelanggaranpage.php");
+                header("Location: ../views/pelanggaranpage.php");
                 exit();
             }
 
@@ -29,7 +29,7 @@ class UserController {
                 $_SESSION['username'] = $username;
                 $_SESSION['user_type'] = 'dosen';
                 $_SESSION['user_data'] = $user;
-                header("Location: views/pelanggaran_dosen.php");
+                header("Location: ../views/pelanggaran_dosen.php");
                 exit();
             }
 
@@ -40,7 +40,7 @@ class UserController {
                 $_SESSION['username'] = $username;
                 $_SESSION['user_type'] = 'admin';
                 $_SESSION['user_data'] = $user;
-                header("Location: views/home-admin.php");
+                header("Location: ../views/home-admin.php");
                 exit();
             }
 
