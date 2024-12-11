@@ -57,10 +57,9 @@ class Pelanggaran {
             ];
     
             $stmt->execute($params);
-            return $stmt->rowCount() > 0; // Return true if a row was affected
+            return true; // Return true if a row was affected
         } catch (PDOException $e) {
             error_log('Error in simpanDetailPelanggaran: ' . $e->getMessage());
-            // var_dump($e);
             return false;
         }
     }
