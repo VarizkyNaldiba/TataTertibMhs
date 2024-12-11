@@ -43,5 +43,16 @@ class News {
             return false;
         }
     }
+
+    public function deleteNews($news_id) {
+        $query = "DELETE FROM news WHERE id_news = ?";
+        try {
+            $stmt = $this->connect->prepare($query);
+            return $stmt->execute([$news_id]);
+        } catch(PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
 }
 ?>

@@ -16,12 +16,16 @@ class NewsController {
         return $this->newsModel->getNewsAdmin($id);
     }
 
-    public function simpanNews($judul, $penulis, $id) {
+    public function store($judul, $penulis, $id) {
         $result = $this->newsModel->insertNews(
             $judul, 
             $penulis, 
             $id
         );
+    }
+
+    public function delete($id) {
+        $result = $this->newsModel->deleteNews($id);
     }
 }
 
