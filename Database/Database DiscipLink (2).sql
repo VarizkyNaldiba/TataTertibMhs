@@ -1,5 +1,5 @@
 drop database DiscipLink;
-
+USE TSQL;
 CREATE DATABASE DiscipLink;
 
 USE DiscipLink;
@@ -70,8 +70,8 @@ CREATE TABLE DETAIL_PELANGGARAN (
     id_tata_tertib INT NOT NULL,  -- ID Tata Tertib yang dilanggar
     id_mahasiswa INT NOT NULL,  -- ID Mahasiswa yang melakukan pelanggaran
     id_sanksi INT NOT NULL,  -- ID Sanksi yang diberikan
-    tugas_khusus VARCHAR(255),
-	detail_tugas_khusus VARCHAR(MAX), --deskripsi tugas khusus
+    tugas_khusus VARCHAR(255), -- deskripsi tugas khusus
+	detail_pelanggaran VARCHAR(MAX), --deskripsi pelanggaran
 	pengumpulan_tgsKhusus VARCHAR(255), --tempat mengumpulkan tugas khusus
     surat VARCHAR(255),  -- pemberian surat mahasiswa
 	pengumpulan_surat VARCHAR(255), -- pengumpulan surat mahasiswa
@@ -94,7 +94,6 @@ CREATE TABLE NOTIFIKASI (
     role_penerima VARCHAR(50) NOT NULL, -- 'mahasiswa', 'dosen', atau 'admin'
     CONSTRAINT FK_NotifMahasiswa FOREIGN KEY (id_mhs) REFERENCES MAHASISWA(id_mhs),
     CONSTRAINT FK_NotifDosen FOREIGN KEY (id_dosen) REFERENCES DOSEN(id_dosen),
-    CONSTRAINT FK_NotifAdmin FOREIGN KEY (id_admin) REFERENCES ADMIN(id_admin),
     CONSTRAINT FK_NotifPelanggaran FOREIGN KEY (id_detail_pelanggaran) REFERENCES DETAIL_PELANGGARAN(id_detail)
 );
 
@@ -129,20 +128,25 @@ JOIN DOSEN D ON DP.id_dosen = D.id_dosen;
 -- Views Pelanggaran Mahasiswa POV Dosen
 CREATE VIEW v_DosenMelaporkan AS
 SELECT 
-	dp.id_detail,
-	d.nidn,
+    dp.id_detail,
+    d.nidn,
     m.nama_lengkap AS nama_mahasiswa,
-	T.deskripsi AS pelanggaran,
-	T.tingkat,
-    d.nama_lengkap AS dosen_pengampu,
-	dp.tugas_khusus,
-	dp.surat,
-	t.poin,
-    dp.status AS status_pelanggaran
+    m.nim,  -- Added NIM for better identification
+    p.nama_prodi,  -- Added program studi information
+    T.deskripsi AS pelanggaran,
+    dp.detail_pelanggaran,
+    T.tingkat,
+    d.nama_lengkap AS dosen_pelapor,
+    dp.tugas_khusus,
+    dp.surat,
+    t.poin,
+    dp.status AS status_pelanggaran,
+    dp.status_tugas
 FROM DETAIL_PELANGGARAN dp
 JOIN DOSEN d ON dp.id_dosen = d.id_dosen
 JOIN MAHASISWA m ON dp.id_mahasiswa = m.id_mhs
-JOIN TATA_TERTIB t ON dp.id_tata_tertib = t.id_tata_tertib;
+JOIN TATA_TERTIB t ON dp.id_tata_tertib = t.id_tata_tertib
+JOIN PRODI p ON m.id_prodi = p.id_prodi;
 
 -- auto notif Dosen
 CREATE PROCEDURE sp_PelanggaranDosenNotif
@@ -233,9 +237,10 @@ CREATE PROCEDURE sp_InsertDetailPelanggaran
     @nim_mahasiswa VARCHAR(20),
     @id_sanksi INT,
     @tugas_khusus VARCHAR(255) = NULL,
-    @detail_tugas_khusus VARCHAR(MAX) = NULL,
+    @detail_pelanggaran VARCHAR(MAX) = NULL,
     @surat VARCHAR(255) = NULL,
-    @status VARCHAR(50)
+    @status VARCHAR(50),
+	@status_tugas VARCHAR(50)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -298,10 +303,10 @@ BEGIN
         -- Insert detail pelanggaran
         INSERT INTO DETAIL_PELANGGARAN (
             id_dosen, id_tata_tertib, id_mahasiswa, id_sanksi, 
-            tugas_khusus, detail_tugas_khusus, surat, status
+            tugas_khusus, detail_pelanggaran, surat, status, status_tugas
         ) VALUES (
             @id_dosen, @id_tata_tertib, @id_mahasiswa, @id_sanksi, 
-            @tugas_khusus, @detail_tugas_khusus, @surat, @status
+            @tugas_khusus, @detail_pelanggaran, @surat, @status, @status_tugas
         );
 
         -- Ambil ID terakhir yang di-insert
@@ -377,7 +382,10 @@ BEGIN
         THROW;
     END CATCH
 END;
-
+drop table MAHASISWA;
+--
+drop view v_DosenMelaporkan;
+--
 drop procedure sp_InsertDetailPelanggaran;
 drop procedure sp_PelanggaranDosenNotif;
 drop procedure sp_TugasKhususNotif;
