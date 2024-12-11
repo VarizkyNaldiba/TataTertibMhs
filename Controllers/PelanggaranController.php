@@ -17,12 +17,12 @@ class PelanggaranController {
         return $this->pelanggaranModel->getDetailLaporanDosen($idDosen);
     }
 
-    public function simpanDetailPelanggaran($nidn, $id_tata_tertib, $nim, $id_sanksi, $tugas_khusus = null, $detail_tugas = null, $surat = null, $status = 'pending') {
+    public function simpanDetailPelanggaran($nidn, $id_tata_tertib, $nim, $id_sanksi, $detail_pelanggaran, $tugas_khusus, $surat, $status, $status_tugas) {
         // Validate input
-        if (!$id_tata_tertib || !$id_sanksi || !$nim) {
+        if (!$id_tata_tertib || !$nidn || !$nim) {
             return [
                 'success' => false, 
-                'message' => 'ID Tata Tertib, ID Sanksi, dan NIM harus diisi'
+                'message' => 'ID Tata Tertib, NIDN, dan NIM harus diisi'
             ];
         }
         // var_dump($nidn);
@@ -33,10 +33,11 @@ class PelanggaranController {
             $id_tata_tertib, 
             $nim, 
             $id_sanksi, 
+            $detail_pelanggaran, 
             $tugas_khusus, 
-            $detail_tugas, 
             $surat, 
-            $status
+            $status,
+            $status_tugas
         );
         // Cek hasil penyimpanan
         if ($result) {

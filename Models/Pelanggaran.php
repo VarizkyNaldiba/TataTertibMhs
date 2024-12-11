@@ -28,7 +28,8 @@ class Pelanggaran {
         
         return $result;
     }
-    public function simpanDetailPelanggaran($nidn_dosen, $id_tata_tertib, $nim_mahasiswa, $id_sanksi, $tugas_khusus = null, $detail_tugas_khusus = null, $surat = null, $status = 'pending') {
+
+    public function simpanDetailPelanggaran($nidn_dosen, $id_tata_tertib, $nim_mahasiswa, $id_sanksi, $detail_pelanggaran, $tugas_khusus, $surat, $status, $status_tugas) {
         try {
             $query = "EXEC sp_InsertDetailPelanggaran 
                 @nidn_dosen = :nidn_dosen, 
@@ -36,9 +37,10 @@ class Pelanggaran {
                 @nim_mahasiswa = :nim_mahasiswa, 
                 @id_sanksi = :id_sanksi, 
                 @tugas_khusus = :tugas_khusus, 
-                @detail_tugas_khusus = :detail_tugas_khusus,
+                @detail_pelanggaran = :detail_pelanggaran,
                 @surat = :surat, 
-                @status = :status";
+                @status = :status,
+                @status_tugas = :status_tugas";
     
             $stmt = $this->connect->prepare($query);
     
@@ -48,16 +50,17 @@ class Pelanggaran {
                 ':nim_mahasiswa' => $nim_mahasiswa,
                 ':id_sanksi' => $id_sanksi,
                 ':tugas_khusus' => $tugas_khusus,
-                ':detail_tugas_khusus' => $detail_tugas_khusus,
+                ':detail_pelanggaran' => $detail_pelanggaran,
                 ':surat' => $surat,
                 ':status' => $status,
+                ':status_tugas' => $status_tugas
             ];
     
             $stmt->execute($params);
             return $stmt->rowCount() > 0; // Return true if a row was affected
         } catch (PDOException $e) {
             error_log('Error in simpanDetailPelanggaran: ' . $e->getMessage());
-            var_dump($e);
+            // var_dump($e);
             return false;
         }
     }

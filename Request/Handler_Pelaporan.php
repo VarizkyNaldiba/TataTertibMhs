@@ -32,11 +32,13 @@ try {
        $_POST['jenisPelanggaran'],
        $_POST['nim'],
        $_POST['sanksi'],
-       $_POST['deskripsiTugas'] ?? null,
        $_POST['deskripsiPelanggaran'],
+       $_POST['deskripsiTugas'] ?? null,
        null,
-       'pending'
+       'Pending',
+       'Belum Dikumpulkan'
     );
+    var_dump($result);
     // var_dump($result);
 
    $_SESSION['success_message'] = $result['success'] 
@@ -48,6 +50,6 @@ try {
    $_SESSION['error_messages'] = [$e->getMessage()];
 }
 
-header("Location: ../views/pelaporan.php");
+header("Location: ../views/pelanggaran_dosen.php");
 exit();
 ?>

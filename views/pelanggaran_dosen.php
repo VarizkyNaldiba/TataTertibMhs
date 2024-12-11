@@ -87,11 +87,15 @@ $pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
                                 <td><?= htmlspecialchars($detail['pelanggaran']) ?></td>
                                 <td><?= htmlspecialchars($detail['tingkat']) ?></td>
                                 <td><?= htmlspecialchars($detail['dosen_pelapor']) ?></td>
-                                <td><?= htmlspecialchars($detail['tugas_khusus']) ?></td>
+                                <td><?= htmlspecialchars($detail['tugas_khusus'] ?? 'Tidak Ada Tugas') ?></td>
                                 <td><a href="#">Unduh File</a></td>
                                 <td><?= htmlspecialchars($detail['poin']) ?></td>
                                 <td><?= htmlspecialchars($detail['status_pelanggaran']) ?></td>
-                                <td><?= htmlspecialchars($detail['status_tugas']) ?></td>
+                                <?php if($detail['tingkat'] === 'V' || $detail['tingkat'] === 'V'):?>
+                                <td></td>
+                                <?php else :?>
+                                    <td><?= htmlspecialchars($detail['status_tugas']) ?></td>
+                                <?php endif ;?>
                             </tr>
                             <?php } 
                         } else {
