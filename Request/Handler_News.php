@@ -6,16 +6,18 @@ require_once '../Controllers/NewsController.php';
 
 $newsController = new NewsController();
 
-try {
-    $result = $newsController->simpanNews(
-        $judul = $_POST['judul'],
-        $konten = $_POST['konten'],
-        $penulis = $_POST['penulis']
-        );
-        
-} catch (Exception $e) {
-    error_log('News Save Error: ' . $e->getMessage());
-    return false;
+
+if(isset($_POST['delete']) && isset($_POST['news_id'])) {
+    $newsController->delete($_POST['news_id']);
+}
+
+// Handle other actions (edit, insert) here
+if(isset($_POST['judul']) && isset($_POST['konten']) && isset($_POST['penulis'])) {
+    $newsController->store(
+        $_POST['judul'],
+        $_POST['konten'],
+        $_POST['penulis']
+    );
 }
 
 header("Location: ../views/news-admin.php");
