@@ -119,9 +119,9 @@ label {
     display: block;
     margin: 10px 0 5px;
 }
-
 input[type="text"],
-textarea {
+textarea,
+select{
     width: calc(100% - 16px);
     padding: 8px;
     margin-bottom: 15px;

@@ -60,7 +60,7 @@ $newsData = $newsController->ReadNews();
         <img src="../img/logo copy.png" alt="logo">
     </div>
 
-    <button class="add-button">Tambah</button>
+    <button class="add-button" id="addButton">Tambah</button>
   <table class="news-table">
     <thead>
       <tr>
@@ -89,7 +89,7 @@ $newsData = $newsController->ReadNews();
 <div id="editModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Edit Berita</h2>
+        <h2 id="modalTitle">Edit Berita</h2>
         <form id="editForm">
             <label for="editJudul">Judul:</label>
             <input type="text" id="editJudul" name="judul" required>

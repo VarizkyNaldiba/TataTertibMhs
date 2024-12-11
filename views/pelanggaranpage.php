@@ -126,7 +126,7 @@ $pelanggaranDetail = $pelanggaranController->getDetailPelanggaranMahasiswa($nim)
             <form id="formSuratPernyataan">
                 <div class="form-control">
                     <label for="suratPernyataan">Surat Pernyataan: *</label>
-                    <input type="file" id="suratPernyataan" name="suratPernyataan" required>
+                    <input type="file" id="suratPernyataan" name="suratPernyataan">
                 </div>
             </form>
 
@@ -134,7 +134,7 @@ $pelanggaranDetail = $pelanggaranController->getDetailPelanggaranMahasiswa($nim)
             <form id="formTugasKhusus">
                 <div class="form-control">
                     <label for="tugasKhusus">Tugas Khusus: *</label>
-                    <input type="file" id="tugasKhusus" name="tugasKhusus" required>
+                    <input type="file" id="tugasKhusus" name="tugasKhusus">
                 </div>
             </form>
         </div>
@@ -170,7 +170,7 @@ $pelanggaranDetail = $pelanggaranController->getDetailPelanggaranMahasiswa($nim)
     </div>
 
     <!-- JavaScript -->
-    <script src="../js/scriptmodal.js" >
+    <script src="../js/script-pelanggaran.js" >
     </script>
 </body>
 

@@ -93,24 +93,39 @@ $tatibData = $tatibController->ReadTatib();
   </table>
 
   <!-- Modal -->
-<div id="editModal" class="modal">
+  <div id="editModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Edit Pelanggaran</h2>
+        <h2 id="modalTitle">Edit Pelanggaran</h2>
         <form id="editForm">
-            <label for="nomor">no.</label>
+            <label for="nomor">No.</label>
             <input type="text" id="nomor" name="nomor" readonly>
+            
+            <label for="editAdmin">Id Admin:</label>
+            <input type="text" id="admin" name="admin" required>
 
             <label for="editKonten">Pelanggaran:</label>
             <textarea id="editKonten" name="konten" rows="4" required></textarea>
 
             <label for="editTingkat">Tingkat:</label>
-            <input type="text" id="editTingkat" name="tingkat" required>
+            <select id="editTingkat" name="tingkat" required>
+                <option value="">Pilih Tingkat</option>
+                <option value="I">Tingkat I</option>
+                <option value="II">Tingkat II</option>
+                <option value="III">Tingkat III</option>
+                <option value="IV">Tingkat IV</option>
+                <option value="V">Tingkat V</option>
+                
+            </select>
+
+            <label for="editPoin">Poin:</label>
+            <input type="text" id="poin" name="poin" readonly>
 
             <button type="submit" class="save-button">Simpan</button>
         </form>
     </div>
 </div>
+
 
 <!-- javascript -->
 <script src="../js/admin-tatib.js"></script>
