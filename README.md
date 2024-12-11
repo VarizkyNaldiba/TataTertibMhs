@@ -1,7 +1,7 @@
 # Sistem Informasi Tata Tertib
 
 ## Deskripsi Proyek
-Sistem Informasi Tata Tertib ini dirancang sebagai aplikasi web untuk mengelola dan mendistribusikan informasi terkait aturan dan tata tertib di lingkungan Politeknik Negeri Malang (POLINEMA) terutama pada Jurusan Teknologi Informasi (JTI). Tujuan utama dari proyek ini adalah untuk menyediakan platform yang memudahkan mahasiswa dan staf dalam mengakses informasi penting mengenai peraturan yang berlaku.
+DiscipLink adalah sistem informasi berbasis web yang dirancang untuk mengelola dan mendistribusikan informasi terkait aturan dan tata tertib di lingkungan Politeknik Negeri Malang (POLINEMA), khususnya pada Jurusan Teknologi Informasi (JTI). Tujuan utama dari proyek ini adalah menyediakan platform yang membantu mahasiswa dan staf dalam mengakses informasi penting mengenai peraturan yang berlaku, serta mempermudah pengelolaan pelanggaran dan sanksi secara sistematis.
 
 ### Fitur Utama
 - **Pengumuman dan Pemberitahuan:** Menyediakan informasi terkini tentang aturan dan tata tertib yang baru atau diperbarui.

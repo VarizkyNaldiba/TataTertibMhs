@@ -86,9 +86,21 @@ $pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
                                 <td><?= htmlspecialchars($detail['nama_mahasiswa']) ?></td>
                                 <td><?= htmlspecialchars($detail['pelanggaran']) ?></td>
                                 <td><?= htmlspecialchars($detail['tingkat']) ?></td>
-                                <td><?= htmlspecialchars($detail['dosen_pelapor']) ?></td>
+                                <td><?= htmlspecialchars(string: $detail['dosen_pelapor']) ?></td>
                                 <td><?= htmlspecialchars($detail['tugas_khusus'] ?? 'Tidak Ada Tugas') ?></td>
-                                <td><a href="#">Unduh File</a></td>
+                                <td>
+                                    <?php if (!empty($detail['surat'])) : ?>
+                                        <a href="<?= htmlspecialchars('../document/' . $detail['surat']) ?>" target="_blank">Unduh Surat Pernyataan</a>
+                                    <?php else : ?>
+                                        <span>Tidak ada file surat yang diunggah.</span>
+                                    <?php endif; ?>
+                                    <?php if (!empty($detail['pengumpulan_tgsKhusus'])) : ?>
+                                        <a href="<?= htmlspecialchars('../document/' . $detail['pengumpulan_tgsKhusus']) ?>" target="_blank">Unduh Tugas Khusus</a>
+                                        <?php else : ?>
+                                            <?php echo $detail['pengumpulan_tgsKhusus']?>
+                                        <span>Tidak ada file tugas yang diunggah.</span>
+                                    <?php endif; ?>
+                                </td>
                                 <td><?= htmlspecialchars($detail['poin']) ?></td>
                                 <td><?= htmlspecialchars($detail['status_pelanggaran']) ?></td>
                                 <?php if($detail['tingkat'] === 'V' || $detail['tingkat'] === 'V'):?>

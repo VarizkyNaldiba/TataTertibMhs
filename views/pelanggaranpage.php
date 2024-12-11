@@ -92,7 +92,7 @@ $pelanggaranDetail = $pelanggaranController->getDetailPelanggaranMahasiswa($nim)
                     </tr>
                 </thead>
                 <tbody>
-                        <?php if (!empty($pelanggaranDetail)) { 
+                        <?php if (!empty($pelanggaranDetail)) {
                             foreach ($pelanggaranDetail as $detail) { ?>
                             <tr>
                                 <td><?= htmlspecialchars($detail['pelanggaran']) ?></td>
@@ -100,53 +100,64 @@ $pelanggaranDetail = $pelanggaranController->getDetailPelanggaranMahasiswa($nim)
                                 <td><?= htmlspecialchars($detail['sanksi']) ?></td>
                                 <td><?= htmlspecialchars($detail['nama_lengkap']) ?></td>
                                 <td><?= htmlspecialchars($detail['tugas_khusus']) ?></td>
-                                <td><a href="<?= htmlspecialchars($detail['surat']) ?>">Unduh File</a></td>
+                                <td><a href="<?= htmlspecialchars('../document/SURAT PERNYATAAN TI.pdf') ?>" target="_blank">Unduh File</a></td>
                                 <td><?= htmlspecialchars($detail['poin']) ?></td>
                                 <td><?= htmlspecialchars($detail['status']) ?></td>
-                                <td><button class="submit-btn" id="openModalButton">Kumpulkan</button></td>
+                                <td>
+                                    <form class="uploadForm" enctype="multipart/form-data">
+                                        <input type="hidden" name="id_detail" value="<?= $detail['id_detail'] ?>">
+                                        <input type="file" name="suratPernyataan" required>
+                                        <button type="button" class="submit-btn uploadButton">Upload Surat Pernyataan</button>
+                                    </form>
+                                    <?php if (in_array($detail['tingkat'], ['I', 'II', 'III'])) : // Check for Roman numerals ?>
+                                        <form class="uploadForm" enctype="multipart/form-data">
+                                            <input type="hidden" name="id_detail" value="<?= $detail['id_detail'] ?>">
+                                            <input type="file" name="tugasKhusus" required>
+                                            <button type="button" class="submit-btn uploadButton">Upload Tugas Khusus</button>
+                                        </form>
+                                    <?php endif; ?>
+                                </td>
                             </tr>
-                            <?php } 
-                        } else {
-                            echo "<td colspan='8'>Data pelanggaran tidak ditemukan.</td>";
-                        } ?>
+                        <?php }
+                    } else {
+                        echo "<td colspan='8'>Data pelanggaran tidak ditemukan.</td>";
+                    } ?>
                 </tbody>
             </table>
         </div>
+    </div>
 
 <!-- untuk modal ini ada 2 pengumpulan tugas khusus dan akhir gimana caranya biar kalo tugas akhir nya ga ada, form untuk input tugas akhir nya ga ada juga?? -->
        <!-- Modal -->
-<div id="uploadModal" class="modal">
-    <div class="modal-dialog">
-        <div class="modal-header">
-            <h2>Upload File</h2>
-            <p><i>*File yang diupload maksimal 2 MB</i></p>
-        </div>
-        <div class="modal-body">
-            <!-- Form Surat Pernyataan -->
-            <form id="formSuratPernyataan">
-                <div class="form-control">
-                    <label for="suratPernyataan">Surat Pernyataan: *</label>
-                    <input type="file" id="suratPernyataan" name="suratPernyataan">
+        <div id="uploadModal" class="modal">
+            <div class="modal-dialog">
+                <div class="modal-header">
+                    <h2>Upload File</h2>
+                    <p><i>*File yang diupload maksimal 2 MB</i></p>
                 </div>
-            </form>
+                <div class="modal-body">
+                    <!-- Form Surat Pernyataan -->
+                    <form id="formSuratPernyataan">
+                        <div class="form-control">
+                            <label for="suratPernyataan">Surat Pernyataan: *</label>
+                            <input type="file" id="suratPernyataan" name="suratPernyataan">
+                        </div>
+                    </form>
 
-            <!-- Form Tugas Khusus -->
-            <form id="formTugasKhusus">
-                <div class="form-control">
-                    <label for="tugasKhusus">Tugas Khusus: *</label>
-                    <input type="file" id="tugasKhusus" name="tugasKhusus">
+                    <!-- Form Tugas Khusus -->
+                    <form id="formTugasKhusus">
+                        <div class="form-control">
+                            <label for="tugasKhusus">Tugas Khusus: *</label>
+                            <input type="file" id="tugasKhusus" name="tugasKhusus">
+                        </div>
+                    </form>
                 </div>
-            </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Batal</button>
+                    <button type="submit" class="btn btn-primary" form="formSuratPernyataan">Simpan</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onclick="closeModal()">Batal</button>
-            <button type="submit" class="btn btn-primary" form="formSuratPernyataan">Simpan</button>
-        </div>
-    </div>
-</div>
-
-
-
 
         <!-- Footer -->
         <div class="footer">
@@ -170,7 +181,29 @@ $pelanggaranDetail = $pelanggaranController->getDetailPelanggaranMahasiswa($nim)
     </div>
 
     <!-- JavaScript -->
-    <script src="../js/script-pelanggaran.js" >
+    <script src="../js/script-pelanggaran.js" ></script>
+    <script>
+    document.querySelectorAll('.uploadButton').forEach(button => {
+        button.addEventListener('click', function() {
+            const form = this.closest('form');
+            const formData = new FormData(form);
+
+            // Send the AJAX request
+            fetch('../Request/Handler_uploads.php', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(result => {
+                alert(result); // Show success message
+                form.reset(); // Reset the form fields
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Gagal mengunggah file.');
+            });
+        });
+    });
     </script>
 </body>
 

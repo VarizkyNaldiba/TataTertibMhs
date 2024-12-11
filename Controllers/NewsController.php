@@ -1,5 +1,5 @@
 <?php
-require_once '../Models/News.php';
+require_once __DIR__ . '/../Models/News.php';
 
 class NewsController {
     private $tatibModel;
