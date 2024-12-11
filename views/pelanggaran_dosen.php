@@ -43,7 +43,7 @@ $pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
 
 <body>
     <div class="sidebar">
-    <img class="logo" src="../img/logo aja.png" alt="logo">
+        <img class="logo" src="../img/logo aja.png" alt="logo">
         <div class="logo-separator"></div>
         <ul>
             <li><a href="../index.php"><i class="fa-solid fa-house"></i></a></li>
@@ -55,31 +55,31 @@ $pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
     </div>
 
     <div class="content">
-            <div class="header">
-                <h1>Pelanggaran</h1>
-            </div>
-            <div class="profile">
-                <p><strong>Nama : <?= $userData['nama_lengkap']?></strong></p>
-                <p><strong>NIP  : <?= $userData['nidn']?></strong></p>
-            </div>
+        <div class="header">
+            <h1>Pelanggaran</h1>
+        </div>
+        <div class="profile">
+            <p><strong>Nama: John Doe</strong></p>
+            <p><strong>NIP: 123456789</strong></p>
+        </div>
 
-            <h3>Tabel Pelanggaran</h3>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Pelanggar</th>
-                            <th>Pelanggaran</th>
-                            <th>Tingkat Pelanggaran</th>
-                            <th>Dosen Pelapor</th>
-                            <th>Tugas Khusus</th>
-                            <th>Surat</th>
-                            <th>Poin</th>
-                            <th>Status</th>
-                            <th>Status Tugas</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+        <h3>Tabel Pelanggaran</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pelanggar</th>
+                        <th>Pelanggaran</th>
+                        <th>Tingkat Pelanggaran</th>
+                        <th>Dosen Pelapor</th>
+                        <th>Tugas Khusus</th>
+                        <th>Surat</th>
+                        <th>Poin</th>
+                        <th>Status</th>
+                        <th>Status Tugas</th>
+                    </tr>
+                </thead>
+                <tbody>
                     <?php if (!empty($pelanggaranDetail)) { 
                             foreach ($pelanggaranDetail as $detail) { ?>
                             <tr>
@@ -104,7 +104,6 @@ $pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
                                 <td><?= htmlspecialchars($detail['poin']) ?></td>
                                 <td><?= htmlspecialchars($detail['status_pelanggaran']) ?></td>
                                 <?php if($detail['tingkat'] === 'V' || $detail['tingkat'] === 'V'):?>
-                                <td></td>
                                 <?php else :?>
                                     <td><?= htmlspecialchars($detail['status_tugas']) ?></td>
                                 <?php endif ;?>
@@ -114,18 +113,17 @@ $pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
                             echo "<td colspan='8'>Data pelanggaran tidak ditemukan.</td>";
                         } ?>
                     </tbody>
-                </table>
-                <div class="statement-button">
+            </table>
+            <div class="statement-button">
                 <button onclick="window.location.href='pelaporan.php'">Laporkan</button>
-                </div>
-                
             </div>
-    
-            
-            <div class="footer">
+        </div>
+    </div>
+</body>
+<footer class="footer">
     <div class="footer-left">
-    <img class="footer-logo" src="../img/logo aja.png" alt="Logo">
-        <img class ="footer-logo" src="../img/logo.png" alt="logo polinema">
+        <img class="footer-logo" src="../img/logo aja.png" alt="Logo">
+        <img class="footer-logo" src="../img/logo.png" alt="logo polinema">
     </div>
     <div class="footer-center">
         <p>Jl. Soekarno Hatta No.9, Jatimulyo, Kec. Lowokwaru, <br>Kota Malang, Jawa Timur 65141</p>
@@ -134,12 +132,10 @@ $pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
     <div class="footer-right">
         <a href="https://instagram.com" class="social-link"><i class="fa-brands fa-instagram" alt="Instagram" class="social-icon"></i></a>
         <a href="https://wa.me/1234567890" class="social-link"><i class="fa-brands fa-whatsapp" alt="WhatsApp" class="social-icon"></i></a>
-        <a href="https://wa.me/1234567890" class="social-link"><i class="fa-solid fa-envelope" alt="Email" class="social-icon"></i></a>
+        <a href="mailto:someone@example.com" class="social-link"><i class="fa-solid fa-envelope" alt="Email" class="social-icon"></i></a>
     </div>
     <div class="footer-bottom">
         <p>© Copyright 2024 web Tatib. All Rights Reserved.</p>
     </div>
-</div>
-        </div>
-</body>
+</footer>
 </html>
