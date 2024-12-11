@@ -35,19 +35,14 @@
                 <h2>Lastest News</h2>
                 <div class="row">
                     <!-- nanti pakai while aja isi nya biar sesuai dengan inputan-->
+                    <?php foreach($newsData as $news): ?>
                     <div class="news-content">
                         <img src="img/news.jpg" alt="gambar">
-                        <p>nsakdlaksjd;laskdjaskdjalksddmsakdmaks</p>
+                        <h5><?= $news['judul'] ?></h5>
+                        <p><?= $news['konten'] ?></p>
                     </div>
+                    <?php endforeach; ?>
                     <!-- sampai sini while nya nanti yang bawah di hapus -->
-                    <div class="news-content">
-                        <img src="" alt="gambar">
-                        <p>kfakjdjkashdjkashjkdhasjdhaksjhdkajshdk</p>
-                    </div>
-                    <div class="news-content">
-                        <img src="" alt="fambar">
-                        <p>laksjdklashdkjahsjdkhaskjhdjkashdkjhasjbdhabsdjnsakjndkjasn</p>
-                    </div>
                 </div>
             </div>
 

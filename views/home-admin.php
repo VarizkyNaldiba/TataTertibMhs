@@ -2,6 +2,7 @@
 session_start();
 
 require_once '../Controllers/UserController.php';
+require_once '../Controllers/NewsController.php';
 
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
@@ -21,6 +22,8 @@ if ($_SESSION['user_type'] === 'mahasiswa') {
     header("Location: pelanggaran_dosen.php");
     exit();
 }
+$newsController = new NewsController();
+$newsData = $newsController->ReadNews();
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -71,18 +74,13 @@ if ($_SESSION['user_type'] === 'mahasiswa') {
             <div class="news">
                 <h2>Lastest News</h2>
                 <div class="row">
-                    <div class="news-content">
-                        <img src="" alt="gambar">
-                        <p>nsakdlaksjd;laskdjaskdjalksd</p>
-                    </div>
-                    <div class="news-content">
-                        <img src="" alt="gambar">
-                        <p>kfakjdjkashdjkashjkdhasjdhaksjhdkajshdk</p>
-                    </div>
-                    <div class="news-content">
-                        <img src="" alt="fambar">
-                        <p>laksjdklashdkjahsjdkhaskjhdjkashdkjhasjbdhabsdjnsakjndkjasn</p>
-                    </div>
+                    <?php foreach($newsData as $news): ?>
+                        <div class="news-content">
+                            <img src="../img/news.jpg" alt="gambar">
+                            <h5><?= $news['judul'] ?></h5>
+                            <p><?= $news['konten'] ?></p>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <div class="footer">

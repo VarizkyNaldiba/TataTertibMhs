@@ -1,13 +1,16 @@
 <?php
 session_start();
-echo realpath(__DIR__ . '/Controllers/UserController.php');
+// echo realpath(__DIR__ . '/Controllers/UserController.php');
 require_once __DIR__ . '/Controllers/UserController.php';
+require_once __DIR__ . '/Controllers/NewsController.php';
 
 if (isset($_GET['logout'])) {
     $userController = new UserController();
     $userController->logout();
     exit();
 }
+$newsController = new NewsController();
+$newsData = $newsController->ReadNews();
 ?>
 <!DOCTYPE html>
 <html lang="id">
