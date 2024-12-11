@@ -90,13 +90,14 @@ $pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
                                 <td><?= htmlspecialchars($detail['tugas_khusus'] ?? 'Tidak Ada Tugas') ?></td>
                                 <td>
                                     <?php if (!empty($detail['surat'])) : ?>
-                                        <a href="<?= htmlspecialchars('../uploads/' . $detail['surat']) ?>" target="_blank">Unduh Surat Pernyataan</a>
+                                        <a href="<?= htmlspecialchars('../document/' . $detail['surat']) ?>" target="_blank">Unduh Surat Pernyataan</a>
                                     <?php else : ?>
                                         <span>Tidak ada file surat yang diunggah.</span>
                                     <?php endif; ?>
                                     <?php if (!empty($detail['pengumpulan_tgsKhusus'])) : ?>
-                                        <a href="<?= htmlspecialchars('../uploads/' . $detail['pengumpulan_tgsKhusus']) ?>" target="_blank">Unduh Tugas Khusus</a>
-                                    <?php else : ?>
+                                        <a href="<?= htmlspecialchars('../document/' . $detail['pengumpulan_tgsKhusus']) ?>" target="_blank">Unduh Tugas Khusus</a>
+                                        <?php else : ?>
+                                            <?php echo $detail['pengumpulan_tgsKhusus']?>
                                         <span>Tidak ada file tugas yang diunggah.</span>
                                     <?php endif; ?>
                                 </td>

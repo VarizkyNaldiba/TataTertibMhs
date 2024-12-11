@@ -139,6 +139,7 @@ SELECT
     d.nama_lengkap AS dosen_pelapor,
     dp.tugas_khusus,
     dp.surat,
+	dp.pengumpulan_tgsKhusus,
     t.poin,
     dp.status AS status_pelanggaran,
     dp.status_tugas

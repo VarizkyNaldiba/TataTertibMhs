@@ -2,8 +2,10 @@
 session_start();
 require_once '../config.php'; // Sertakan file konfigurasi untuk mengakses koneksi database
 
-// Periksa apakah direktori uploads ada, jika tidak, buat direktori tersebut
-$uploadDir = '../uploads/';
+
+// Check if the uploads directory exists, if not create it
+$uploadDir = '../document/';
+
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0777, true); // Buat direktori dengan izin akses
 }
