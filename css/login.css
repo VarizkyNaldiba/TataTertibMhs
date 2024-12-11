@@ -79,68 +79,6 @@ button:hover{
 background-color: #324A86;
 }
 
-.admin-button {
-  background-color: #ffffff;
-  position: fixed;
-  top: 0;          
-  right: 0;        
-  z-index: 1000;   
-  margin: 20px;      
-  padding: 5px;
-  border: solid 1px #000000;
-  border-radius: 8px;
-}
-.admin-button:hover{
-  color: #ffffff;
-background-color: #052157;
-}
-
-
-.user {
-    margin: 30px 25%;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .user div {
-    width: 100px;
-    padding: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .NIM-button-active {
-    background-color: #052157;
-    color: white;
-    border-radius: 50px;
-  }
-
-  .NIM-button{
-    background-color: #ffffff;
-    color: black;
-    border-radius: 50px 0 0 50px;
-  }
-
-  .NIP-button-active{
-    background-color: #052157;
-    color: white;
-    border-radius: 50px;
-  }
-  
-  .NIP-button {
-    background-color: #ffffff;
-    color: black;
-    border-radius: 0 50px 50px 0;
-  }
-
   @media screen and (max-width: 768px) {
     form {
       width: 90%; /* Lebar lebih kecil agar sesuai layar ponsel */

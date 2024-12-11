@@ -43,15 +43,10 @@ if (isset($_SESSION['username'])) {
     <h1>login</h1>
   </div>
   <form method="POST" action="../Request/Handler_Login.php">
-    <div class="admin-button" onclick="redirectToPage('login_admin.php')">ADMIN</div>
     <h3>Masuk</h3>
-    <div class="user">
-        <div class="NIM-button-active" id="nim-tab" onclick="switchTab('nim')">NIM</div>
-        <div class="NIP-button" id="nip-tab" onclick="switchTab('nip')">NIP</div>
-    </div>
     <input type="hidden" id="user-type" name="user_type" value="nim">
-    <label for="username">NIM</label>
-    <input type="text" placeholder="Masukkan NIM" id="username" name="username" required>
+    <label for="username">Username</label>
+    <input type="text" placeholder="Masukkan Username" id="username" name="username" required>
     <label for="password">Kata Sandi</label>
     <input type="password" placeholder="Masukkan Kata Sandi" id="password" name="password" required>
     <button type="submit">Masuk</button>

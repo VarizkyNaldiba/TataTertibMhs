@@ -19,9 +19,11 @@ editButtons.forEach((button) => {
         document.getElementById('editKonten').value = konten;
         document.getElementById('editPenulis').value = penulis;
 
+        // Ubah judul modal
+        document.getElementById('modalTitle').textContent = 'Edit Berita';
+
         // Tampilkan modal
         modal.style.display = 'block';
-
     });
 });
 
@@ -35,4 +37,23 @@ window.addEventListener('click', (event) => {
     if (event.target === modal) {
         modal.style.display = 'none';
     }
+});
+
+// Mendapatkan elemen tombol Tambah
+const addButton = document.getElementById('addButton');
+
+// Fungsi untuk membuka modal dengan isi kosong
+addButton.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    // Kosongkan isi modal
+    document.getElementById('editJudul').value = '';
+    document.getElementById('editKonten').value = '';
+    document.getElementById('editPenulis').value = '';
+
+    // Ubah judul modal
+    document.getElementById('modalTitle').textContent = 'Tambah Berita';
+
+    // Tampilkan modal
+    modal.style.display = 'block';
 });
