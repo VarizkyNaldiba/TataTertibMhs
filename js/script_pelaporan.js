@@ -52,3 +52,13 @@ document.getElementById('tingkat').addEventListener('change', function () {
          deskripsiTugasContainer.style.display = 'none'; // Sembunyikan deskripsi tugas
      }
 });
+
+function showConfirmation() {
+
+    var confirmAction = confirm("Apakah Anda yakin ingin melaporkan?");
+
+    if (confirmAction) {
+        window.location.href = "pelanggaran_dosen.php"; 
+    }
+
+}

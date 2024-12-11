@@ -1,3 +1,4 @@
+/* Gaya untuk layar desktop dan perangkat lebih besar */
 .profile {
   font-family: 'Inter';
   margin: 38px;
@@ -12,54 +13,59 @@
 }
 
 .table-container {
-  margin:38px;
+  margin: 38px;
   margin-top: 0;
   background-color: #F2F7FC;
   padding: 20px;
-  max-height: 250px; /* Sesuaikan tinggi maksimal tabel */
-  overflow-y: auto; /* Tambahkan scroll vertikal jika konten melebihi batas */
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 25%;
+  overflow-x: auto; /* Tambahkan scroll horizontal jika tabel terlalu lebar */
 }
 
-table thead{
-  position: sticky;
-  top: 0;
-}
-
-table {
-  width: 100%;
+.table-container table {
   border-collapse: collapse;
-  margin-top: 20px;
-  padding: 20px;
   font-family: 'Inter';
+  min-width: 800px; /* Tentukan lebar minimum tabel agar tetap konsisten */
 }
 
-table th, table td {
+.table-container th,
+.table-container td {
   padding: 10px;
   text-align: center;
   border: 1px solid #BFB8B8;
 }
 
-table th {
+.table-container th {
   background-color: #052157;
   color: #CED0D2;
+  position: sticky;
+  top: 0; /* Header tetap terlihat saat scroll */
+  z-index: 1;
 }
 
-table a {
-  color: #007bff;
-  text-decoration: none;
+.table-container tbody {
+  display: block;
+  max-height: 250px; /* Batasi tinggi maksimal tabel */
+  overflow-y: auto; /* Tambahkan scroll vertikal */
+}
+
+.table-container thead {
+  display: table; /* Tetap gunakan display table untuk menjaga kolom sejajar */
+  width: 100%;
+  table-layout: fixed;
+}
+
+.table-container tbody tr {
+  display: table; /* Atur ulang baris tbody menjadi display table */
+  width: 100%;
+  table-layout: fixed;
 }
 
 h3 {
-margin-top: 53px;
-margin-left: 38px;
-font-family: 'Inter';
-}
-
-table a:hover {
-  text-decoration: underline;
+  margin-top: 53px;
+  margin-left: 38px;
+  font-family: 'Inter';
 }
 
 .submit-btn {
@@ -79,7 +85,6 @@ table a:hover {
 .statement-button {
   margin-top: 20px;
   text-align: right;
-
 }
 
 .statement-button button {
@@ -94,4 +99,25 @@ table a:hover {
 
 .statement-button button:hover {
   background-color: #0056b3;
+}
+
+/* Responsif untuk tampilan ponsel */
+@media (max-width: 768px) {
+  .table-container {
+    margin: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    overflow-x: auto; /* Tambahkan scroll horizontal */
+  }
+
+  .table-container table {
+    min-width: 800px; /* Tentukan lebar minimum untuk tabel agar tetap digulir secara horizontal */
+    width: auto; /* Membiarkan tabel mengikuti lebar konten */
+  }
+
+  /* Menjaga agar teks di dalam tabel tetap rapi */
+  .table-container th, .table-container td {
+    font-size: 12px; /* Sesuaikan ukuran font jika perlu */
+    padding: 8px;
+  }
 }
