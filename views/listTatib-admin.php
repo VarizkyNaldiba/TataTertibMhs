@@ -62,7 +62,8 @@ $tatibData = $tatibController->ReadTatib();
     </div>
 
     <button class="add-button" id="addButton">Tambah</button>
-  <table class="news-table">
+    <div class="table-container">
+  <table id="tatib-table">
     <thead>
       <tr>
         <th>No</th>
@@ -84,19 +85,21 @@ $tatibData = $tatibController->ReadTatib();
                       <td><?= $tatib['deskripsi']?></td>
                       <td><?= $tatib['tingkat']?></td>
                       <td><?= $tatib['poin']?></td>
-                      <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
+                      <td><button class="edit-button" id="editbutton"><i class="fa-solid fa-pen-to-square"></i></button> 
+                        <!--tombol delete --> 
+                        <button class="delete" id="delete"><i class="fa-solid fa-trash"></i></button></td>
                   </tr>
                   <?php $i++?>
                   <?php endforeach;?>
           <?php endif;?>
     </tbody>
   </table>
-
-  <!-- Modal -->
+</div>
+  <!-- Modal edit -->
   <div id="editModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h2 id="modalTitle">Edit Pelanggaran</h2>
+        <h2>Edit Pelanggaran</h2>
         <form id="editForm">
             <label for="nomor">No.</label>
             <input type="text" id="nomor" name="nomor" readonly>
@@ -108,7 +111,7 @@ $tatibData = $tatibController->ReadTatib();
             <textarea id="editKonten" name="konten" rows="4" required></textarea>
 
             <label for="editTingkat">Tingkat:</label>
-            <select id="editTingkat" name="tingkat" required>
+            <select id="tingkat" name="tingkat" required>
                 <option value="">Pilih Tingkat</option>
                 <option value="I">Tingkat I</option>
                 <option value="II">Tingkat II</option>
@@ -126,6 +129,39 @@ $tatibData = $tatibController->ReadTatib();
     </div>
 </div>
 
+<!-- Modal insert-->
+<div id="insertModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Tambah Pelanggaran</h2>
+        <form id="insertForm">
+            <label for="nomor">No.</label>
+            <input type="text" id="nomor" name="nomor" readonly>
+            
+            <label for="insertAdmin">Id Admin:</label>
+            <input type="text" id="admin" name="admin" required>
+
+            <label for="insertKonten">Pelanggaran:</label>
+            <textarea id="insertKonten" name="konten" rows="4" required></textarea>
+
+            <label for="insertTingkat">Tingkat:</label>
+            <select id="tingkat" name="tingkat" required>
+                <option value="">Pilih Tingkat</option>
+                <option value="I">Tingkat I</option>
+                <option value="II">Tingkat II</option>
+                <option value="III">Tingkat III</option>
+                <option value="IV">Tingkat IV</option>
+                <option value="V">Tingkat V</option>
+                
+            </select>
+
+            <label for="editPoin">Poin:</label>
+            <input type="text" id="poin" name="poin" readonly>
+
+            <button type="submit" class="save-button">Simpan</button>
+        </form>
+    </div>
+</div>
 
 <!-- javascript -->
 <script src="../js/admin-tatib.js"></script>

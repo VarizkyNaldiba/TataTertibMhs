@@ -57,11 +57,13 @@ $newsData = $newsController->ReadNews();
     <div class="header"></div>
     <div class="judul">
         <h1>DISCIPLINK NEWS</h1>
-        <img src="../img/logo copy.png" alt="logo">
     </div>
 
     <button class="add-button" id="addButton">Tambah</button>
-  <table class="news-table">
+    <div class="table-container">
+
+    
+  <table>
     <thead>
       <tr>
         <th>Judul</th>
@@ -78,19 +80,22 @@ $newsData = $newsController->ReadNews();
                       <td><?= $news['judul']?></td>
                       <td><?= $news['konten']?></td>
                       <td><?= $news['penulis_id']?></td>
-                      <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
+                      <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button>
+                      <!--tombol delete --> 
+                      <button class="delete" id="delete"><i class="fa-solid fa-trash"></i></button></td>
                   </tr>
                   <?php endforeach;?>
           <?php endif;?>
     </tbody>
   </table>
+</div>
 
-  <!-- Modal -->
-<div id="editModal" class="modal">
+<!-- Modal Edit Berita -->
+<div id="editBeritaModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h2 id="modalTitle">Edit Berita</h2>
-        <form id="editForm">
+        <h2>Edit Berita</h2>
+        <form id="editBeritaForm">
             <label for="editJudul">Judul:</label>
             <input type="text" id="editJudul" name="judul" required>
 
@@ -104,6 +109,27 @@ $newsData = $newsController->ReadNews();
         </form>
     </div>
 </div>
+
+<!-- Modal Tambah Berita -->
+<div id="insertBeritaModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Tambah Berita</h2>
+        <form id="insertBeritaForm">
+            <label for="insertJudul">Judul:</label>
+            <input type="text" id="insertJudul" name="judul" required>
+
+            <label for="insertKonten">Konten:</label>
+            <textarea id="insertKonten" name="konten" rows="4" required></textarea>
+
+            <label for="insertPenulis">Penulis:</label>
+            <input type="text" id="insertPenulis" name="penulis" required>
+
+            <button type="submit" class="save-button">Simpan</button>
+        </form>
+    </div>
+</div>
+
 
 <!-- javascript -->
 <script src="../js/script-news.js"></script>
