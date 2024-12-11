@@ -1,3 +1,27 @@
+<?php
+session_start();
+
+require_once '../Controllers/UserController.php';
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
+if (isset($_GET['logout'])) {
+    $userController = new UserController();
+    $userController->logout();
+    exit();
+}
+
+if ($_SESSION['user_type'] === 'mahasiswa') {
+    header("Location: pelanggaranpage.php");
+    exit();
+} else if ($_SESSION['user_type'] === 'dosen') {
+    header("Location: pelanggaran_dosen.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -19,10 +43,10 @@
     <img class="logo" src="../img/logo aja.png" alt="logo">
         <div class="logo-separator"></div>
         <ul>
-            <li class="active"><a href="home-admin.html"><i class="fa-solid fa-house"></i></a></li>
+            <li class="active"><a href="home-admin.php"><i class="fa-solid fa-house"></i></a></li>
             <li><a href="listTatib-admin.php"><i class="fa-solid fa-book"></i></a></li>
             <li><a href="news-admin.php"><i class="fa-solid fa-newspaper"></i></a></li>
-            <li class="logout"><a href="?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+            <li class="logout"><a href="../?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>
     </div>
     <div class="content">

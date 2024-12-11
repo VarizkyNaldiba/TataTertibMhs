@@ -16,7 +16,6 @@ $tatibData = $tatibController->ReadTatib();
 $sanksiData = $tatibController->ReadSanksi();
 
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 
@@ -85,17 +84,14 @@ $sanksiData = $tatibController->ReadSanksi();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                        if ($tatibData) {
-                            foreach ($tatibData as $tatib) {;?>
-                    <tr data-tingkat="<?= $tatib['tingkat']?>">
-                        <td><?= $tatib['deskripsi']?></td>
-                        <td><?= $tatib['tingkat']?></td>
-                    </tr>
-                    <?php
-                    }
-                }
-                ?>
+                    <?php if ($tatibData) :?>
+                            <?php foreach ($tatibData as $tatib) :?>
+                            <tr data-tingkat="<?= $tatib['tingkat']?>">
+                                <td><?= $tatib['deskripsi']?></td>
+                                <td><?= $tatib['tingkat']?></td>
+                            </tr>
+                            <?php endforeach;?>
+                    <?php endif;?>
                 </tbody>
             </table>
         </div>

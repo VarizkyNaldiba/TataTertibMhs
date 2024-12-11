@@ -1,3 +1,31 @@
+<?php
+session_start();
+require_once '../config.php';
+
+require_once "../Controllers/NewsController.php";
+require_once '../Controllers/UserController.php';
+
+if (isset($_SESSION['username'])) {
+  // Redirect based on role
+  if ($_SESSION['user_type'] === 'mahasiswa') {
+      header("Location: pelanggaranpage.php");
+      exit();
+  } else if ($_SESSION['user_type'] === 'dosen') {
+    header("Location: pelanggaran_dosen.php");
+    exit();
+  }
+}
+
+if (isset($_GET['logout'])) {
+    $userController = new UserController();
+    $userController->logout();
+    exit();
+}
+
+$newsController = new NewsController();
+$newsData = $newsController->ReadNews();
+
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -19,10 +47,10 @@
     <img class="logo" src="../img/logo aja.png" alt="logo">
         <div class="logo-separator"></div>
         <ul>
-        <li><a href="home-admin.html"><i class="fa-solid fa-house"></i></a></li>
+        <li><a href="home-admin.php"><i class="fa-solid fa-house"></i></a></li>
             <li><a href="listTatib-admin.php"><i class="fa-solid fa-book"></i></a></li>
-            <li class="active"><a href="news-admin.html"><i class="fa-solid fa-newspaper"></i></a></li>
-            <li class="logout"><a href="?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
+            <li class="active"><a href="news-admin.php"><i class="fa-solid fa-newspaper"></i></a></li>
+            <li class="logout"><a href="../?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>
     </div>
 <div class="content">
@@ -44,35 +72,16 @@
     </thead>
     <tbody>
       <tr>
-        <td>Pelanggaran tata tertib tingkat II</td>
-        <td>Mahasiswa dengan NIM 2341024909 telah melakukan perusakan Fasilitas Jurusan Teknologi Informasi</td>
-        <td>1</td>
-        <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
-      </tr>
-      <tr>
-        <td>Pelanggaran tata tertib tingkat III</td>
-        <td>Mahasiswa dengan NIM 2341024909 telah Merokok di luar area kawasan merokok</td>
-        <td>2</td>
-        <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
-      </tr>
-      <tr>
-        <td>Memperbarui Tata Tertib</td>
-        <td>Memperbarui tingkat pelanggaran ganti rugi</td>
-        <td>3</td>
-        <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
-      </tr>
-      <tr>
-        <td>Pelanggaran tata tertib tingkat IV</td>
-        <td>Mahasiswa dengan NIM 2341024909 telah Makan di Laboratorium</td>
-        <td>4</td>
-        <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
-      </tr>
-      <tr>
-        <td>Pelanggaran tata tertib tingkat V</td>
-        <td>Mahasiswa dengan NIM 2341024909 telah Berkata kasar kepada teman</td>
-        <td>5</td>
-        <td><button class="edit-button" onclick="openModal()"><i class="fa-solid fa-pen-to-square"></i></button></td>
-      </tr>
+          <?php if ($newsData) :?>
+                  <?php foreach ($newsData as $news) :?>
+                  <tr>
+                      <td><?= $news['judul']?></td>
+                      <td><?= $news['konten']?></td>
+                      <td><?= $news['penulis_id']?></td>
+                      <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button></td>
+                  </tr>
+                  <?php endforeach;?>
+          <?php endif;?>
     </tbody>
   </table>
 

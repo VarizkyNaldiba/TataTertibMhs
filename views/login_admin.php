@@ -1,3 +1,21 @@
+<?php
+require_once '../Controllers/UserController.php';
+
+session_start();
+if (isset($_SESSION['username'])) {
+    // Redirect based on role
+    if ($_SESSION['user_type'] === 'admin') {
+        header("Location: index.php");
+        exit();
+    } else if ($_SESSION['user_type'] === 'mahasiswa') {
+        header("Location: pelanggaranpage.php");
+        exit();
+    } else if ($_SESSION['user_type'] === 'dosen') {
+      header("Location: pelanggaran_dosen.php");
+      exit();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +43,7 @@
   <div class="header">
     <h1>login</h1>
   </div>
-  <form method="POST" action="">
+  <form method="POST" action="../Request/Handler_Login.php">
     <div class="admin-button" onclick="redirectToPage('login.php')">Mahasiswa/Dosen</div>
     <h3>Masuk</h3>
     <input type="hidden" id="user-type" name="user_type" value="nim">

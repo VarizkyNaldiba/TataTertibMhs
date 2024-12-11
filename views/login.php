@@ -13,18 +13,8 @@ if (isset($_SESSION['username'])) {
     }
 }
 
-$user = new UserController();
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $userType = $_POST['user_type'];
-    
-    if (!$user->login($username, $password)) {
-        echo "<div class='alert alert-danger' style='color: red; text-align: center; margin-bottom: 15px;'>
-                Login gagal! Username atau password salah.
-              </div>";
-    }
-}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <div class="header">
     <h1>login</h1>
   </div>
-  <form method="POST" action="">
+  <form method="POST" action="../Request/Handler_Login.php">
     <div class="admin-button" onclick="redirectToPage('login_admin.php')">ADMIN</div>
     <h3>Masuk</h3>
     <div class="user">

@@ -31,6 +31,17 @@ class Users {
         }
     }
 
+    public function getAdminLogin($username, $password) {
+        try {
+            $stmt = $this->connect->prepare("SELECT * FROM admin WHERE NIP = ? AND password = ?");
+            $stmt->execute([$username, $password]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
     public function getAllUsers() {
         try {
             $stmt = $this->connect->prepare("SELECT * FROM mahasiswa UNION ALL SELECT * FROM dosen");
