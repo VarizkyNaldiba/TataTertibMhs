@@ -8,16 +8,10 @@ background-color: #9EC6EC;
 .judul {
     position: relative; /* Menjaga elemen gambar tetap di tempat */
     font-size: 30px;
+    margin-left: 20px;
     display: flex;
     align-items: center; /* Menyelaraskan elemen secara vertikal */
     justify-content: flex-start; /* Tetap berada di sebelah kiri */
-}
-
-.judul img {
-    position: absolute;
-    right: 10px; /* Jarak dari tepi kanan */
-    top: 30px; /* Jarak dari tepi atas */
-    height: 90px; /* Ukuran default gambar */
 }
 
 .add-button {
@@ -35,31 +29,40 @@ background-color: #9EC6EC;
     background-color: #45a049;
   }
   
-  .news-table {
-    width: calc(100% - 40px);
-    border-collapse: collapse;
-    margin-top: 10px;
-    margin-left: 20px;
-    margin-bottom: 100px;
+  .table-container{
+    width: calc(100% - 40px); /* Match container width */
+  max-height: 250px; /* Sesuaikan tinggi maksimal tabel */
+  overflow-y: auto; /* Tambahkan scroll vertikal jika konten melebihi batas */
+  margin: 0 auto 20px auto;
+  border: 1px solid #ddd;
+  border-radius: 6px;
   }
   
-  .news-table th,
-  .news-table td {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table thead{
+    position: sticky;
+  }
+  
+  table th,
+  table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
   }
   
-  .news-table th {
+  table th {
     background-color: #f4f4f4;
     font-weight: bold;
   }
   
-  .news-table tr:nth-child(even) {
+  table tr:nth-child(even) {
     background-color: #f9f9f9;
   }
   
-  .news-table tr:hover {
+  table tr:hover {
     background-color: #f1f1f1;
   }
   
@@ -74,6 +77,19 @@ background-color: #9EC6EC;
   
   .edit-button:hover {
     background-color: #ff8c00;
+  }
+
+  .delete{
+    background-color:  #ff0000aa;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+  }
+  
+  .delete:hover {
+    background-color: #ff0000;
   }
 
   /* Modal Background */
@@ -152,11 +168,5 @@ textarea {
         font-size: 20px; /* Mengecilkan ukuran teks untuk layar kecil */
     }
 
-    .judul img {
-        height: 60px; /* Mengecilkan ukuran gambar */
-        right: 5px; /* Mengurangi jarak untuk layar kecil */
-        top: 20px;
-    }
-   
 }
 
