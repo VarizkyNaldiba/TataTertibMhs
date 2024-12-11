@@ -109,11 +109,13 @@ $pelanggaranDetail = $pelanggaranController->getDetailPelanggaranMahasiswa($nim)
                                         <input type="file" name="suratPernyataan" required>
                                         <button type="button" class="submit-btn uploadButton">Upload Surat Pernyataan</button>
                                     </form>
-                                    <form class="uploadForm" enctype="multipart/form-data">
-                                        <input type="hidden" name="id_detail" value="<?= $detail['id_detail'] ?>">
-                                        <input type="file" name="tugasKhusus" required>
-                                        <button type="button" class="submit-btn uploadButton">Upload Tugas Khusus</button>
-                                    </form>
+                                    <?php if (in_array($detail['tingkat'], ['I', 'II', 'III'])) : // Check for Roman numerals ?>
+                                        <form class="uploadForm" enctype="multipart/form-data">
+                                            <input type="hidden" name="id_detail" value="<?= $detail['id_detail'] ?>">
+                                            <input type="file" name="tugasKhusus" required>
+                                            <button type="button" class="submit-btn uploadButton">Upload Tugas Khusus</button>
+                                        </form>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php }
