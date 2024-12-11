@@ -100,7 +100,8 @@ $pelanggaranDetail = $pelanggaranController->getDetailPelanggaranMahasiswa($nim)
                                 <td><?= htmlspecialchars($detail['sanksi']) ?></td>
                                 <td><?= htmlspecialchars($detail['nama_lengkap']) ?></td>
                                 <td><?= htmlspecialchars($detail['tugas_khusus']) ?></td>
-                                <td><a href="<?= htmlspecialchars($detail['surat']) ?>">Unduh File</a></td>
+                                <!-- <td><a href="<?= htmlspecialchars($detail['surat']) ?>">Unduh File</a></td> -->
+                                <td><a href="https://drive.google.com/file/d/1xCpoS0pGdYQ_HQN8XoyAm7Fu1Uah2oCj/view?usp=sharing">Unduh File</a></td>
                                 <td><?= htmlspecialchars($detail['poin']) ?></td>
                                 <td><?= htmlspecialchars($detail['status']) ?></td>
                                 <td><button class="submit-btn" id="openModalButton">Kumpulkan</button></td>

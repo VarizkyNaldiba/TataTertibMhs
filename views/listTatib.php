@@ -96,22 +96,28 @@ $sanksiData = $tatibController->ReadSanksi();
             </table>
         </div>
 
-
         <!-- Sanksi Section -->
         <div class="sanksi-section">
             <h3>Sanksi Berdasarkan Tingkat</h3>
             <?php
                 if ($sanksiData) {
+                    // Mengelompokkan sanksi berdasarkan tingkat
+                    $groupedSanksi = [];
                     foreach ($sanksiData as $sanksi) {
-                        $formattedDeskripsi = str_replace(';', '<br>', $sanksi['deskripsi']);
-                        ?>
-                        <div class="sanksi-tingkat" data-tingkat="<?= $sanksi['tingkat']?>">
-                            <b>Tingkat <?= $sanksi['tingkat']?>:</b> 
-                            <div style="margin-left: 10px;">
-                                <?= $formattedDeskripsi ?>.
-                            </div>
-                        </div>
-                        <?php
+                        $tingkat = $sanksi['tingkat'];
+                        $groupedSanksi[$tingkat][] = $sanksi['deskripsi'];
+                    }
+
+                    // Menampilkan sanksi per tingkat tanpa titik dua
+                    foreach ($groupedSanksi as $tingkat => $sanksiList) {
+                        echo "<div class='sanksi-tingkat' data-tingkat='$tingkat'>";
+                        echo "<b>Tingkat $tingkat</b>";
+                        echo "<ul style='margin-left: 10px;'>";
+                        foreach ($sanksiList as $index => $deskripsi) {
+                            echo chr(codepoint: 97 + $index) . ") " . $deskripsi . "<br>";
+                        }
+                        echo "</ul>";
+                        echo "</div>";
                     }
                 }
             ?>
