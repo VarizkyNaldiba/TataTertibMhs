@@ -1,3 +1,5 @@
+use DiscipLink;
+
 -- Menambahkan data dummy ke tabel PRODI
 INSERT INTO PRODI (id_prodi, nama_prodi, jurusan)
 VALUES
@@ -21,7 +23,7 @@ VALUES
     ('2347120090', 'Budi Santoso', 'budi.santoso@student.example.com', 2023, 'TI01', 3, 'password456', 'mahasiswa'),
     ('2347120100', 'Citra Dewi', 'citra.dewi@student.example.com', 2023, 'TI01', 4, 'password789', 'mahasiswa'),
     ('2347120110', 'Dian Putri', 'dian.putri@student.example.com', 2023, 'TI02', 4, 'password101', 'mahasiswa'),
-    ('2347120120', 'Eko Prasetyo', 'eko.prasetyo@student.example.com', 2023, 'TI02', 5, 'password102', 'mahasiswa');
+    ('2347120120', 'Eko Prasetyo', 'eko.prasetyo@student.example.com', 2023, 'TI02', 1, 'password102', 'mahasiswa');
 
 -- Data Dummy untuk Tabel ADMIN
 INSERT INTO ADMIN (NIP, password)
@@ -33,52 +35,52 @@ VALUES
 ('ADMIN005', 'admin102');
 
 -- Data Dummy untuk Tabel TATA_TERTIB
-INSERT INTO TATA_TERTIB (deskripsi, tingkat, poin)
+INSERT INTO TATA_TERTIB (id_adminTatib, deskripsi, tingkat, poin)
 VALUES
     -- Tingkat V (Poin 2)
-    ('Berkomunikasi dengan tidak sopan, baik tertulis atau tidak tertulis kepada mahasiswa, dosen, karyawan, atau orang lain', 'V', 2),
+    (1, 'Berkomunikasi dengan tidak sopan, baik tertulis atau tidak tertulis kepada mahasiswa, dosen, karyawan, atau orang lain', 'V', 2),
 
     -- Tingkat IV (Poin 4)
-    ('Berbusana tidak sopan dan tidak rapi. Yaitu antara lain adalah: berpakaian ketat, transparan, memakai t-shirt (baju kaos tidak berkerah), tank top, hipster, you can see, rok mini, backless, celana pendek, celana tiga per empat, legging, model celana atau baju koyak, sandal, sepatu sandal di lingkungan kampus', 'IV', 4),
-    ('Mahasiswa laki-laki berambut tidak rapi, gondrong yaitu panjang rambutnya melewati batas alis mata di bagian depan, telinga di bagian samping atau menyentuh kerah baju di bagian leher', 'IV', 4),
-    ('Mahasiswa berambut dengan model punk, dicat selain hitam dan/atau skinned.', 'IV', 4),
-    ('Makan, atau minum di dalam ruang kuliah/laboratorium/bengkel.', 'IV', 4),
+    (1, 'Berbusana tidak sopan dan tidak rapi. Yaitu antara lain adalah: berpakaian ketat, transparan, memakai t-shirt (baju kaos tidak berkerah), tank top, hipster, you can see, rok mini, backless, celana pendek, celana tiga per empat, legging, model celana atau baju koyak, sandal, sepatu sandal di lingkungan kampus', 'IV', 4),
+    (1, 'Mahasiswa laki-laki berambut tidak rapi, gondrong yaitu panjang rambutnya melewati batas alis mata di bagian depan, telinga di bagian samping atau menyentuh kerah baju di bagian leher', 'IV', 4),
+    (1, 'Mahasiswa berambut dengan model punk, dicat selain hitam dan/atau skinned.', 'IV', 4),
+    (1, 'Makan, atau minum di dalam ruang kuliah/laboratorium/bengkel.', 'IV', 4),
 
     -- Tingkat III (Poin 8)
-    ('Melanggar peraturan/ketentuan yang berlaku di Polinema baik di Jurusan/Program Studi', 'III', 8),
-    ('Tidak menjaga kebersihan di seluruh area Polinema', 'III', 8),
-    ('Membuat kegaduhan yang mengganggu pelaksanaan perkuliahan atau praktikum yang sedang berlangsung', 'III', 8),
-    ('Merokok di luar area kawasan merokok', 'III', 8),
-    ('Bermain kartu, game online di area kampus', 'III', 8),
-    ('Mengotori atau mencoret-coret meja, kursi, tembok, dan lain-lain di lingkungan Polinema', 'III', 8),
-    ('Bertingkah laku kasar atau tidak sopan kepada mahasiswa, dosen, dan/atau karyawan.', 'III', 8),
+    (1, 'Melanggar peraturan/ketentuan yang berlaku di Polinema baik di Jurusan/Program Studi', 'III', 8),
+    (1, 'Tidak menjaga kebersihan di seluruh area Polinema', 'III', 8),
+    (1, 'Membuat kegaduhan yang mengganggu pelaksanaan perkuliahan atau praktikum yang sedang berlangsung', 'III', 8),
+    (1, 'Merokok di luar area kawasan merokok', 'III', 8),
+    (1, 'Bermain kartu, game online di area kampus', 'III', 8),
+    (1, 'Mengotori atau mencoret-coret meja, kursi, tembok, dan lain-lain di lingkungan Polinema', 'III', 8),
+    (1, 'Bertingkah laku kasar atau tidak sopan kepada mahasiswa, dosen, dan/atau karyawan.', 'III', 8),
 
     -- Tingkat II (Poin 16)
-    ('Merusak sarana dan prasarana yang ada di area Polinema', 'II', 16),
-    ('Tidak menjaga ketertiban dan keamanan di seluruh area Polinema (misalnya: parkir tidak pada tempatnya, konvoi selebrasi wisuda dll)', 'II', 16),
-    ('Melakukan pengotoran/pengrusakan barang milik orang lain termasuk milik Politeknik Negeri Malang', 'II', 16),
-    ('Mengakses materi pornografi di kelas atau area kampus', 'II', 16),
-    ('Membawa dan/atau menggunakan senjata tajam dan/atau senjata api untuk hal kriminal', 'II', 16),
-    ('Melakukan perkelahian, serta membentuk geng/kelompok yang bertujuan negatif.', 'II', 16),
-    ('Melakukan kegiatan politik praktis di dalam kampus', 'II', 16),
-    ('Melakukan tindakan kekerasan atau perkelahian di dalam kampus.', 'II', 16),
-    ('Melakukan penyalahgunaan identitas untuk perbuatan negatif', 'II', 16),
-    ('Mengancam, baik tertulis atau tidak tertulis kepada mahasiswa, dosen, dan/atau karyawan.', 'II', 16),
+    (1, 'Merusak sarana dan prasarana yang ada di area Polinema', 'II', 16),
+    (1, 'Tidak menjaga ketertiban dan keamanan di seluruh area Polinema (misalnya: parkir tidak pada tempatnya, konvoi selebrasi wisuda dll)', 'II', 16),
+    (1, 'Melakukan pengotoran/pengrusakan barang milik orang lain termasuk milik Politeknik Negeri Malang', 'II', 16),
+    (1, 'Mengakses materi pornografi di kelas atau area kampus', 'II', 16),
+    (1, 'Membawa dan/atau menggunakan senjata tajam dan/atau senjata api untuk hal kriminal', 'II', 16),
+    (1, 'Melakukan perkelahian, serta membentuk geng/kelompok yang bertujuan negatif.', 'II', 16),
+    (1, 'Melakukan kegiatan politik praktis di dalam kampus', 'II', 16),
+    (1, 'Melakukan tindakan kekerasan atau perkelahian di dalam kampus.', 'II', 16),
+    (1, 'Melakukan penyalahgunaan identitas untuk perbuatan negatif', 'II', 16),
+    (1, 'Mengancam, baik tertulis atau tidak tertulis kepada mahasiswa, dosen, dan/atau karyawan.', 'II', 16),
 
     -- Tingkat I (Poin 32)
-    ('Mencuri dalam bentuk apapun', 'I', 32),
-    ('Melakukan kecurangan dalam bidang akademik, administratif, dan keuangan.', 'I', 32),
-    ('Melakukan pemerasan dan/atau penipuan', 'I', 32),
-    ('Melakukan pelecehan dan/atau tindakan asusila dalam segala bentuk di dalam dan di luar kampus', 'I', 32),
-    ('Berjudi, mengkonsumsi minum-minuman keras, dan/atau bermabuk-mabukan di lingkungan dan di luar lingkungan Kampus Polinema', 'I', 32),
-    ('Mengikuti organisasi dan atau menyebarkan faham-faham yang dilarang oleh Pemerintah.', 'I', 32),
-    ('Melakukan pemalsuan data / dokumen / tanda tangan.', 'I', 32),
-    ('Melakukan plagiasi (copy paste) dalam tugas-tugas atau karya ilmiah', 'I', 32),
-    ('Tidak menjaga nama baik Polinema di masyarakat dan/atau mencemarkan nama baik Polinema melalui media apapun', 'I', 32),
-    ('Melakukan kegiatan atau sejenisnya yang dapat menurunkan kehormatan atau martabat Negara, Bangsa dan Polinema.', 'I', 32),
-    ('Menggunakan barang-barang psikotropika dan/atau zat-zat Adiktif lainnya', 'I', 32),
-    ('Mengedarkan serta menjual barang-barang psikotropika dan/atau zat-zat Adiktif lainnya', 'I', 32),
-    ('Terlibat dalam tindakan kriminal dan dinyatakan bersalah oleh Pengadilan', 'I', 32);
+    (1, 'Mencuri dalam bentuk apapun', 'I', 32),
+    (1, 'Melakukan kecurangan dalam bidang akademik, administratif, dan keuangan.', 'I', 32),
+    (1, 'Melakukan pemerasan dan/atau penipuan', 'I', 32),
+    (1, 'Melakukan pelecehan dan/atau tindakan asusila dalam segala bentuk di dalam dan di luar kampus', 'I', 32),
+    (1, 'Berjudi, mengkonsumsi minum-minuman keras, dan/atau bermabuk-mabukan di lingkungan dan di luar lingkungan Kampus Polinema', 'I', 32),
+    (1, 'Mengikuti organisasi dan atau menyebarkan faham-faham yang dilarang oleh Pemerintah.', 'I', 32),
+    (1, 'Melakukan pemalsuan data / dokumen / tanda tangan.', 'I', 32),
+    (1, 'Melakukan plagiasi (copy paste) dalam tugas-tugas atau karya ilmiah', 'I', 32),
+    (1, 'Tidak menjaga nama baik Polinema di masyarakat dan/atau mencemarkan nama baik Polinema melalui media apapun', 'I', 32),
+    (1, 'Melakukan kegiatan atau sejenisnya yang dapat menurunkan kehormatan atau martabat Negara, Bangsa dan Polinema.', 'I', 32),
+    (1, 'Menggunakan barang-barang psikotropika dan/atau zat-zat Adiktif lainnya', 'I', 32),
+    (1, 'Mengedarkan serta menjual barang-barang psikotropika dan/atau zat-zat Adiktif lainnya', 'I', 32),
+    (1, 'Terlibat dalam tindakan kriminal dan dinyatakan bersalah oleh Pengadilan', 'I', 32);
 
 
 -- Data Dummy untuk Tabel SANKSI (dipisah sub-bab nya)
@@ -98,7 +100,7 @@ VALUES
 INSERT INTO DETAIL_PELANGGARAN (id_dosen, id_tata_tertib, id_mahasiswa, id_sanksi, tugas_khusus, detail_tugas_khusus, pengumpulan_tgsKhusus, surat, pengumpulan_surat, status, status_tugas)
 VALUES 
 -- Pelanggaran 1
-(1, 2, 3, 4, 
+(1, 2, 5, 4, 
  'Membuat Artikel', 
  'Mahasiswa wajib membuat artikel tentang etika kedisiplinan minimal 1000 kata.', 
  'data:application/pdf;base64,JVBERi0xLjQKJcfsj6IK...', 
@@ -108,7 +110,7 @@ VALUES
  'Belum Diberikan'),
 
 -- Pelanggaran 2
-(2, 1, 5, 2, 
+(2, 1, 4, 2, 
  'Membersihkan Ruangan', 
  'Mahasiswa diwajibkan membersihkan ruangan kelas G-102 dan melampirkan bukti foto.', 
  'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD...', 
@@ -118,7 +120,7 @@ VALUES
  'Sudah Diberikan'),
 
 -- Pelanggaran 3
-(3, 3, 6, 3, 
+(3, 3, 3, 3, 
  'Mengikuti Seminar', 
  'Mahasiswa diwajibkan mengikuti seminar kedisiplinan dan melampirkan ringkasan.', 
  'data:application/pdf;base64,JVBERi0xLjQKJcfsj9IK...', 
@@ -128,7 +130,7 @@ VALUES
  'Belum Diberikan'),
 
 -- Pelanggaran 4
-(4, 4, 7, 5, 
+(4, 4, 2, 5, 
  'Membuat Poster', 
  'Mahasiswa harus membuat poster digital tentang peraturan kampus dengan format PNG.', 
  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA...', 
@@ -138,7 +140,7 @@ VALUES
  'Sudah Diberikan'),
 
 -- Pelanggaran 5
-(5, 5, 8, 1, 
+(1, 5, 1, 1, 
  'Menulis Ringkasan Buku', 
  'Mahasiswa wajib membaca buku tentang etika mahasiswa dan membuat ringkasan minimal 500 kata.', 
  'data:application/pdf;base64,JVBERi0xLjQKJcfsj12IK...', 
