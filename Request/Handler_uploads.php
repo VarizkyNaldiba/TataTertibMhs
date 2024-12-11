@@ -3,7 +3,7 @@ session_start();
 require_once '../config.php'; // Include the config file to access the database connection
 
 // Check if the uploads directory exists, if not create it
-$uploadDir = '../uploads/';
+$uploadDir = '../document/';
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0777, true); // Create directory with permissions
 }
