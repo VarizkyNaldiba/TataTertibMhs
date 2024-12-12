@@ -92,7 +92,7 @@ $tatibData = $tatibController->ReadTatib();
                       <td><?= $tatib['tingkat']?></td>
                       <td><?= $tatib['poin']?></td>
                       <td class="button-cell">
-                        <button class="edit-button" id="editbutton"><i class="fa-solid fa-pen-to-square"></i></button> 
+                        <!-- <button class="edit-button" id="editbutton"><i class="fa-solid fa-pen-to-square"></i></button>  -->
                         <!--tombol delete --> 
                     <form action="../Request/Handler_Tatib.php" method="post">
                         <input type="hidden" name="id_tatib" value="<?= $tatib['id_tata_tertib'] ?>">
