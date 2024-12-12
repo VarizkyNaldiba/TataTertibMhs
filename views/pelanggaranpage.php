@@ -83,7 +83,7 @@ $pelanggaranDetail = $pelanggaranController->getDetailPelanggaranMahasiswa($nim)
                         <th>Pelanggaran</th>
                         <th>Tingkat Pelanggaran</th>
                         <th>Sanksi</th>
-                        <th>Dosen Pengampu</th>
+                        <th>Dosen Pelapor</th>
                         <th>Tugas Khusus</th>
                         <th>Surat</th>
                         <th>Poin</th>

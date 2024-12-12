@@ -22,8 +22,12 @@ if (isset($_GET['logout'])) {
     exit();
 }
 
+// Ambil data user dari session
+$userData = $_SESSION['user_data'];
+
 $newsController = new NewsController();
-$newsData = $newsController->ReadNews();
+$id_admin = $userData['id_admin'];
+$newsData = $newsController->AdminNews($id_admin);
 
 ?>
 <!DOCTYPE html>
@@ -73,19 +77,21 @@ $newsData = $newsController->ReadNews();
       </tr>
     </thead>
     <tbody>
-      <tr>
-          <?php if ($newsData) :?>
-                  <?php foreach ($newsData as $news) :?>
-                  <tr>
-                      <td><?= $news['judul']?></td>
-                      <td><?= $news['konten']?></td>
-                      <td><?= $news['penulis_id']?></td>
-                      <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button>
-                      <!--tombol delete --> 
-                      <button class="delete" id="delete"><i class="fa-solid fa-trash"></i></button></td>
-                  </tr>
-                  <?php endforeach;?>
-          <?php endif;?>
+        <?php if ($newsData) :?>
+                <?php foreach ($newsData as $news) :?>
+                <tr>
+                    <td><?= $news['judul']?></td>
+                    <td><?= $news['konten']?></td>
+                    <td><?= $news['penulis_id']?></td>
+                    <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <!--tombol delete --> 
+                    <form action="../Request/Handler_News.php" method="post">
+                        <input type="hidden" name="news_id" value="<?= $news['id_news'] ?>">
+                        <button class="delete" id="delete" name="delete" onclick="return confirm('Apakah anda yakin ingin menghapus?');"><i class="fa-solid fa-trash"></i></button></td>
+                    </form>
+                </tr>
+                <?php endforeach;?>
+        <?php endif;?>
     </tbody>
   </table>
 </div>
@@ -115,15 +121,15 @@ $newsData = $newsController->ReadNews();
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Tambah Berita</h2>
-        <form id="insertBeritaForm">
+        <form id="insertBeritaForm" method="POST" action="../Request/Handler_News.php">
+            <label for="insertPenulis">ID Penulis:</label>
+            <input type="text" id="insertPenulis" name="penulis" value="<?= $userData['id_admin']?>" required readonly>
+            
             <label for="insertJudul">Judul:</label>
             <input type="text" id="insertJudul" name="judul" required>
-
+            
             <label for="insertKonten">Konten:</label>
             <textarea id="insertKonten" name="konten" rows="4" required></textarea>
-
-            <label for="insertPenulis">Penulis:</label>
-            <input type="text" id="insertPenulis" name="penulis" required>
 
             <button type="submit" class="save-button">Simpan</button>
         </form>

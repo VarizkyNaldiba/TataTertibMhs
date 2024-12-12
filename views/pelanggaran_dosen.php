@@ -59,8 +59,8 @@ $pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
             <h1>Pelanggaran</h1>
         </div>
         <div class="profile">
-            <p><strong>Nama: John Doe</strong></p>
-            <p><strong>NIP: 123456789</strong></p>
+            <p><strong>Nama: <?= $userData['nama_lengkap'] ?></strong></p>
+            <p><strong>NIP: <?= $userData['nidn'] ?></strong></p>
         </div>
 
         <h3>Tabel Pelanggaran</h3>
@@ -104,6 +104,7 @@ $pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
                                 <td><?= htmlspecialchars($detail['poin']) ?></td>
                                 <td><?= htmlspecialchars($detail['status_pelanggaran']) ?></td>
                                 <?php if($detail['tingkat'] === 'V' || $detail['tingkat'] === 'V'):?>
+                                    <td>Tidak ada tugas</td>
                                 <?php else :?>
                                     <td><?= htmlspecialchars($detail['status_tugas']) ?></td>
                                 <?php endif ;?>
