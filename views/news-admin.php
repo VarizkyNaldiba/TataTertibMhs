@@ -86,11 +86,12 @@ $newsData = $newsController->AdminNews($id_admin);
                     <td><?= $news['judul']?></td>
                     <td><?= $news['konten']?></td>
                     <td><?= $news['penulis_id']?></td>
-                    <td><button class="edit-button" 
+                    <td class="button-cell">
+                        <button class="edit-button" 
                                 data-id="<?= $news['id_news'] ?>" 
                                 data-judul="<?= htmlspecialchars($news['judul']) ?>" 
                                 data-konten="<?= htmlspecialchars($news['konten']) ?>">
-                            <i class="fa-solid fa-pen-to-square"></i>
+                                <i class="fa-solid fa-pen-to-square"></i>
                         </button>
                     <!--tombol delete --> 
                     <form action="../Request/Handler_News.php" method="post">

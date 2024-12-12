@@ -65,3 +65,22 @@ document.addEventListener('change', (event) => {
         setPoinByTingkat(selectedTingkat, poinField);
     }
 });
+
+const tatibTable = document.getElementById('tatib-table');
+
+tatibTable.addEventListener('click', function (event) {
+    if (event.target.closest('.edit-button')) {
+        const row = event.target.closest('tr');
+        const cells = row.querySelectorAll('td');
+
+        // Mengisi form edit dengan data dari tabel
+        document.getElementById('nomor').value = cells[0].textContent;
+        document.getElementById('admin').value = cells[1].textContent;
+        document.getElementById('editKonten').value = cells[2].textContent;
+        document.getElementById('tingkat').value = cells[3].textContent;
+        document.getElementById('poin').value = cells[4].textContent;
+
+        // Menampilkan modal edit
+        editModal.style.display = 'block';
+    }
+});
