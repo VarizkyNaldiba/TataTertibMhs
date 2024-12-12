@@ -14,6 +14,9 @@ if (isset($_SESSION['username'])) {
     header("Location: pelanggaran_dosen.php");
     exit();
   }
+} else {
+    header("Location: login.php");
+    exit();
 }
 
 if (isset($_GET['logout'])) {

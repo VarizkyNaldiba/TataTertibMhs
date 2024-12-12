@@ -4,22 +4,23 @@ session_start();
 require_once '../Controllers/UserController.php';
 require_once '../Controllers/NewsController.php';
 
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-    exit();
-}
+if (isset($_SESSION['username'])) {
+    // Redirect based on role
+    if ($_SESSION['user_type'] === 'mahasiswa') {
+        header("Location: pelanggaranpage.php");
+        exit();
+    } else if ($_SESSION['user_type'] === 'dosen') {
+      header("Location: pelanggaran_dosen.php");
+      exit();
+    }
+  }if (!isset($_SESSION['username'])) {
+      header("Location: login.php");
+      exit();
+  }
 
 if (isset($_GET['logout'])) {
     $userController = new UserController();
     $userController->logout();
-    exit();
-}
-
-if ($_SESSION['user_type'] === 'mahasiswa') {
-    header("Location: pelanggaranpage.php");
-    exit();
-} else if ($_SESSION['user_type'] === 'dosen') {
-    header("Location: pelanggaran_dosen.php");
     exit();
 }
 $newsController = new NewsController();
