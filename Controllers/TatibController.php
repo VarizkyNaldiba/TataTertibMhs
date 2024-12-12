@@ -18,6 +18,28 @@ class TatibController {
     public function ReadSanksi() {
         return $this->sanksiModel->getAllSanksi();
     }
+
+    public function store($admin, $deskripsi, $tingkat, $poin) {
+        $result = $this->tatibModel->insertTatib(
+            $admin, 
+            $deskripsi, 
+            $tingkat, 
+            $poin
+        );
+    }
+
+    public function update($id, $judul, $penulis, $id_penulis) {
+        $result = $this->tatibModel->updateTatib(
+            $id, 
+            $judul, 
+            $penulis, 
+            $id_penulis
+        );
+    }
+
+    public function delete($id) {
+        $result = $this->tatibModel->deleteTatib($id);
+    }
 }
 
 ?>
