@@ -20,13 +20,12 @@
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 25%;
-  overflow-x: auto; /* Tambahkan scroll horizontal jika tabel terlalu lebar */
 }
 
 .table-container table {
   border-collapse: collapse;
   font-family: 'Inter';
-  min-width: 800px; /* Tentukan lebar minimum tabel agar tetap konsisten */
+  
 }
 
 .table-container th,
@@ -46,6 +45,7 @@
 
 .table-container tbody {
   display: block;
+  overflow-x: hidden;
   max-height: 250px; /* Batasi tinggi maksimal tabel */
   overflow-y: auto; /* Tambahkan scroll vertikal */
 }
@@ -54,6 +54,7 @@
   display: table; /* Tetap gunakan display table untuk menjaga kolom sejajar */
   width: 100%;
   table-layout: fixed;
+  position: sticky;
 }
 
 .table-container tbody tr {
