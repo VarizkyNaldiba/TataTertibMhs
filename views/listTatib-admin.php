@@ -25,6 +25,9 @@ if (isset($_GET['logout'])) {
     exit();
 }
 
+// Ambil data user dari session
+$userData = $_SESSION['user_data'];
+
 $tatibController = new TatibController();
 $tatibData = $tatibController->ReadTatib();
 
@@ -91,7 +94,10 @@ $tatibData = $tatibController->ReadTatib();
                       <td class="button-cell">
                         <button class="edit-button" id="editbutton"><i class="fa-solid fa-pen-to-square"></i></button> 
                         <!--tombol delete --> 
-                        <button class="delete" id="delete"><i class="fa-solid fa-trash"></i></button></td>
+                    <form action="../Request/Handler_Tatib.php" method="post">
+                        <input type="hidden" name="id_tatib" value="<?= $tatib['id_tata_tertib'] ?>">
+                        <button class="delete" id="delete" name="delete" onclick="return confirm('Apakah anda yakin ingin menghapus?');"><i class="fa-solid fa-trash"></i></button></td>
+                  </form>
                   </tr>
                   <?php $i++?>
                   <?php endforeach;?>
@@ -138,15 +144,12 @@ $tatibData = $tatibController->ReadTatib();
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Tambah Pelanggaran</h2>
-        <form id="insertForm">
-            <label for="nomor">No.</label>
-            <input type="text" id="nomor" name="nomor" readonly>
-            
+        <form id="insertForm" method="POST" action="../Request/Handler_Tatib.php">
             <label for="insertAdmin">Id Admin:</label>
-            <input type="text" id="admin" name="admin" required>
+            <input type="text" id="admin" name="admin" value="<?= $userData['id_admin']?>" required readonly>
 
-            <label for="insertKonten">Pelanggaran:</label>
-            <textarea id="insertKonten" name="konten" rows="4" required></textarea>
+            <label for="insertDeskripsi">Pelanggaran:</label>
+            <textarea id="insertDeskripsi" name="deskripsi" rows="4" required></textarea>
 
             <label for="insertTingkat">Tingkat:</label>
             <select id="tingkat" name="tingkat" required>
@@ -162,7 +165,7 @@ $tatibData = $tatibController->ReadTatib();
             <label for="editPoin">Poin:</label>
             <input type="text" id="poin" name="poin" readonly>
 
-            <button type="submit" class="save-button">Simpan</button>
+            <button type="submit" class="save-button" name="store">Simpan</button>
         </form>
     </div>
 </div>
