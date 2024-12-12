@@ -24,6 +24,15 @@ class NewsController {
         );
     }
 
+    public function update($id, $judul, $penulis, $id_penulis) {
+        $result = $this->newsModel->updateNews(
+            $id, 
+            $judul, 
+            $penulis, 
+            $id_penulis
+        );
+    }
+
     public function delete($id) {
         $result = $this->newsModel->deleteNews($id);
     }

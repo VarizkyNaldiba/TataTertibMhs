@@ -39,7 +39,20 @@ class News {
             $stmt->execute([$judul, $konten, $id]);
             return true;
         } catch(PDOException $e) {
-            error_log('Error in simpanDetailPelanggaran: ' . $e->getMessage());
+            error_log('Error in insertNews: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function updateNews($id, $judul, $konten, $id_penulis){
+        $query = "UPDATE news SET judul = ?, konten = ?, penulis_id = ? WHERE id_news = ?";
+              
+        try {
+            $stmt = $this->connect->prepare($query);
+            $stmt->execute([$judul, $konten, $id_penulis, $id]);
+            return true;
+        } catch(PDOException $e) {
+            error_log('Error in updateNews: ' . $e->getMessage());
             return false;
         }
     }
