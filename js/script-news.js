@@ -13,6 +13,15 @@ addBeritaButton.addEventListener('click', () => {
 // Fungsi untuk membuka modal edit berita
 editBeritaButtons.forEach((button) => {
     button.addEventListener('click', (e) => {
+        const newsId = button.getAttribute('data-id');
+        const judul = button.getAttribute('data-judul');
+        const konten = button.getAttribute('data-konten');
+
+        // Populate the edit modal
+        document.getElementById('editNewsId').value = newsId;
+        document.getElementById('editJudul').value = judul;
+        document.getElementById('editKonten').value = konten;
+
         editBeritaModal.style.display = 'block';
     });
 });

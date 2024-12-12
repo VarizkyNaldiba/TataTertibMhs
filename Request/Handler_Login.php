@@ -11,9 +11,9 @@ try {
         $userType = $_POST['user_type'];
         
         if (!$user->login($username, $password)) {
-            echo "<div class='alert alert-danger' style='color: red; text-align: center; margin-bottom: 15px;'>
-                    Login gagal! Username atau password salah.
-                  </div>";
+            $_SESSION['login_error'] = 'Invalid username or password.';
+            header("Location: ../views/login.php");
+            exit();
         }
     }
 } catch (Exception $e) {

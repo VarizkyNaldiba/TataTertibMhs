@@ -14,6 +14,9 @@ if (isset($_SESSION['username'])) {
     header("Location: pelanggaran_dosen.php");
     exit();
   }
+}if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
 }
 
 if (isset($_GET['logout'])) {
@@ -83,7 +86,12 @@ $newsData = $newsController->AdminNews($id_admin);
                     <td><?= $news['judul']?></td>
                     <td><?= $news['konten']?></td>
                     <td><?= $news['penulis_id']?></td>
-                    <td><button class="edit-button"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <td><button class="edit-button" 
+                                data-id="<?= $news['id_news'] ?>" 
+                                data-judul="<?= htmlspecialchars($news['judul']) ?>" 
+                                data-konten="<?= htmlspecialchars($news['konten']) ?>">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
                     <!--tombol delete --> 
                     <form action="../Request/Handler_News.php" method="post">
                         <input type="hidden" name="news_id" value="<?= $news['id_news'] ?>">
@@ -101,15 +109,17 @@ $newsData = $newsController->AdminNews($id_admin);
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Edit Berita</h2>
-        <form id="editBeritaForm">
+        <form id="editBeritaForm" method="POST" action="../Request/Handler_News.php">
+            <input type="hidden" id="editNewsId" name="news_id" required>
+            
+            <label for="editPenulis">Penulis:</label>
+            <input type="text" id="editPenulis" name="penulis" value="<?= $userData['id_admin']?>" required readonly>
+            
             <label for="editJudul">Judul:</label>
             <input type="text" id="editJudul" name="judul" required>
-
+            
             <label for="editKonten">Konten:</label>
             <textarea id="editKonten" name="konten" rows="4" required></textarea>
-
-            <label for="editPenulis">Penulis:</label>
-            <input type="text" id="editPenulis" name="penulis" required>
 
             <button type="submit" class="save-button">Simpan</button>
         </form>
@@ -131,7 +141,7 @@ $newsData = $newsController->AdminNews($id_admin);
             <label for="insertKonten">Konten:</label>
             <textarea id="insertKonten" name="konten" rows="4" required></textarea>
 
-            <button type="submit" class="save-button">Simpan</button>
+            <button type="submit" class="save-button" name="store">Simpan</button>
         </form>
     </div>
 </div>
