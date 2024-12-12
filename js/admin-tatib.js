@@ -74,7 +74,6 @@ tatibTable.addEventListener('click', function (event) {
         const cells = row.querySelectorAll('td');
 
         // Mengisi form edit dengan data dari tabel
-        document.getElementById('nomor').value = cells[0].textContent;
         document.getElementById('admin').value = cells[1].textContent;
         document.getElementById('editKonten').value = cells[2].textContent;
         document.getElementById('tingkat').value = cells[3].textContent;
