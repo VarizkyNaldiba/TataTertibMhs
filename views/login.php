@@ -39,6 +39,12 @@ if (isset($_SESSION['username'])) {
     </ul>
 </div>
 <div class="content">
+  <?php if (isset($_SESSION['login_error'])): ?> 
+    <script type="text/javascript"> 
+      alert("<?= $_SESSION['login_error']; ?>"); 
+    </script> 
+    <?php unset($_SESSION['login_error']); ?> 
+  <?php endif; ?>
   <div class="header">
     <h1>login</h1>
   </div>
