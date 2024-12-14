@@ -73,7 +73,7 @@ background-color: #9EC6EC;
     gap: 10px;  
   }
   
-  .edit-button,
+.edit-button,
 .delete {
     background-color: #ffa500;
     color: white;
@@ -143,8 +143,8 @@ label {
     display: block;
     margin: 10px 0 5px;
 }
-
 input[type="text"],
+input[type="file"],
 textarea {
     width: calc(100% - 16px);
     padding: 8px;

@@ -77,6 +77,7 @@ $pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
                         <th>Poin</th>
                         <th>Status</th>
                         <th>Status Tugas</th>
+                        <th>Edit laporan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -108,6 +109,8 @@ $pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
                                 <?php else :?>
                                     <td><?= htmlspecialchars($detail['status_tugas']) ?></td>
                                 <?php endif ;?>
+                                <!-- tombol edit laporan -->
+                                <td><button class="edit-laporan" onclick="window.location.href='pelaporan.php'"><i class="fa-solid fa-pen-to-square"></i></button></td>
                             </tr>
                             <?php } 
                         } else {

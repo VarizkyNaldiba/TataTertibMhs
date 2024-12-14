@@ -32,13 +32,16 @@
                     pihak kampus untuk memahami, memantau, dan menegakkan aturan secara efisien.</p>
             </div>
             <div class="news">
-                <h2>Lastest News</h2>
+                <h2>News</h2>
                 <div class="row">
                     <!-- nanti pakai while aja isi nya biar sesuai dengan inputan-->
                     <?php foreach($newsData as $news): ?>
                     <div class="news-content">
                         <img src="img/news.jpg" alt="gambar">
-                        <h5><?= $news['judul'] ?></h5>
+                        <h3><?= $news['judul'] ?></h3>
+                        <!-- ini nanti di ganti nama -->
+                        <h5><?=$news['penulis_id']?></h5>
+                        <!-- ini -->
                         <p><?= $news['konten'] ?></p>
                     </div>
                     <?php endforeach; ?>
