@@ -26,13 +26,13 @@ VALUES
     ('2347120120', 'Eko Prasetyo', 'eko.prasetyo@student.example.com', 2023, 'TI02', 1, 'password102', 'mahasiswa');
 
 -- Data Dummy untuk Tabel ADMIN
-INSERT INTO ADMIN (NIP, password)
+INSERT INTO ADMIN (NIP, nama_admin, password)
 VALUES
-('ADMIN001', 'admin123'),
-('ADMIN002', 'admin456'),
-('ADMIN003', 'admin789'),
-('ADMIN004', 'admin101'),
-('ADMIN005', 'admin102');
+    ('ADMIN001', 'Achmad Budiarto', 'admin123'),
+    ('ADMIN002', 'Siti Aminah', 'admin456'),
+    ('ADMIN003', 'Wahyu Wibowo', 'admin789'),
+    ('ADMIN004', 'Dian Putri', 'admin101'),
+    ('ADMIN005', 'Eko Prasetyo', 'admin102');
 
 -- Data Dummy untuk Tabel TATA_TERTIB
 INSERT INTO TATA_TERTIB (id_adminTatib, deskripsi, tingkat, poin)
@@ -95,68 +95,6 @@ VALUES
     ('II', 'Diberikan nilai D pada mata kuliah terkait saat melakukan pelanggaran'),
     ('I', 'Dinonaktifkan (Cuti Akademik/Terminal) selama dua semester'),
     ('I', 'Diberhentikan sebagai mahasiswa');
-
--- Data Dummy untuk tabel DETAIL_PELANGGARAN
-INSERT INTO DETAIL_PELANGGARAN (id_dosen, id_tata_tertib, id_mahasiswa, id_sanksi, tugas_khusus, detail_tugas_khusus, pengumpulan_tgsKhusus, surat, pengumpulan_surat, status, status_tugas)
-VALUES 
--- Pelanggaran 1
-(1, 2, 5, 4, 
- 'Membuat Artikel', 
- 'Mahasiswa wajib membuat artikel tentang etika kedisiplinan minimal 1000 kata.', 
- 'data:application/pdf;base64,JVBERi0xLjQKJcfsj6IK...', 
- 'data:application/pdf;base64,JVBERi0xLjQKJcfsj7IK...', 
- NULL, 
- 'Pending', 
- 'Belum Diberikan'),
-
--- Pelanggaran 2
-(2, 1, 4, 2, 
- 'Membersihkan Ruangan', 
- 'Mahasiswa diwajibkan membersihkan ruangan kelas G-102 dan melampirkan bukti foto.', 
- 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD...', 
- 'data:application/pdf;base64,JVBERi0xLjQKJcfsj8IK...', 
- 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA...', 
- 'Terverifikasi', 
- 'Sudah Diberikan'),
-
--- Pelanggaran 3
-(3, 3, 3, 3, 
- 'Mengikuti Seminar', 
- 'Mahasiswa diwajibkan mengikuti seminar kedisiplinan dan melampirkan ringkasan.', 
- 'data:application/pdf;base64,JVBERi0xLjQKJcfsj9IK...', 
- 'data:application/pdf;base64,JVBERi0xLjQKJcfsj10IK...', 
- NULL, 
- 'Pending', 
- 'Belum Diberikan'),
-
--- Pelanggaran 4
-(4, 4, 2, 5, 
- 'Membuat Poster', 
- 'Mahasiswa harus membuat poster digital tentang peraturan kampus dengan format PNG.', 
- 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA...', 
- 'data:application/pdf;base64,JVBERi0xLjQKJcfsj11IK...', 
- 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA...', 
- 'Selesai', 
- 'Sudah Diberikan'),
-
--- Pelanggaran 5
-(1, 5, 1, 1, 
- 'Menulis Ringkasan Buku', 
- 'Mahasiswa wajib membaca buku tentang etika mahasiswa dan membuat ringkasan minimal 500 kata.', 
- 'data:application/pdf;base64,JVBERi0xLjQKJcfsj12IK...', 
- 'data:application/pdf;base64,JVBERi0xLjQKJcfsj13IK...', 
- NULL, 
- 'Pending', 
- 'Belum Diberikan');
-
--- Data Dummy untuk Tabel NOTIFIKASI
-INSERT INTO NOTIFIKASI (id_mhs, id_dosen, pesan, status, role_penerima)
-VALUES
-    (2, NULL, 'Anda mendapatkan teguran lisan terkait pelanggaran tata tertib.', 'unread', 'mahasiswa'),
-    (NULL, 2, 'Laporan pelanggaran mahasiswa Budi Santoso telah selesai.', 'read', 'dosen'),
-    (3, NULL, 'Anda mendapatkan surat peringatan untuk pelanggaran tata tertib.', 'unread', 'mahasiswa'),
-    (NULL, 4, 'Mahasiswa Dian Putri melanggar aturan dan telah disanksi.', 'read', 'dosen'),
-    (5, NULL, 'Laporan pelanggaran mahasiswa Eko Prasetyo telah selesai.', 'unread', 'mahasiswa');
 
 -- Data Dummy untuk Tabel NEWS
 INSERT INTO NEWS (judul, konten, penulis_id)

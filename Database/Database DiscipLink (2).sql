@@ -15,6 +15,7 @@ CREATE TABLE PRODI(
 CREATE TABLE ADMIN (
     id_admin INT PRIMARY KEY IDENTITY(1,1),
     NIP VARCHAR(50) UNIQUE NOT NULL,
+    nama_admin VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL
 );
 
@@ -100,6 +101,7 @@ CREATE TABLE NOTIFIKASI (
 -- Tabel untuk News (Berita) yang dikelola oleh Admin
 CREATE TABLE NEWS (
     id_news INT PRIMARY KEY IDENTITY(1,1),
+    gambar VARCHAR(255),
     judul VARCHAR(100) NOT NULL,
     konten TEXT NOT NULL,
     penulis_id INT NOT NULL,  -- ID Admin yang membuat berita
