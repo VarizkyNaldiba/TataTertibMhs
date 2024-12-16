@@ -68,6 +68,16 @@ h3 {
   margin-left: 38px;
   font-family: 'Inter';
 }
+.edit-laporan{
+  background-color: orange;
+  border: none;
+  border-radius: 3px;
+  padding: 4px 8px;
+}
+
+.edit-laporan:hover{
+  background-color: rgba(255, 166, 0, 0.804);
+}
 
 .submit-btn {
   background-color: #007bff;

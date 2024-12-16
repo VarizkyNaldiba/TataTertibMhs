@@ -28,12 +28,13 @@ class TatibController {
         );
     }
 
-    public function update($id, $judul, $penulis, $id_penulis) {
+    public function update($id, $admin, $deskripsi, $tingkat, $poin) {
         $result = $this->tatibModel->updateTatib(
-            $id, 
-            $judul, 
-            $penulis, 
-            $id_penulis
+            $id,
+            $admin, 
+            $deskripsi, 
+            $tingkat, 
+            $poin
         );
     }
 

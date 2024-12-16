@@ -34,18 +34,18 @@ class Tatib {
         }
     }
 
-    // public function updateTatib($id, $judul, $pelanggaran, $id_penulis){
-    //     $query = "UPDATE news set judul = ?, deskripsi = ?, penulis_id = ? WHERE id = ?)";
+    public function updateTatib($id, $admin, $pelanggaran, $tingkat, $poin){
+        $query = "UPDATE TATA_TERTIB set id_adminTatib = ?, deskripsi = ?, tingkat = ?, poin = ? WHERE id_tata_tertib = ?)";
               
-    //     try {
-    //         $stmt = $this->connect->prepare($query);
-    //         $stmt->execute([$judul, $deskripsi, $id_penulis, $id]);
-    //         return true;
-    //     } catch(PDOException $e) {
-    //         error_log('Error in updatedeskripsi: ' . $e->getMessage());
-    //         return false;
-    //     }
-    // }
+        try {
+            $stmt = $this->connect->prepare($query);
+            $stmt->execute([$admin, $deskripsi, $tingkat, $poin, $id]);
+            return true;
+        } catch(PDOException $e) {
+            error_log('Error in updateTatib: ' . $e->getMessage());
+            return false;
+        }
+    }
 
     public function deleteTatib($id) {
         $query = "DELETE FROM TATA_TERTIB WHERE id_tata_tertib = ?";
