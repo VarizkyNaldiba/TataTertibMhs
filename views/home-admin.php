@@ -66,7 +66,7 @@ $newsData = $newsController->ReadNews();
                 <p>Sebuah sistem yang dirancang untuk mengelola aturan, <br>pelanggaran, dan sanksi di Universitas</p>
             </div>
             <div class="dashboard-container">
-                <img class="logo-disciplink" src="../img/full.png">
+                <img class="logo-disciplink" src="../img/ga logo aja.png">
                 <p>Disciplink adalah platform digital inovatif yang dirancang untuk menghubungkan mahasiswa dengan
                     sistem kedisiplinan kampus. Sebagai gabungan dari kata "Discipline" dan "Link", Disciplink berfokus
                     pada penyederhanaan proses pengelolaan tata tertib di lingkungan akademik, memudahkan mahasiswa dan
