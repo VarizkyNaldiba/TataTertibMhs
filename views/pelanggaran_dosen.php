@@ -110,7 +110,7 @@ $pelanggaranDetail = $pelanggaranController->getDetailLaporanDosen($nidn);
                                     <td><?= htmlspecialchars($detail['status_tugas']) ?></td>
                                 <?php endif ;?>
                                 <!-- tombol edit laporan -->
-                                <td><button class="edit-laporan" onclick="window.location.href='pelaporan.php'"><i class="fa-solid fa-pen-to-square"></i></button></td>
+                                <td><button class="edit-laporan" onclick="window.location.href='edit-pelaporan.php'"><i class="fa-solid fa-pen-to-square"></i></button></td>
                             </tr>
                             <?php } 
                         } else {
