@@ -30,13 +30,12 @@ class News {
         return $result;
     }
 
-    public function insertNews($judul, $konten, $id){
-        $query = "INSERT INTO news (judul, konten, penulis_id) 
-              VALUES (?, ?, ?)";
+    public function insertNews($gambar, $judul, $konten, $id){
+        $query = "INSERT INTO NEWS (gambar, judul, konten, penulis_id) VALUES (?, ?, ?, ?)";
               
         try {
             $stmt = $this->connect->prepare($query);
-            $stmt->execute([$judul, $konten, $id]);
+            $stmt->execute([$gambar, $judul, $konten, $id]);
             return true;
         } catch(PDOException $e) {
             error_log('Error in insertNews: ' . $e->getMessage());

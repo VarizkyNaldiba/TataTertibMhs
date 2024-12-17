@@ -74,6 +74,7 @@ $newsData = $newsController->AdminNews($id_admin);
     <thead>
       <tr>
         <th>Judul</th>
+        <th>gambar</th>
         <th>Konten</th>
         <th>Penulis</th>
         <th>Aksi</th>
@@ -84,6 +85,13 @@ $newsData = $newsController->AdminNews($id_admin);
                 <?php foreach ($newsData as $news) :?>
                 <tr>
                     <td><?= $news['judul']?></td>
+                    <td>
+                    <?php if (!empty($news['gambar'])): ?>
+                        <img src="../<?= $news['gambar'] ?>" alt="News Image" style="max-width: 100px;">
+                        <?php else :?>
+                        <p>Tidak ada gambar</p>
+                    <?php endif; ?>
+                    </td>
                     <td><?= $news['konten']?></td>
                     <td><?= $news['penulis_id']?></td>
                     <td class="button-cell">
@@ -135,7 +143,7 @@ $newsData = $newsController->AdminNews($id_admin);
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Tambah Berita</h2>
-        <form id="insertBeritaForm" method="POST" action="../Request/Handler_News.php">
+        <form id="insertBeritaForm" method="POST" action="../Request/Handler_News.php" enctype="multipart/form-data">
             <label for="insertPenulis">ID Penulis:</label>
             <input type="text" id="insertPenulis" name="penulis" value="<?= $userData['id_admin']?>" required readonly>
             

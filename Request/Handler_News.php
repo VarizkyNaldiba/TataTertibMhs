@@ -8,11 +8,12 @@ $newsController = new NewsController();
 
 
 
-if(isset($_POST['store']) && isset($_POST['judul']) && isset($_POST['konten']) && isset($_POST['penulis'])) {
-    $newsController->store(
+if(isset($_POST['store']) && isset($_FILES['gambar']) && isset($_POST['judul']) && isset($_POST['konten']) && isset($_POST['penulis'])) {
+    $result = $newsController->store(
         $_POST['judul'],
+        $_POST['penulis'],
         $_POST['konten'],
-        $_POST['penulis']
+        $_FILES['gambar']
     );
 } else if(isset($_POST['store']) && isset($_POST['konten']) && isset($_POST['penulis'])) {
     $newsController->update(
