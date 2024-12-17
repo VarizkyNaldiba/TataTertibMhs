@@ -19,7 +19,14 @@ if ($_SESSION['user_type'] === 'mahasiswa') {
     header("Location: pelanggaranpage.php");
     exit();
 }
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']);
+} else {
+    $id = 0;
+}
 
+$pelanggar = new PelanggarController();
+$Detailpelanggar = $pelanggar->getDetailPelanggar($id);
 // Ambil data user dari session
 $userData = $_SESSION['user_data'];
 

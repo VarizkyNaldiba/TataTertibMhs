@@ -47,6 +47,10 @@ class PelanggaranController {
     public function getNotifikasiDosen($idDosen) {
         return $this->pelanggaranModel->getNotifikasiDosen($idDosen);
     }
+
+    public function getDetailPelanggar($id){
+        
+    }
 }
 
 ?>

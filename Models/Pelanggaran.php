@@ -29,6 +29,10 @@ class Pelanggaran {
         return $result;
     }
 
+    public function getUpdatePelanggar($id) {
+        // $query = "SELECT * FROM v_DosenMelaporkan WHERE nidn = ?";
+    }
+
     public function simpanDetailPelanggaran($nidn_dosen, $id_tata_tertib, $nim_mahasiswa, $id_sanksi, $detail_pelanggaran, $tugas_khusus, $surat, $status, $status_tugas) {
         try {
             $query = "EXEC sp_InsertDetailPelanggaran 
