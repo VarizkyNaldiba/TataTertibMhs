@@ -338,50 +338,64 @@ BEGIN
     END CATCH
 END;
 
--- Pengecekan tugas oleh DPA
-CREATE PROCEDURE sp_TugasSelesai
-    @id_detail INT
+-- Update laporan
+CREATE PROCEDURE sp_editLaporan
+    @id_detail_pelanggaran INT,
+    @id_tata_tertib INT = NULL,
+    @id_sanksi INT = NULL,
+    @tugas_khusus NVARCHAR(MAX) = NULL,
+    @status NVARCHAR(50) = NULL,
+    @updated_by NVARCHAR(100)
 AS
 BEGIN
     BEGIN TRY
         BEGIN TRANSACTION;
 
-        -- Update status tugas di tabel DETAIL_PELANGGARAN
-        UPDATE DETAIL_PELANGGARAN
-        SET status_tugas = 'Selesai'
-        WHERE id_detail = @id_detail;
-
-        -- Deklarasi variabel
-        DECLARE @id_dosen INT, @id_dpa INT, @pesan NVARCHAR(MAX);
-
-        -- Ambil id_dosen dari DETAIL_PELANGGARAN
-        SELECT @id_dosen = id_dosen
-        FROM DETAIL_PELANGGARAN
-        WHERE id_detail = @id_detail;
-
-        -- Ambil id_dpa dari tabel MAHASISWA
-        SELECT @id_dpa = M.id_dpa
-        FROM MAHASISWA M
-        JOIN DETAIL_PELANGGARAN DP ON DP.id_mahasiswa = M.id_mhs
-        WHERE DP.id_detail = @id_detail;
-
-        -- Kirim notifikasi ke dosen pelapor
-        SET @pesan = 'Tugas khusus telah selesai diperiksa oleh DPA.';
-        INSERT INTO NOTIFIKASI (id_dosen, id_detail_pelanggaran, pesan, status, role_penerima)
-        VALUES (@id_dosen, @id_detail, @pesan, 'unread', 'dosen');
-
-        -- Kirim notifikasi ke DPA
-        IF @id_dpa IS NOT NULL
+        -- Periksa apakah ID detail pelanggaran ada
+        IF NOT EXISTS (
+            SELECT 1
+            FROM DETAIL_PELANGGARAN
+            WHERE id_detail_pelanggaran = @id_detail_pelanggaran
+        )
         BEGIN
-            INSERT INTO NOTIFIKASI (id_dosen, id_detail_pelanggaran, pesan, status, role_penerima)
-            VALUES (@id_dpa, @id_detail, @pesan, 'unread', 'dosen');
+            THROW 50001, 'Data detail pelanggaran tidak ditemukan.', 1;
+        END
+
+        -- Update data detail pelanggaran
+        UPDATE DETAIL_PELANGGARAN
+        SET 
+            id_tata_tertib = ISNULL(@id_tata_tertib, id_tata_tertib),
+            id_sanksi = ISNULL(@id_sanksi, id_sanksi),
+            tugas_khusus = ISNULL(@tugas_khusus, tugas_khusus),
+            status = ISNULL(@status, status),
+            updated_at = GETDATE(),
+            updated_by = @updated_by
+        WHERE id_detail_pelanggaran = @id_detail_pelanggaran;
+
+        -- Berikan notifikasi jika status berubah menjadi "Selesai"
+        IF @status = 'Selesai'
+        BEGIN
+            DECLARE @id_mahasiswa INT;
+
+            -- Ambil ID mahasiswa dari pelanggaran yang diedit
+            SELECT @id_mahasiswa = id_mahasiswa
+            FROM DETAIL_PELANGGARAN
+            WHERE id_detail_pelanggaran = @id_detail_pelanggaran;
+
+            -- Masukkan notifikasi untuk mahasiswa
+            INSERT INTO NOTIFIKASI (id_mahasiswa, pesan, created_at)
+            VALUES (
+                @id_mahasiswa,
+                'Laporan pelanggaran Anda telah selesai diproses.',
+                GETDATE()
+            );
         END
 
         COMMIT TRANSACTION;
     END TRY
     BEGIN CATCH
-        IF @@TRANCOUNT > 0
-            ROLLBACK TRANSACTION;
+        ROLLBACK TRANSACTION;
+        -- Tangani error
         THROW;
     END CATCH
 END;
