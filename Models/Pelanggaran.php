@@ -30,7 +30,17 @@ class Pelanggaran {
     }
 
     public function getUpdatePelanggar($id) {
-        // $query = "SELECT * FROM v_DosenMelaporkan WHERE nidn = ?";
+        $query = "SELECT dp.*, m.nim, m.nama_lengkap, m.angkatan
+              FROM DETAIL_PELANGGARAN dp
+              JOIN MAHASISWA m ON dp.id_mahasiswa = m.id_mhs
+              JOIN TATA_TERTIB tt ON dp.id_tata_tertib = tt.id_tata_tertib
+              JOIN SANKSI s ON dp.id_sanksi = s.id_sanksi
+              WHERE dp.id_detail = ?";
+    
+        $stmt = $this->connect->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function simpanDetailPelanggaran($nidn_dosen, $id_tata_tertib, $nim_mahasiswa, $id_sanksi, $detail_pelanggaran, $tugas_khusus, $surat, $status, $status_tugas) {
@@ -64,6 +74,39 @@ class Pelanggaran {
             return true; // Return true if a row was affected
         } catch (PDOException $e) {
             error_log('Error in simpanDetailPelanggaran: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function updateDetailPelanggaran($id_detail, $id_tata_tertib, $nim_mahasiswa, $id_sanksi, $detail_pelanggaran, $tugas_khusus, $status, $status_tugas){
+        try {
+            $query = "EXEC sp_editLaporan 
+                @id_detail = :id_detail,
+                @id_tata_tertib = :id_tata_tertib,
+                @nim_mahasiswa = :nim_mahasiswa,
+                @id_sanksi = :id_sanksi,
+                @tugas_khusus = :tugas_khusus,
+                @detail_pelanggaran = :detail_pelanggaran,
+                @status = :status,
+                @status_tugas = :status_tugas";
+            
+            $stmt = $this->connect->prepare($query);
+    
+            $params = [
+                ':id_detail' => $id_detail,
+                ':id_tata_tertib' => $id_tata_tertib,
+                ':nim_mahasiswa' => $nim_mahasiswa,
+                ':id_sanksi' => $id_sanksi,
+                ':tugas_khusus' => $tugas_khusus,
+                ':detail_pelanggaran' => $detail_pelanggaran,
+                ':status' => $status,
+                ':status_tugas' => $status_tugas
+            ];
+    
+            $stmt->execute($params);
+            return true; // Return true if a row was affected
+        } catch (PDOException $e) {
+            error_log('Error in updateDetailPelanggaran: ' . $e->getMessage());
             return false;
         }
     }

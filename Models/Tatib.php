@@ -57,5 +57,13 @@ class Tatib {
             return false;
         }
     }
+
+    public function getTatibById($id_tata_tertib) {
+        $query = "SELECT * FROM TATA_TERTIB WHERE id_tata_tertib = ?";
+        $stmt = $this->connect->prepare($query);
+        $stmt->bindParam(1, $id_tata_tertib, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
 ?>
