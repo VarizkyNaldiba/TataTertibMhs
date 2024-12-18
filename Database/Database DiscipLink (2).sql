@@ -338,53 +338,92 @@ BEGIN
     END CATCH
 END;
 
--- Pengecekan tugas oleh DPA
-CREATE PROCEDURE sp_TugasSelesai
-    @id_detail INT
+-- Update laporan
+CREATE PROCEDURE sp_editLaporan
+    @id_detail INT,
+    @id_tata_tertib INT,
+    @nim_mahasiswa VARCHAR(20),
+    @id_sanksi INT,
+    @tugas_khusus VARCHAR(255) = NULL,
+    @detail_pelanggaran VARCHAR(MAX) = NULL,
+    @status VARCHAR(50),
+    @status_tugas VARCHAR(50)
 AS
 BEGIN
+    SET NOCOUNT ON;
+
+    -- Cek keberadaan Detail Pelanggaran
+    IF NOT EXISTS (SELECT 1 FROM DETAIL_PELANGGARAN WHERE id_detail = @id_detail)
+    BEGIN
+        RAISERROR('Detail pelanggaran tidak ditemukan', 16, 1);
+        RETURN;
+    END
+
+    -- Cek keberadaan mahasiswa
+    DECLARE @id_mahasiswa INT;
+    SELECT @id_mahasiswa = id_mhs 
+    FROM MAHASISWA 
+    WHERE nim = @nim_mahasiswa;
+
+    IF @id_mahasiswa IS NULL
+    BEGIN
+        RAISERROR('Mahasiswa dengan NIM tersebut tidak ditemukan', 16, 1);
+        RETURN;
+    END
+
+    -- Validasi tata tertib
+    IF NOT EXISTS (SELECT 1 FROM TATA_TERTIB WHERE id_tata_tertib = @id_tata_tertib)
+    BEGIN
+        RAISERROR('Tata tertib tidak valid', 16, 1);
+        RETURN;
+    END
+
+    -- Validasi sanksi
+    IF NOT EXISTS (SELECT 1 FROM SANKSI WHERE id_sanksi = @id_sanksi)
+    BEGIN
+        RAISERROR('Sanksi tidak valid', 16, 1);
+        RETURN;
+    END
+
+    -- Validasi status
+    IF @status NOT IN ('pending', 'proses', 'selesai')
+    BEGIN
+        RAISERROR('Status tidak valid', 16, 1);
+        RETURN;
+    END
+
     BEGIN TRY
         BEGIN TRANSACTION;
 
-        -- Update status tugas di tabel DETAIL_PELANGGARAN
+        -- Update detail pelanggaran
         UPDATE DETAIL_PELANGGARAN
-        SET status_tugas = 'Selesai'
+        SET 
+            id_tata_tertib = @id_tata_tertib,
+            id_mahasiswa = @id_mahasiswa,
+            id_sanksi = @id_sanksi,
+            tugas_khusus = @tugas_khusus,
+            detail_pelanggaran = @detail_pelanggaran,
+            status = @status,
+            status_tugas = @status_tugas
         WHERE id_detail = @id_detail;
-
-        -- Deklarasi variabel
-        DECLARE @id_dosen INT, @id_dpa INT, @pesan NVARCHAR(MAX);
-
-        -- Ambil id_dosen dari DETAIL_PELANGGARAN
-        SELECT @id_dosen = id_dosen
-        FROM DETAIL_PELANGGARAN
-        WHERE id_detail = @id_detail;
-
-        -- Ambil id_dpa dari tabel MAHASISWA
-        SELECT @id_dpa = M.id_dpa
-        FROM MAHASISWA M
-        JOIN DETAIL_PELANGGARAN DP ON DP.id_mahasiswa = M.id_mhs
-        WHERE DP.id_detail = @id_detail;
-
-        -- Kirim notifikasi ke dosen pelapor
-        SET @pesan = 'Tugas khusus telah selesai diperiksa oleh DPA.';
-        INSERT INTO NOTIFIKASI (id_dosen, id_detail_pelanggaran, pesan, status, role_penerima)
-        VALUES (@id_dosen, @id_detail, @pesan, 'unread', 'dosen');
-
-        -- Kirim notifikasi ke DPA
-        IF @id_dpa IS NOT NULL
-        BEGIN
-            INSERT INTO NOTIFIKASI (id_dosen, id_detail_pelanggaran, pesan, status, role_penerima)
-            VALUES (@id_dpa, @id_detail, @pesan, 'unread', 'dosen');
-        END
 
         COMMIT TRANSACTION;
+
+        -- Return ID detail pelanggaran yang diupdate
+        SELECT @id_detail AS id_detail;
     END TRY
     BEGIN CATCH
         IF @@TRANCOUNT > 0
             ROLLBACK TRANSACTION;
-        THROW;
+
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        DECLARE @ErrorSeverity INT = ERROR_SEVERITY();
+        DECLARE @ErrorState INT = ERROR_STATE();
+
+        RAISERROR(@ErrorMessage, @ErrorSeverity, @ErrorState);
     END CATCH
 END;
+
 drop table MAHASISWA;
 --
 drop view v_DosenMelaporkan;

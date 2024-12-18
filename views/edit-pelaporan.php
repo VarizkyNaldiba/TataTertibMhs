@@ -19,13 +19,30 @@ if ($_SESSION['user_type'] === 'mahasiswa') {
     header("Location: pelanggaranpage.php");
     exit();
 }
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']);
+} else {
+    $id = 0;
+}
 
+$pelanggar = new PelanggaranController();
+$detailPelanggar = $pelanggar->getDetailPelanggar($id);
 // Ambil data user dari session
 $userData = $_SESSION['user_data'];
 
 $tatibController = new TatibController();
 $tatibData = $tatibController->ReadTatib();
 $sanksiData = $tatibController->ReadSanksi();
+
+// semester
+$detailPelanggar['angkatan'];
+$currentYear = date('Y');
+$currentMonth = date('n');
+$yearDiff = $currentYear - $detailPelanggar['angkatan'];
+$semester = ($yearDiff * 2);
+if($currentMonth >= 8) { // Semester ganjil dimulai sekitar Agustus
+    $semester += 1;
+}
 ?>
 
 <!DOCTYPE html>
@@ -79,35 +96,36 @@ $sanksiData = $tatibController->ReadSanksi();
         <div class="form-container">
             <form id="pelanggaranForm" method="POST" action="../Request/Handler_Pelaporan.php">
                 <!-- Added method POST -->
+                <input type="hidden" name="id_detail" value="<?= $id ?>">
                 <!-- NIM -->
                 <div class="form-group">
                     <label for="nim">NIM</label>
-                    <input type="text" id="nim" name="nim" placeholder="NIM" required>
+                    <input type="text" id="nim" name="nim" value="<?= htmlspecialchars($detailPelanggar['nim'] ?? '') ?>" required>
                 </div>
 
                 <!-- Nama -->
                 <div class="form-group">
                     <label for="nama">Nama</label>
-                    <input type="text" id="nama" name="nama" placeholder="Nama Lengkap">
+                    <input type="text" id="nama" name="nama" value="<?= htmlspecialchars($detailPelanggar['nama_lengkap'] ?? '') ?>" readonly>
                 </div>
 
                 <!-- Semester -->
                 <div class="form-group">
                     <label for="semester">Semester</label>
-                    <input type="text" id="semester" name="semester" placeholder="Semester">
+                    <input type="text" id="semester" name="semester" placeholder="Semester" value="<?= htmlspecialchars($semester ?? '') ?>" readonly>
                 </div>
 
                 <!-- Tingkat -->
                 <div class="form-group">
                     <label for="tingkat">Tingkat</label>
                     <select id="tingkat" name="tingkat" required>
-                        <option value="">Pilih Tingkat</option>
-                        <option value="I">Tingkat 1</option>
+                    <option value="">Pilih Tingkat</option>
+                    <option value="I">Tingkat 1</option>
                         <option value="II">Tingkat 2</option>
                         <option value="III">Tingkat 3</option>
                         <option value="IV">Tingkat 4</option>
                         <option value="V">Tingkat 5</option>
-                    </select>
+                </select>
                 </div>
 
                 <!-- Jenis Pelanggaran -->
@@ -140,18 +158,18 @@ $sanksiData = $tatibController->ReadSanksi();
                 <!-- Deskripsi Pelanggaran -->
                 <div class="form-group">
                     <label for="deskripsiPelanggaran">Deskripsi Pelanggaran</label>
-                    <textarea id="deskripsiPelanggaran" name="deskripsiPelanggaran" required></textarea>
+                    <textarea id="deskripsiPelanggaran" name="deskripsiPelanggaran" required><?= htmlspecialchars($detailPelanggar['detail_pelanggaran'] ?? '') ?></textarea>
                 </div>
 
                 <!-- Deskripsi Tugas Khusus -->
                 <div class="form-group" id="deskripsiTugas-container" style="display: none;">
                     <label for="deskripsiTugas">Deskripsi Tugas Khusus</label>
-                    <textarea id="deskripsiTugas" name="deskripsiTugas"></textarea>
+                    <textarea id="deskripsiTugas" name="deskripsiTugas"><?= htmlspecialchars($detailPelanggar['tugas_khusus'] ?? '') ?></textarea>
                 </div>
 
                 <!-- Buttons -->
                 <div class="form-buttons">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" name="update" class="btn btn-primary">Simpan</button>
                     <button onclick="showConfirmation()" type="button" class="btn btn-secondary">Batal</button>
                 </div>
             </form>
