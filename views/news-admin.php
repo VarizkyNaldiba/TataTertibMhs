@@ -42,7 +42,9 @@ $newsData = $newsController->AdminNews($id_admin);
     <title>Home Page</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/news-admin.css">
@@ -51,30 +53,29 @@ $newsData = $newsController->AdminNews($id_admin);
 
 <body>
     <div class="sidebar">
-    <img class="logo" src="../img/logo aja.png" alt="logo">
+        <img class="logo" src="../img/logo aja.png" alt="logo">
         <div class="logo-separator"></div>
         <ul>
-        <li><a href="home-admin.php"><i class="fa-solid fa-house"></i></a></li>
+            <li><a href="home-admin.php"><i class="fa-solid fa-house"></i></a></li>
             <li><a href="listTatib-admin.php"><i class="fa-solid fa-book"></i></a></li>
             <li class="active"><a href="news-admin.php"><i class="fa-solid fa-newspaper"></i></a></li>
             <li class="logout"><a href="../?logout=true"><i class="fa-solid fa-right-from-bracket"></i></a></li>
         </ul>
     </div>
-<div class="content">
-    <div class="header"></div>
-    <div class="judul">
-        <h1>DISCIPLINK NEWS</h1>
-    </div>
+    <div class="content">
+        <div class="header"></div>
+        <div class="judul">
+            <h1>DISCIPLINK NEWS</h1>
+        </div>
 
-    <button class="add-button" id="addButton">Tambah</button>
-    <div class="table-container">
+        <button class="add-button" id="addButton" onclick="window.location.href='tambah-berita.php'">Tambah</button>
+        <div class="table-container">
 
     
   <table>
     <thead>
       <tr>
         <th>Judul</th>
-        <th>gambar</th>
         <th>Konten</th>
         <th>Penulis</th>
         <th>Aksi</th>
@@ -85,13 +86,6 @@ $newsData = $newsController->AdminNews($id_admin);
                 <?php foreach ($newsData as $news) :?>
                 <tr>
                     <td><?= $news['judul']?></td>
-                    <td>
-                    <?php if (!empty($news['gambar'])): ?>
-                        <img src="../<?= $news['gambar'] ?>" alt="News Image" style="max-width: 100px;">
-                        <?php else :?>
-                        <p>Tidak ada gambar</p>
-                    <?php endif; ?>
-                    </td>
                     <td><?= $news['konten']?></td>
                     <td><?= $news['penulis_id']?></td>
                     <td class="button-cell">
@@ -100,21 +94,24 @@ $newsData = $newsController->AdminNews($id_admin);
                                 data-judul="<?= htmlspecialchars($news['judul']) ?>" 
                                 data-konten="<?= htmlspecialchars($news['konten']) ?>">
                                 <i class="fa-solid fa-pen-to-square"></i>
-                        </button> 
-                    <!--tombol delete --> 
-                    <form action="../Request/Handler_News.php" method="post">
-                        <input type="hidden" name="news_id" value="<?= $news['id_news'] ?>">
-                        <button class="delete" id="delete" name="delete" onclick="return confirm('Apakah anda yakin ingin menghapus?');"><i class="fa-solid fa-trash"></i></button></td>
-                    </form>
-                </tr>
-                <?php endforeach;?>
-        <?php endif;?>
-    </tbody>
-  </table>
-</div>
+                            </button>
+                            <!--tombol delete -->
+                            <form action="../Request/Handler_News.php" method="post">
+                                <input type="hidden" name="news_id" value="<?= $news['id_news'] ?>">
+                                <button class="delete" id="delete" name="delete"
+                                    onclick="return confirm('Apakah anda yakin ingin menghapus?');"><i
+                                        class="fa-solid fa-trash"></i></button>
+                        </td>
+                        </form>
+                    </tr>
+                    <?php endforeach;?>
+                    <?php endif;?>
+                </tbody>
+            </table>
+        </div>
 
-<!-- Modal Edit Berita -->
-<div id="editBeritaModal" class="modal">
+        <!-- Modal Edit Berita -->
+        <!-- <div id="editBeritaModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Edit Berita</h2>
@@ -136,9 +133,9 @@ $newsData = $newsController->AdminNews($id_admin);
             <button type="submit" class="save-button">Simpan</button>
         </form>
     </div>
-</div>
+</div> -->
 
-<!-- Modal Tambah Berita -->
+        <!-- Modal Tambah Berita
 <div id="insertBeritaModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
@@ -159,29 +156,33 @@ $newsData = $newsController->AdminNews($id_admin);
             <button type="submit" class="save-button" name="store">Simpan</button>
         </form>
     </div>
-</div>
+</div> -->
 
 
-<!-- javascript -->
-<script src="../js/script-news.js"></script>
-</div>
+        <!-- javascript -->
+        <script src="../js/script-news.js"></script>
+    </div>
 </body>
 <footer class="footer">
-        <div class="footer-left">
+    <div class="footer-left">
         <img class="footer-logo" src="../img/logo aja.png" alt="Logo">
-            <img class ="footer-logo" src="../img/logo.png" alt="logo polinema">
-        </div>
-        <div class="footer-center">
-            <p>Jl. Soekarno Hatta No.9, Jatimulyo, Kec. Lowokwaru, <br>Kota Malang, Jawa Timur 65141</p>
-            <p><a href="tel:(0341)404424" class="footer-link">(0341) 404424</a></p>
-        </div>
-        <div class="footer-right">
-            <a href="https://instagram.com" class="social-link"><i class="fa-brands fa-instagram" alt="Instagram" class="social-icon"></i></a>
-            <a href="https://wa.me/1234567890" class="social-link"><i class="fa-brands fa-whatsapp" alt="WhatsApp" class="social-icon"></i></a>
-            <a href="https://wa.me/1234567890" class="social-link"><i class="fa-solid fa-envelope" alt="Email" class="social-icon"></i></a>
-        </div>
-        <div class="footer-bottom">
-            <p>© Copyright 2024 web Tatib. All Rights Reserved.</p>
-        </div>
+        <img class="footer-logo" src="../img/logo.png" alt="logo polinema">
+    </div>
+    <div class="footer-center">
+        <p>Jl. Soekarno Hatta No.9, Jatimulyo, Kec. Lowokwaru, <br>Kota Malang, Jawa Timur 65141</p>
+        <p><a href="tel:(0341)404424" class="footer-link">(0341) 404424</a></p>
+    </div>
+    <div class="footer-right">
+        <a href="https://instagram.com" class="social-link"><i class="fa-brands fa-instagram" alt="Instagram"
+                class="social-icon"></i></a>
+        <a href="https://wa.me/1234567890" class="social-link"><i class="fa-brands fa-whatsapp" alt="WhatsApp"
+                class="social-icon"></i></a>
+        <a href="https://wa.me/1234567890" class="social-link"><i class="fa-solid fa-envelope" alt="Email"
+                class="social-icon"></i></a>
+    </div>
+    <div class="footer-bottom">
+        <p>© Copyright 2024 web Tatib. All Rights Reserved.</p>
+    </div>
 </footer>
+
 </html>
