@@ -71,28 +71,32 @@ $newsData = $newsController->AdminNews($id_admin);
         <button class="add-button" id="addButton" onclick="window.location.href='tambah-berita.php'">Tambah</button>
         <div class="table-container">
 
-    
-  <table>
-    <thead>
-      <tr>
-        <th>Judul</th>
-        <th>Konten</th>
-        <th>Penulis</th>
-        <th>Aksi</th>
-      </tr>
-    </thead>
-    <tbody>
-        <?php if ($newsData) :?>
-                <?php foreach ($newsData as $news) :?>
-                <tr>
-                    <td><?= $news['judul']?></td>
-                    <td><?= $news['konten']?></td>
-                    <td><?= $news['penulis_id']?></td>
-                    <td class="button-cell">
-                         <button class="edit-button" 
-                                data-id="<?= $news['id_news'] ?>" 
-                                data-judul="<?= htmlspecialchars($news['judul']) ?>" 
-                                data-konten="<?= htmlspecialchars($news['konten']) ?>">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Judul</th>
+                        <th>Konten</th>
+                        <th>Penulis</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if ($newsData) :?>
+                    <?php foreach ($newsData as $news) :?>
+                    <tr>
+                        <td>
+                            <?= $news['judul']?>
+                        </td>
+                        <td>
+                            <?= $news['konten']?>
+                        </td>
+                        <td>
+                            <?= $news['penulis_id']?>
+                        </td>
+                        <td class="button-cell">
+                            <button class="edit-button"
+                                onclick="window.location.href='edit-berita.php?id=<?= htmlspecialchars($news['id_news']) ?>&judul=<?= urlencode($news['judul']) ?>&konten=<?= urlencode($news['konten']) ?>'">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
                             <!--tombol delete -->
