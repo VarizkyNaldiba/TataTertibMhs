@@ -41,6 +41,10 @@ class TatibController {
     public function delete($id) {
         $result = $this->tatibModel->deleteTatib($id);
     }
+
+    public function getTatibDetail($id_tata_tertib) {
+        return $this->tatibModel->getTatibById($id_tata_tertib);
+    }
 }
 
 ?>

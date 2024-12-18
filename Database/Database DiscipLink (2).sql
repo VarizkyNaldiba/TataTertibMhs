@@ -340,65 +340,90 @@ END;
 
 -- Update laporan
 CREATE PROCEDURE sp_editLaporan
-    @id_detail_pelanggaran INT,
-    @id_tata_tertib INT = NULL,
-    @id_sanksi INT = NULL,
-    @tugas_khusus NVARCHAR(MAX) = NULL,
-    @status NVARCHAR(50) = NULL,
-    @updated_by NVARCHAR(100)
+    @id_detail INT,
+    @id_tata_tertib INT,
+    @nim_mahasiswa VARCHAR(20),
+    @id_sanksi INT,
+    @tugas_khusus VARCHAR(255) = NULL,
+    @detail_pelanggaran VARCHAR(MAX) = NULL,
+    @status VARCHAR(50),
+    @status_tugas VARCHAR(50)
 AS
 BEGIN
+    SET NOCOUNT ON;
+
+    -- Cek keberadaan Detail Pelanggaran
+    IF NOT EXISTS (SELECT 1 FROM DETAIL_PELANGGARAN WHERE id_detail = @id_detail)
+    BEGIN
+        RAISERROR('Detail pelanggaran tidak ditemukan', 16, 1);
+        RETURN;
+    END
+
+    -- Cek keberadaan mahasiswa
+    DECLARE @id_mahasiswa INT;
+    SELECT @id_mahasiswa = id_mhs 
+    FROM MAHASISWA 
+    WHERE nim = @nim_mahasiswa;
+
+    IF @id_mahasiswa IS NULL
+    BEGIN
+        RAISERROR('Mahasiswa dengan NIM tersebut tidak ditemukan', 16, 1);
+        RETURN;
+    END
+
+    -- Validasi tata tertib
+    IF NOT EXISTS (SELECT 1 FROM TATA_TERTIB WHERE id_tata_tertib = @id_tata_tertib)
+    BEGIN
+        RAISERROR('Tata tertib tidak valid', 16, 1);
+        RETURN;
+    END
+
+    -- Validasi sanksi
+    IF NOT EXISTS (SELECT 1 FROM SANKSI WHERE id_sanksi = @id_sanksi)
+    BEGIN
+        RAISERROR('Sanksi tidak valid', 16, 1);
+        RETURN;
+    END
+
+    -- Validasi status
+    IF @status NOT IN ('pending', 'proses', 'selesai')
+    BEGIN
+        RAISERROR('Status tidak valid', 16, 1);
+        RETURN;
+    END
+
     BEGIN TRY
         BEGIN TRANSACTION;
 
-        -- Periksa apakah ID detail pelanggaran ada
-        IF NOT EXISTS (
-            SELECT 1
-            FROM DETAIL_PELANGGARAN
-            WHERE id_detail_pelanggaran = @id_detail_pelanggaran
-        )
-        BEGIN
-            THROW 50001, 'Data detail pelanggaran tidak ditemukan.', 1;
-        END
-
-        -- Update data detail pelanggaran
+        -- Update detail pelanggaran
         UPDATE DETAIL_PELANGGARAN
         SET 
-            id_tata_tertib = ISNULL(@id_tata_tertib, id_tata_tertib),
-            id_sanksi = ISNULL(@id_sanksi, id_sanksi),
-            tugas_khusus = ISNULL(@tugas_khusus, tugas_khusus),
-            status = ISNULL(@status, status),
-            updated_at = GETDATE(),
-            updated_by = @updated_by
-        WHERE id_detail_pelanggaran = @id_detail_pelanggaran;
-
-        -- Berikan notifikasi jika status berubah menjadi "Selesai"
-        IF @status = 'Selesai'
-        BEGIN
-            DECLARE @id_mahasiswa INT;
-
-            -- Ambil ID mahasiswa dari pelanggaran yang diedit
-            SELECT @id_mahasiswa = id_mahasiswa
-            FROM DETAIL_PELANGGARAN
-            WHERE id_detail_pelanggaran = @id_detail_pelanggaran;
-
-            -- Masukkan notifikasi untuk mahasiswa
-            INSERT INTO NOTIFIKASI (id_mahasiswa, pesan, created_at)
-            VALUES (
-                @id_mahasiswa,
-                'Laporan pelanggaran Anda telah selesai diproses.',
-                GETDATE()
-            );
-        END
+            id_tata_tertib = @id_tata_tertib,
+            id_mahasiswa = @id_mahasiswa,
+            id_sanksi = @id_sanksi,
+            tugas_khusus = @tugas_khusus,
+            detail_pelanggaran = @detail_pelanggaran,
+            status = @status,
+            status_tugas = @status_tugas
+        WHERE id_detail = @id_detail;
 
         COMMIT TRANSACTION;
+
+        -- Return ID detail pelanggaran yang diupdate
+        SELECT @id_detail AS id_detail;
     END TRY
     BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        -- Tangani error
-        THROW;
+        IF @@TRANCOUNT > 0
+            ROLLBACK TRANSACTION;
+
+        DECLARE @ErrorMessage NVARCHAR(4000) = ERROR_MESSAGE();
+        DECLARE @ErrorSeverity INT = ERROR_SEVERITY();
+        DECLARE @ErrorState INT = ERROR_STATE();
+
+        RAISERROR(@ErrorMessage, @ErrorSeverity, @ErrorState);
     END CATCH
 END;
+
 drop table MAHASISWA;
 --
 drop view v_DosenMelaporkan;

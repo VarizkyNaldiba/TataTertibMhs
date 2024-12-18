@@ -150,7 +150,7 @@ $sanksiData = $tatibController->ReadSanksi();
 
                 <!-- Buttons -->
                 <div class="form-buttons">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" name="store" class="btn btn-primary">Simpan</button>
                     <button onclick="showConfirmation()" type="button" class="btn btn-secondary">Batal</button>
                 </div>
             </form>
