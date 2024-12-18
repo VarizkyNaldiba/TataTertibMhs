@@ -99,7 +99,7 @@ $pelanggaranDetail = $pelanggaranController->getDetailPelanggaranMahasiswa($nim)
                                 <td><?= htmlspecialchars($detail['tingkat']) ?></td>
                                 <td><?= htmlspecialchars($detail['sanksi']) ?></td>
                                 <td><?= htmlspecialchars($detail['nama_lengkap']) ?></td>
-                                <td><?= htmlspecialchars($detail['tugas_khusus']) ?></td>
+                                <td><?= htmlspecialchars($detail['tugas_khusus'] ?? 'Tidak Ada Tugas') ?></td>
                                 <td><a href="<?= htmlspecialchars('../document/SURAT PERNYATAAN TI.pdf') ?>" target="_blank">Unduh File</a></td>
                                 <td><?= htmlspecialchars($detail['poin']) ?></td>
                                 <td><?= htmlspecialchars($detail['status']) ?></td>

@@ -38,6 +38,29 @@ class PelanggaranController {
             $status,
             $status_tugas
         );
+        return $result; // Tambahkan return
+    }
+
+    public function updateDetailPelanggaran($id_detail, $id_tata_tertib, $nim, $id_sanksi, $detail_pelanggaran, $tugas_khusus, $status, $status_tugas){
+        if (!$id_tata_tertib || !$id_detail || !$nim) {
+            return [
+                'success' => false, 
+                'message' => 'ID Tata Tertib, ID detail, dan NIM harus diisi'
+            ];
+        }
+
+        // Simpan detail pelanggaran menggunakan model
+        $result = $this->pelanggaranModel->updateDetailPelanggaran(
+            $id_detail, 
+            $id_tata_tertib, 
+            $nim, 
+            $id_sanksi, 
+            $detail_pelanggaran, 
+            $tugas_khusus, 
+            $status,
+            $status_tugas
+        );
+        return $result; // Tambahkan return
     }
     
     public function getNotifikasiMahasiswa($idMahasiswa) {
@@ -49,7 +72,7 @@ class PelanggaranController {
     }
 
     public function getDetailPelanggar($id){
-        
+        return $this->pelanggaranModel->getUpdatePelanggar($id);
     }
 }
 
