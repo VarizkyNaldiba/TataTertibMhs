@@ -50,7 +50,7 @@ class NewsController {
     /**
      * Tambah berita.
      */
-    public function store($judul, $konten, $penulis_id, $gambar = null) {
+    public function store($gambar, $judul, $konten, $penulis_id) {
         // Validasi input
         if (empty($judul) || empty($penulis_id) || empty($konten)) {
             throw new Exception("Semua input (judul, penulis, konten) harus diisi.");
@@ -93,7 +93,7 @@ class NewsController {
     /**
      * Update berita.
      */
-    public function update($id, $judul, $konten, $gambar = null) {
+    public function update($id, $judul, $konten, $gambarPath = null) {
         try {
             // Validasi ID berita
             if (empty($id)) {
@@ -110,31 +110,12 @@ class NewsController {
             }
     
             // Tentukan gambar yang akan digunakan
-            $gambarPath = $gambar['tmp_name'] ? $gambar['tmp_name'] : $oldNews['gambar'];
-    
-            // Proses unggah gambar baru jika ada
-            if (!empty($gambar['name'])) {
-                $uploadDir = '../document/news/'; // Direktori upload
-                $fileName = time() . '_' . basename($gambar['name']);
-                $uploadFile = $uploadDir . $fileName;
-    
-                // Cek tipe file
-                $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-                if (!in_array($gambar['type'], $allowedTypes)) {
-                    throw new Exception("Format gambar tidak didukung.");
-                }
-    
-                // Pindahkan file ke direktori tujuan
-                if (!move_uploaded_file($gambar['tmp_name'], $uploadFile)) {
-                    throw new Exception("Gagal mengunggah gambar baru.");
-                }
-                $gambarPath = 'document/news/' . $fileName;
-            }
+            $gambar = $gambarPath ?: $oldNews['gambar'];
     
             // Update data berita
             $query = "UPDATE news SET judul = ?, konten = ?, gambar = ? WHERE id_news = ?";
             $stmt = $this->connect->prepare($query);
-            $stmt->execute([$judul, $konten, $gambarPath, $id]);
+            $stmt->execute([$judul, $konten, $gambar, $id]);
     
             return ['status' => 'success', 'message' => 'Berita berhasil diperbarui.'];
         } catch (Exception $e) {

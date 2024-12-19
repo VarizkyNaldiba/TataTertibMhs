@@ -26,7 +26,7 @@ try {
         }
 
         // Panggil method store()
-        $result = $newsController->store($judul, $konten, $penulis);
+        $result = $newsController->store($gambar, $judul, $konten, $penulis);
         var_dump($result);
         $_SESSION['message'] = $result['message'] ?? 'Berita berhasil disimpan.';
         $_SESSION['status'] = $result['status'] ?? 'success';
