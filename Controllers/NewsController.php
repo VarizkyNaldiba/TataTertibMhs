@@ -48,58 +48,52 @@ class NewsController {
     }
 
     /**
-     * Ambil berita berdasarkan ID penulis (admin).
+     * Tambah berita.
      */
-    public function store($judul, $penulis, $konten, $gambar)
-    {
+    public function store($judul, $konten, $penulis_id, $gambar = null) {
         // Validasi input
-        if (empty($judul) || empty($penulis) || empty($konten)) {
-            die("Semua input harus diisi.");
+        if (empty($judul) || empty($penulis_id) || empty($konten)) {
+            throw new Exception("Semua input (judul, penulis, konten) harus diisi.");
         }
     
         // Proses gambar jika diunggah
+        $gambarPath = null;
         if (!empty($gambar['name'])) {
             $uploadDir = '../document/news/'; // Direktori upload
-            $uploadFile = $uploadDir . basename($gambar['name']);
+            $fileName = time() . '_' . basename($gambar['name']);
+            $uploadFile = $uploadDir . $fileName;
     
             // Cek tipe file
             $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
             if (!in_array($gambar['type'], $allowedTypes)) {
-                die("Format gambar tidak didukung.");
+                throw new Exception("Format gambar tidak didukung.");
             }
     
             // Pindahkan file yang diunggah
             if (!move_uploaded_file($gambar['tmp_name'], $uploadFile)) {
-                die("Gagal mengunggah gambar.");
+                throw new Exception("Gagal mengunggah gambar.");
             }
     
             // Simpan path gambar ke database
-            $gambarPath = 'document/news/' . basename($gambar['name']);
-        } else {
-            $gambarPath = null; // Jika tidak ada gambar
-        }
-    
-        // Cek ID admin berdasarkan nama_admin (penulis)
-        try {
-            $stmt = $this->connect->prepare("SELECT id_admin FROM ADMIN WHERE nama_admin = ?");
-            $stmt->execute([$penulis]);
-            $penulis_id = $stmt->fetchColumn();
-    
-            // Jika admin tidak ditemukan, kembalikan pesan error
-            if (!$penulis_id) {
-                die("Admin tidak ditemukan. Pastikan nama admin benar.");
-            }
-        } catch (PDOException $e) {
-            die("Error: " . $e->getMessage());
+            $gambarPath = 'document/news/' . $fileName;
         }
     
         // Query untuk menyimpan berita
-        $query = "INSERT INTO news (judul, penulis_id, konten, gambar) VALUES (?, ?, ?, ?)";
-        $stmt = $this->connect->prepare($query);
-        $stmt->execute([$judul, $penulis_id, $konten, $gambarPath]);
+        try {
+            $query = "INSERT INTO news (judul, penulis_id, konten, gambar) VALUES (?, ?, ?, ?)";
+            $stmt = $this->connect->prepare($query);
+            $stmt->execute([$judul, $penulis_id, $konten, $gambarPath]);
+
+            return ['status' => 'success', 'message' => 'Berita berhasil disimpan.'];
+        } catch (PDOException $e) {
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        }
     }
 
-    public function update($id, $judul, $konten, $gambarPath = null) {
+    /**
+     * Update berita.
+     */
+    public function update($id, $judul, $konten, $gambar = null) {
         try {
             // Validasi ID berita
             if (empty($id)) {
@@ -116,12 +110,31 @@ class NewsController {
             }
     
             // Tentukan gambar yang akan digunakan
-            $gambar = $gambarPath ?: $oldNews['gambar'];
+            $gambarPath = $gambar['tmp_name'] ? $gambar['tmp_name'] : $oldNews['gambar'];
+    
+            // Proses unggah gambar baru jika ada
+            if (!empty($gambar['name'])) {
+                $uploadDir = '../document/news/'; // Direktori upload
+                $fileName = time() . '_' . basename($gambar['name']);
+                $uploadFile = $uploadDir . $fileName;
+    
+                // Cek tipe file
+                $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+                if (!in_array($gambar['type'], $allowedTypes)) {
+                    throw new Exception("Format gambar tidak didukung.");
+                }
+    
+                // Pindahkan file ke direktori tujuan
+                if (!move_uploaded_file($gambar['tmp_name'], $uploadFile)) {
+                    throw new Exception("Gagal mengunggah gambar baru.");
+                }
+                $gambarPath = 'document/news/' . $fileName;
+            }
     
             // Update data berita
             $query = "UPDATE news SET judul = ?, konten = ?, gambar = ? WHERE id_news = ?";
             $stmt = $this->connect->prepare($query);
-            $stmt->execute([$judul, $konten, $gambar, $id]);
+            $stmt->execute([$judul, $konten, $gambarPath, $id]);
     
             return ['status' => 'success', 'message' => 'Berita berhasil diperbarui.'];
         } catch (Exception $e) {
@@ -133,23 +146,27 @@ class NewsController {
      * Hapus berita berdasarkan ID.
      */
     public function delete($id) {
-        // Ambil path gambar untuk dihapus
-        $news = $this->newsModel->getNewsById($id);
-        if ($news && !empty($news['gambar'])) {
-            $filePath = __DIR__ . '/../' . $news['gambar'];
-            if (file_exists($filePath)) {
-                unlink($filePath); // Hapus file gambar
+        try {
+            // Ambil path gambar untuk dihapus
+            $stmt = $this->connect->prepare("SELECT gambar FROM news WHERE id_news = ?");
+            $stmt->execute([$id]);
+            $news = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($news && !empty($news['gambar'])) {
+                $filePath = __DIR__ . '/../' . $news['gambar'];
+                if (file_exists($filePath)) {
+                    unlink($filePath); // Hapus file gambar
+                }
             }
-        }
 
-        // Hapus berita dari database
-        $result = $this->newsModel->deleteNews($id);
+            // Hapus berita dari database
+            $query = "DELETE FROM news WHERE id_news = ?";
+            $stmt = $this->connect->prepare($query);
+            $stmt->execute([$id]);
 
-        if ($result) {
             return ['status' => 'success', 'message' => 'Berita berhasil dihapus.'];
-        } else {
-            return ['status' => 'error', 'message' => 'Gagal menghapus berita.'];
+        } catch (PDOException $e) {
+            return ['status' => 'error', 'message' => $e->getMessage()];
         }
     }
 }
-?>

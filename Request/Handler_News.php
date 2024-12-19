@@ -26,7 +26,8 @@ try {
         }
 
         // Panggil method store()
-        $result = $newsController->store($judul, $penulis, $konten, $gambar);
+        $result = $newsController->store($judul, $konten, $penulis);
+        var_dump($result);
         $_SESSION['message'] = $result['message'] ?? 'Berita berhasil disimpan.';
         $_SESSION['status'] = $result['status'] ?? 'success';
     } 
@@ -86,6 +87,5 @@ try {
     $_SESSION['status'] = 'error';
 }
 
-// Redirect ke halaman admin
 header("Location: ../views/news-admin.php");
 exit();

@@ -47,11 +47,11 @@ class News {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function insertNews($judul, $konten, $penulis_id, $gambarPath) {
-        $query = "INSERT INTO NEWS (judul, konten, penulis_id, gambar) VALUES (?, ?, ?, ?)";
+    public function insertNews($judul, $konten, $penulis_id) {
+        $query = "INSERT INTO NEWS (judul, konten, penulis_id ) VALUES (?, ?, ?)";
         try {
             $stmt = $this->connect->prepare($query);
-            $stmt->execute([$judul, $konten, $penulis_id, $gambarPath]);
+            $stmt->execute([$judul, $konten, $penulis_id]);
             return true;
         } catch (PDOException $e) {
             error_log('Error in insertNews: ' . $e->getMessage());

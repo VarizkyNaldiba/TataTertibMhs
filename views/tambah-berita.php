@@ -65,11 +65,8 @@ $newsData = $newsController->AdminNews($id_admin);
         <div class="judul">
             <h1>Tambah Berita</h1>
         </div>
-        <form id="insertBeritaForm" method="POST" action="../Request/Handler_News.php">
-            <label for="insertPenulis">ID Penulis:</label>
-            <input type="text" id="insertPenulis" name="penulis" value="<?= $userData['id_admin']?>" required readonly>
-
-            <label for="insertPenulis">Penulis:</label>
+        <form id="insertBeritaForm" method="POST" action="../Request/Handler_News.php" enctype="multipart/form-data">
+            <label for="insertPenulisNama">Penulis:</label>
             <input type="text" id="insertPenulisNama" name="penulis_nama" value="<?= htmlspecialchars($userData['nama_admin']) ?>" required readonly>
             <input type="hidden" id="insertPenulis" name="penulis" value="<?= htmlspecialchars($userData['id_admin']) ?>" required>
             
@@ -83,7 +80,6 @@ $newsData = $newsController->AdminNews($id_admin);
             <input type="file" id="insertGambar" name="gambar" accept="image/*">
 
             <button type="submit" class="save-button" name="store">Simpan</button>
-            <button class="cancel-button" name="cancel" onclick="window.location.href='news-admin.php'">cancel</button>
         </form>
     </div>
 </body>
