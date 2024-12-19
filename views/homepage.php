@@ -37,10 +37,14 @@
                     <!-- nanti pakai while aja isi nya biar sesuai dengan inputan-->
                     <?php foreach($newsData as $news): ?>
                     <div class="news-content">
-                        <img src="img/news.jpg" alt="gambar">
+                        <?php if (!empty($news['gambar'])): ?>
+                            <img src="<?= htmlspecialchars($news['gambar']) ?>" alt="Gambar News"">
+                        <?php else : ?>
+                            <img src="img/news.jpg" alt="gambar">
+                        <?php endif; ?>
                         <h3><?= $news['judul'] ?></h3>
                         <!-- ini nanti di ganti nama -->
-                        <h5><?=$news['penulis_id']?></h5>
+                        <h5><?=$news['penulis_nama']?></h5>
                         <!-- ini -->
                         <p><?= $news['konten'] ?></p>
                     </div>
