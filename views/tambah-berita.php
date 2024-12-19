@@ -68,6 +68,10 @@ $newsData = $newsController->AdminNews($id_admin);
         <form id="insertBeritaForm" method="POST" action="../Request/Handler_News.php">
             <label for="insertPenulis">ID Penulis:</label>
             <input type="text" id="insertPenulis" name="penulis" value="<?= $userData['id_admin']?>" required readonly>
+
+            <label for="insertPenulis">Penulis:</label>
+            <input type="text" id="insertPenulisNama" name="penulis_nama" value="<?= htmlspecialchars($userData['nama_admin']) ?>" required readonly>
+            <input type="hidden" id="insertPenulis" name="penulis" value="<?= htmlspecialchars($userData['id_admin']) ?>" required>
             
             <label for="insertJudul">Judul:</label>
             <input type="text" id="insertJudul" name="judul" required>

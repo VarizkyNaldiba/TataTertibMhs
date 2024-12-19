@@ -67,6 +67,24 @@ class UserController {
             return false;
         }
     }
-}
 
+    public function getAdminName($id_admin) {
+        global $connect; // Gunakan koneksi global untuk PDO
+        try {
+            $stmt = $connect->prepare("SELECT nama_admin FROM admin WHERE id_admin = :id_admin");
+            $stmt->bindValue(':id_admin', $id_admin, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($data) {
+                return $data['nama_admin'];
+            }
+            return null; // Jika admin tidak ditemukan
+    
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return null;
+        }
+    }
+}
 ?>

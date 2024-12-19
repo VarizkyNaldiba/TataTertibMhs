@@ -4,9 +4,23 @@ require_once __DIR__ . '/../config.php';
 class News {
     private $connect;
 
-    public function __construct() {
-        global $connect;
+    public function __construct($connect = null) {
+        if ($connect === null) {
+            global $connect;
+        }
         $this->connect = $connect;
+    }
+
+    public function getNewsById($id) {
+        try {
+            $stmt = $this->connect->prepare("SELECT * FROM NEWS WHERE id_news = ?");
+            $stmt->execute([$id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // Log or display the error
+            echo "Error: " . $e->getMessage();
+            return null;
+        }
     }
 
     public function getAllNews() {
@@ -20,41 +34,47 @@ class News {
         }
     }
 
-    public function getNewsAdmin($id){
-        $query = "SELECT * FROM NEWS WHERE penulis_id = ?";
+    // Dalam model News
+    public function getNewsAdmin($adminId) {
+        $query = "SELECT
+                    news.id_news, news.judul, news.konten, news.gambar,
+                    admin.nama_admin AS penulis_nama
+                FROM NEWS news
+                JOIN ADMIN admin ON news.penulis_id = admin.id_admin
+                WHERE news.penulis_id = ?";
         $stmt = $this->connect->prepare($query);
-        $stmt->bindParam(1, $id, PDO::PARAM_STR); 
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        return $result;
+        $stmt->execute([$adminId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function insertNews($gambar, $judul, $konten, $id){
-        $query = "INSERT INTO NEWS (gambar, judul, konten, penulis_id) VALUES (?, ?, ?, ?)";
-              
+    public function insertNews($judul, $konten, $penulis_id, $gambarPath) {
+        $query = "INSERT INTO NEWS (judul, konten, penulis_id, gambar) VALUES (?, ?, ?, ?)";
         try {
             $stmt = $this->connect->prepare($query);
-            $stmt->execute([$gambar, $judul, $konten, $id]);
+            $stmt->execute([$judul, $konten, $penulis_id, $gambarPath]);
             return true;
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             error_log('Error in insertNews: ' . $e->getMessage());
             return false;
         }
     }
 
-    public function updateNews($id, $judul, $konten, $id_penulis){
-        $query = "UPDATE news SET judul = ?, konten = ?, penulis_id = ? WHERE id_news = ?";
-              
+    public function updateNews($id, $judul, $konten, $penulis_id, $gambarPath = null) {
+        $query = "UPDATE NEWS SET judul = ?, konten = ?, penulis_id = ?" . 
+                 ($gambarPath ? ", gambar = ?" : "") . " WHERE id_news = ?";
+                  
         try {
             $stmt = $this->connect->prepare($query);
-            $stmt->execute([$judul, $konten, $id_penulis, $id]);
+            $params = [$judul, $konten, $penulis_id];
+            if ($gambarPath) $params[] = $gambarPath;
+            $params[] = $id;
+            $stmt->execute($params);
             return true;
         } catch(PDOException $e) {
             error_log('Error in updateNews: ' . $e->getMessage());
             return false;
         }
-    }
+    }    
 
     public function deleteNews($news_id) {
         $query = "DELETE FROM news WHERE id_news = ?";
