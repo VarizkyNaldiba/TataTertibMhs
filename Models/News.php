@@ -25,7 +25,11 @@ class News {
 
     public function getAllNews() {
         try {
-            $stmt = $this->connect->prepare("SELECT * FROM NEWS");
+            $stmt = $this->connect->prepare("SELECT
+                    news.id_news, news.judul, news.konten, news.gambar,
+                    admin.nama_admin AS penulis_nama
+                FROM NEWS news
+                JOIN ADMIN admin ON news.penulis_id = admin.id_admin");
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch(PDOException $e) {
