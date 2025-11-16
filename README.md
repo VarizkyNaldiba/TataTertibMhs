@@ -35,3 +35,5 @@ Untuk memulai dengan proyek ini, silakan ikuti langkah-langkah berikut:
 1. Clone repositori ini:
    ```bash
    git clone https://github.com/VarizkyNaldiba/TataTertibMhs.git
+2. Figma Link
+   https://www.figma.com/design/yRxgSGu5uvuoKQznRxPCNg/UI%2FUX-Sistem-Tatib?node-id=10-572&node-type=frame&t=FUBlBYXBfDiK1yST-0
